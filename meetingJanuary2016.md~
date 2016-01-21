@@ -1,0 +1,41 @@
+% Department Meeting 
+% Reyer and Jan
+% January 27th, 2016
+
+
+Introduction
+================
+
+
+Agenda
+------
+
+
+* updates:
+
+    * macro recruitment
+    * Tilec recruitment
+    * thesis allocation
+
+* 
+
+
+
+
+<!--
+
+How to turn this markdown file into a presentation:
+
+pandoc -s --mathjax --slide-level 2 --toc --toc-depth=1 -t revealjs meetingJanuary2016.md -V theme=solarized -o meetingJanuary2016.html
+
+pandoc --slide-level 2 --toc --toc-depth=1 -t beamer meetingJanuary2016.md -V theme:Montpellier -o meetingJanuary2016.pdf
+
+
+
+
+new slide:
+
+------------
+
+
+-->

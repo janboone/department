@@ -12,6 +12,8 @@ two definitions
 * Economics analyzes the allocation of scarce resources
 * Economists know the price of everything and the value of nothing
 * both are relevant in health care
+* "financial considerations should play no role in health care"
+
 
 why worry?
 ----------
@@ -55,6 +57,7 @@ moral hazard
 * we have (mandatory) health insurance because
 
     * treatments are expensive and you may not be able to afford them
+    * if you could afford the treatments, big reduction in "normal" consumption
     * solidarity: some people are unlucky with their health and we all pay for their treatments
 
 * problem is that health becomes (almost) free
@@ -86,7 +89,7 @@ scarce resources
 
 * we can spend each euro only once
 * should we spend it on education, welfare benefits, the army, health care, consumption (lower taxes)?
-* return on education is estimated to be around 15%
+* return on education is estimated to be around 15% per euro
 * what is the return on health care expenditure?
 * within health: if we face a budget, which treatments should we spend money on?
 
@@ -110,7 +113,7 @@ not perfect health
 
 * there is a difference between a year of full health
 * and a year lying in hospital
-* or losing eye-sight, hearing
+* or losing eye-sight
 * not being able to do your own shopping, walking the stairs
 * based on surveys, the 80.000 is discounted to take such effects into account
 * then we get qaly's: quality adjusted life years
@@ -120,9 +123,10 @@ which treatment covered?
 
 * by this reasoning
 
-    * a new cancer treatment that leads to 0.5 qaly
-    * at the price of 50.000 euro
+    * a new cancer treatment that brings 0.5 qaly
+    * at the price of 50.000 euro per treatment
 	* should not be covered by basic insurance
+    * because, once it is covered, people will use it
 
 * this is what (almost) happened to the treatments for Fabry and Pompe
 * then the 8 o'clock news opens with ...
@@ -131,7 +135,13 @@ which treatment covered?
 difficult choices
 -----------------
 
-* should an older person
+* should a 90 year old's qaly be valued the same as an 20 year old?
+
+    * no, valued less: decreasing marginal returns and the 90 year old already had many years
+    * no, valued more: 90 year old has only few years left; the additional qaly is a big increase
+
+* in the Netherlands, the analysis is not done at the patient level but at the treatment level
+* average increase in qaly's is used to decide wether to cover treatment or not
 
 
 Other effects
@@ -156,9 +166,19 @@ Conclusion
 policy implications
 -------------------
 
-* allocating scarce resources leads to
+* allocating scarce resources leads to "unpleasant" choices
+* economics makes these choices explicit
+* this gives the impression that "we know the price of everything and the value of nothing"
+* but if we do not make these choices as a society, physicians have to do it individually
 
+    * very unpleasant for them
+    * whether you get a life saving treatment or not, depends on your physician
+	* may not be equipped to trade off treatment against money spent on education
 
+* "financial considerations should play no role in health care"
+
+    * not a great strategy 
+    * by definition not true: once you decide to spend your euro on a treatment, you do not spend it on something else
 
 <!--
 

@@ -118,8 +118,8 @@ not perfect health
 * based on surveys, the 80.000 is discounted to take such effects into account
 * then we get qaly's: quality adjusted life years
 
-which treatment covered?
-------------------------
+which treatment?
+----------------
 
 * by this reasoning
 

@@ -37,7 +37,8 @@ examples
 --------
 
 * proton beam therapy ![death star](http://img.lum.dolimg.com/v1/images/Death-Star-I-copy_36ad2500.jpeg?region=0%2C0%2C1600%2C900&width=300 "death star")
-* strong preference for treatment (even if it does not do anything) than to do nothing
+
+* strong preference for treatment (even if it does not do much) than to do nothing
 * end of life care
 
     * most people prefer to die at home surrounded by loved ones
@@ -61,7 +62,13 @@ moral hazard
     * solidarity: some people are unlucky with their health and we all pay for their treatments
 
 * problem is that health becomes (almost) free
-* when something is free, people tend to behave in "strange" ways
+
+
+---------
+
+
+![for free](tomatoes.jpg?region=0%2C0%2C1600%2C900&width=600 "For free!")
+
 
 
 solutions
@@ -73,13 +80,29 @@ solutions
     * solidarity: chronically ill have to pay more
 
 * exclude some treatments
-* in the news:
 
-    * "Advies: borstkankermiddel niet vergoeden", NRC 21-1-2016
-	* "Bestraling van kanker kan beter maar kost wel 10.000 euro meer", NRC 5-3-2015
-    * "Longkankermedicijn is te duur voor basispakket, vindt Zorginstituut", NRC 8-12-2015
-    * "Pompe wel of niet in het basispakket, dat is de vraag", NRC 22-9-2012
-	* "Duur medicijn voor SLE-patient afgewezen voor vergoeding", NRC 11-9-2012
+
+-------------
+
+![Trouw headlines](roemer.png?region=0%2C0%2C1600%2C900&width=600 "No copayments")
+
+
+-------------
+
+
+![NRC headlines](nrc1.png?region=0%2C0%2C1600%2C900&width=600 "Treatment too expensive")
+
+-------------
+
+
+![NRC headlines](nrc2.png?region=0%2C0%2C1600%2C900&width=600 "Treatment too expensive")
+
+-------------
+
+
+![NRC headlines](nrc3.png?region=0%2C0%2C1600%2C900&width=600 "Treatment too expensive")
+
+
 
 Economic analysis
 =======================
@@ -101,9 +124,9 @@ value of health
 
 --------
 
-* in the Netherlands we work with 80.000 euro
-* the UK with 25.000 pound
-* economic analysis finds something in the range 100.000-200.000
+* in the Netherlands we work with 80,000 euro per life-year
+* the UK with 25,000 pound
+* economic analysis finds something in the range 100,000-200,000
 * we are trying here to allocate scarce resources optimally and need to know the return on this spending to make the trade offs
 * but: Economists know the price of everything and the value of nothing
 
@@ -115,7 +138,7 @@ not perfect health
 * and a year lying in hospital
 * or losing eye-sight
 * not being able to do your own shopping, walking the stairs
-* based on surveys, the 80.000 is discounted to take such effects into account
+* based on surveys, the 80,000 is discounted to take such effects into account
 * then we get qaly's: quality adjusted life years
 
 which treatment?
@@ -179,6 +202,31 @@ policy implications
 
     * not a great strategy 
     * by definition not true: once you decide to spend your euro on a treatment, you do not spend it on something else
+
+
+economics courses
+-----------------
+
+* to fully understand the discussion above, we need the analysis of
+
+    * public economics
+
+        * how should the government allocate money
+
+    * micro economics
+
+        * how does a health insurance market work with asymmetric information
+        * moral hazard; adverse selection
+
+    * industrial organization
+
+        * how do pharmaceutical companies set their prices?
+
+    * health economics (MSc)
+
+        * how to determine the value of a qaly?
+
+
 
 <!--
 

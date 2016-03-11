@@ -11,7 +11,7 @@ Current topics
 
 * recruitment
 * thesis allocation
-
+* renovation: meeting CvB on March 21st (keep the discussion focused)
 
 Agenda
 ------
@@ -44,17 +44,19 @@ productivity
 tenure criteria
 ---------------
 
-* education
-
-    * should be valued "more" than in current proposal
-    * hard to make explicit; leave it to the tenure/promotion committee?
-
-
 * research
 
     * make tenure harder (AIS of at least 7 or 8 and 1 "top" journal) but subsequent step easier than in current proposal
-    * how to deal with co-authors?
-	* e.g. in relation to AIS-cap: first correct for co-authors, then apply cap?
+    * how to deal with co-authors? Our proposal: $AIS \sqrt{2}/\sqrt{n}$
+	* relation with AIS-cap: first correct for co-authors, then apply cap
+
+* education
+
+    * in principle, focus is on research
+    * but we recognize that there can be exceptions due to excellent
+      service to the department in the area of education
+	* we will mention this explicitly in the document
+    * hard to make concrete; leave the judgement to the tenure/promotion committee
 
 
 ------------
@@ -63,7 +65,7 @@ tenure criteria
 
     * use webforms
     * if someone deviates from committee's proposal, needs to motivate
-    * tenure/promotion committee can disregard "no" votes that are badly motivated
+    * do we allow the tenure/promotion committee to disregard "no" votes that are badly motivated?
 
 
 Task allocation
@@ -74,7 +76,8 @@ bins vs continuous model
 
 * we propose to have a relatively simple 3 bin model that we will apply using common sense
 * bin for research intensive profile is for people who satisfy tenure criteria in the past 5 years
-* final numbers need to be calibrated; but even research intensive bin involves teaching and admin
+* final numbers need to be calibrated; but even research intensive bin
+  involves teaching and admin (in total 4 course equivalents)
 * teaching profile has more teaching and admin
 * intermediate profile
 * we need to improve teaching efficiency to keep this manageable
@@ -82,13 +85,14 @@ bins vs continuous model
     * video lectures
     * reduce MSc econ
 	* combine RM and MSc courses
+	* use external/part-time teachers
 
 ------------
 
 * external money: we would like to encourage you to do relatively small projects
 
-    * reduces teaching (5000; 10,000; 15,000)
-    * should we make this "mandatory"
+    * reduces teaching/thesis supervision (5000; 10,000; 15,000)
+    * should we make this "mandatory"?
 
 * but you cannot just reduce teaching below 2 courses by earning a lot
 * if you want to do a big project, first talk to HoDs
@@ -112,6 +116,9 @@ past, present, future
 * people have accumulated research budgets in the past, that we cannot afford to spend at the moment
 * apologies for this ...
 * if you want to spend more than 1500 per year from your personal research budget, ask HoDs first
+* for expenditures below 1500, check with Korine first
+* with external projects you can --at max.-- add 3000 euro per year to
+  your research budget
 * if you do not have a PRB, you can ask HoDs to spend at max. 1500 euro per year as part of dept. research budget
 * once our budget improves, we can relax these rules
 

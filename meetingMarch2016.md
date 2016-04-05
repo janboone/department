@@ -48,7 +48,7 @@ tenure criteria
 
     * make tenure harder (AIS of at least 7 or 8 and 1 "top" journal) but subsequent step easier than in current proposal
     * how to deal with co-authors? Our proposal: $AIS \sqrt{2}/\sqrt{n}$
-	* relation with AIS-cap: first correct for co-authors, then apply cap
+	* relation with AIS-cap of 5.0: first correct for co-authors, then apply cap
 
 * education
 

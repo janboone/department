@@ -18,7 +18,7 @@ Current topics
 
 * sponsored chair
 
-* Misja Mikker, sponsored by NZa
+    * Misja Mikker, sponsored by NZa
 
 
 --------------

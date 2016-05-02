@@ -15,17 +15,20 @@ Current topics
     * Esra Durceylan: 0.4 fte Assistant Professor teaching contract for 4 years
 	* Boris van Leeuwen: full-time Tenure Track Assistant Professor contract for 6 years
 	* Moritz Suppliet: full-time Postdoc contract for 1+2 years
- 
+
+* sponsored chair
+
+    * Misja Mikker, sponsored by NZa
 
 * thesis allocation
 
     * different supervision style in other departments
 
-* new appointments
+* new admin appointments
 
     * Jens will take over from Sjak as AD MSc ECO
-    * Bert
-	* Sigrid
+    * Bert will take over from Jens as EC Micro GS
+	* Sigrid will take over from Jan as RC Micro
 
 * renovation: move to P building
 
@@ -43,7 +46,6 @@ Agenda
 	* personal research budgets
 
 
-
 Task allocation
 ====================
 
@@ -52,8 +54,7 @@ bins vs continuous model
 
 * we propose to have a relatively simple 3 bin model that we will apply using common sense
 * bin for research intensive profile is for people who satisfy tenure criteria in the past 5 years
-* final numbers need to be calibrated; but even research intensive bin
-  involves teaching and admin (in total 4 course equivalents)
+* final numbers need to be calibrated; but even research intensive bin involves teaching and admin (in total 4 course equivalents)
 * teaching profile has more teaching and admin
 * intermediate profile
 * we need to improve teaching efficiency to keep this manageable
@@ -77,10 +78,7 @@ bins vs continuous model
 
     * we would like to come to a more uniform distribution of CentER PhD students over faculty
     * supervising a CentER PhD student counts as 2 MSc theses
-	* keep an eye on the costs of the pre and formal defense
-
-
-
+	* keep an eye on the costs of the pre and formal defense (see dept. website for details)
 
 
 Research budgets
@@ -93,8 +91,7 @@ past, present, future
 * apologies for this ...
 * if you want to spend more than 1500 per year from your personal research budget, ask HoDs first
 * for expenditures below 1500, check with Korine first
-* with external projects you can --at max.-- add 3000 euro per year to
-  your research budget
+* with external projects you can --at max.-- add 3000 euro per year to your research budget
 * if you do not have a PRB, you can ask HoDs to spend at max. 1500 euro per year as part of dept. research budget
 * once our budget improves, we can relax these rules
 
@@ -109,7 +106,13 @@ computer, laptop
 submission fees
 ---------------
 
-* ???
+* Per year the dept. reimburses at max. 1500 euro in submission fees. Costs above 1500 euro will be charged to your personal budget
+* membership fees are not reimbursed unless necessary for submissions
+* we do not reimburse subscription fees for journals, magazines
+* books need to be ordered via `INDEX Books <https://www.indexbooks.nl/>`_
+* we can only reimburse books that are directly relevant for teaching purposes
+* again, once the financial situation improves we can relax these rules
+
 
 
 Summarizing

@@ -18,7 +18,10 @@ Current topics
 
 * sponsored chair
 
-    * Misja Mikker, sponsored by NZa
+* Misja Mikker, sponsored by NZa
+
+
+--------------
 
 * thesis allocation
 
@@ -109,7 +112,7 @@ submission fees
 * Per year the dept. reimburses at max. 1500 euro in submission fees. Costs above 1500 euro will be charged to your personal budget
 * membership fees are not reimbursed unless necessary for submissions
 * we do not reimburse subscription fees for journals, magazines
-* books need to be ordered via `INDEX Books <https://www.indexbooks.nl/>`_
+* books need to be ordered via [INDEX Books](https://www.indexbooks.nl/)
 * we can only reimburse books that are directly relevant for teaching purposes
 * again, once the financial situation improves we can relax these rules
 
@@ -132,9 +135,9 @@ What do you think?
 
 How to turn this markdown file into a presentation:
 
-pandoc -s --mathjax --slide-level 2  -t revealjs meetingMarch2016.md -V theme=solarized -o meetingMarch2016.html
+pandoc -s --mathjax --slide-level 2  -t revealjs meetingMay2016.md -V theme=solarized -o meetingMay2016.html
 
-pandoc --slide-level 2 --toc --toc-depth=1 -t beamer meetingMarch2016.md -V theme:Montpellier -o meetingMarch2016.pdf
+pandoc --slide-level 2 --toc --toc-depth=1 -t beamer meetingMay2016.md -V theme:Montpellier -o meetingMay2016.pdf
 
 
 

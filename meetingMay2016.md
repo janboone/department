@@ -20,6 +20,10 @@ Current topics
 
     * Misja Mikker, sponsored by NZa
 
+* we are contacting people at CPB, ministries etc. to teach a course or two on small contract
+
+    * suggestions are welcome
+    * think of former PhD students working in the Netherlands
 
 --------------
 
@@ -71,11 +75,12 @@ bins vs continuous model
 
 * external money: we would like to encourage you to do relatively small projects
 
-    * reduces teaching/thesis supervision (5000; 10,000; 15,000)
+    * reduces teaching/thesis supervision (5,000; 10,000; 15,000)
     * should we make this "mandatory"?
 
 * but you cannot just reduce teaching below 2 courses by earning a lot
 * if you want to do a big project, first talk to HoDs
+* for small projects, send project budget to Korine before signing the contract
 
 * PhD supervision
 
@@ -88,7 +93,7 @@ Research budgets
 ======================
 
 past, present, future
---------------------
+---------------------
 
 * people have accumulated research budgets in the past, that we cannot afford to spend at the moment
 * apologies for this ...
@@ -106,10 +111,9 @@ computer, laptop
 * department will provide "standard" desktop/laptop (see ICT website; cost approx. 700-800 euro in 2016)
 * if you prefer an upgraded model, the extra cost will be charged to your personal budget
 
-submission fees
----------------
+books etc.
+----------
 
-* Per year the dept. reimburses at max. 1500 euro in submission fees. Costs above 1500 euro will be charged to your personal budget
 * membership fees are not reimbursed unless necessary for submissions
 * we do not reimburse subscription fees for journals, magazines
 * books need to be ordered via [INDEX Books](https://www.indexbooks.nl/)

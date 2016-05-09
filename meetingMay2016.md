@@ -6,6 +6,15 @@
 Introduction
 ================
 
+top publications
+----------------
+
+* Elena (with Arno Riedl) "Justice Under Uncertainty" accepted by Management Science
+* Patricio (with Ghosal and Mani) "Poverty and Aspirations Failure" accepted by The Economic Journal
+* Stefan (with Brown and Vlahu) "Understanding Bank-Run Contagion" accepted by Management Science
+
+
+
 Current topics
 --------------
 

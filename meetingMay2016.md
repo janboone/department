@@ -9,9 +9,12 @@ Introduction
 top publications
 ----------------
 
-* Elena (with Arno Riedl) "Justice Under Uncertainty" accepted by Management Science
-* Patricio (with Ghosal and Mani) "Poverty and Aspirations Failure" accepted by The Economic Journal
-* Stefan (with Brown and Vlahu) "Understanding Bank-Run Contagion" accepted by Management Science
+* Elena (with Arno Riedl) "Justice Under Uncertainty" accepted at Management Science
+* Patricio (with Ghosal) "Self-fulfilling mistakes: Characterization and Welfare" accepted at Economic Journal
+* Patricio (with Blanco and Vargas) "Does the Unemployment Benefit
+  Institution affect the Productivity of Workers? Evidence from the
+  Field" accepted at Management Science
+* Stefan (with Brown and Vlahu) "Understanding Bank-Run Contagion" accepted at Management Science
 
 
 

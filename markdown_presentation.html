@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Jan Boone" />
+  <title>Introduction Markdown</title>
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="reveal.js/css/reveal.min.css"/>
+    <style type="text/css">code{white-space: pre;}</style>
+    <link rel="stylesheet" href="reveal.js/css/theme/simple.css" id="theme">
+  <link rel="stylesheet" media="print" href="reveal.js/css/print/pdf.css" />
+  <!--[if lt IE 9]>
+  <script src="reveal.js/lib/js/html5shiv.js"></script>
+  <![endif]-->
+    <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML" type="text/javascript"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section>
+    <h1 class="title">Introduction Markdown</h1>
+    <h2 class="author">Jan Boone</h2>
+    <h3 class="date">Dept. of Economics, Tilburg University</h3>
+</section>
+<section id="TOC">
+<ul>
+<li><a href="#/introduction">Introduction</a></li>
+<li><a href="#/latex">Latex</a></li>
+<li><a href="#/installation">Installation</a></li>
+<li><a href="#/markdown">markdown</a></li>
+</ul>
+</section>
+
+<section><section id="introduction" class="titleslide slide level1"><h1><a href="#/introduction">Introduction</a></h1></section><section id="this-lecture" class="slide level2">
+<h1><a href="#/this-lecture">this lecture</a></h1>
+<ul>
+<li><p>in this part, we look at</p>
+<ul>
+<li>markdown</li>
+<li><a href="http://pandoc.org/demos.html">pandoc</a></li>
+<li><a href="https://atom.io/">atom</a></li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="latex" class="titleslide slide level1"><h1><a href="#/latex">Latex</a></h1></section><section id="latex-vs-markdown" class="slide level2">
+<h1><a href="#/latex-vs-markdown">latex vs markdown</a></h1>
+<ul>
+<li>Latex is great!</li>
+<li>markdown does not compete with latex when writing a paper or PhD thesis</li>
+<li><p>however,</p>
+<ul>
+<li>when writing a short note (say, assignment or referee report), latex is a bit heavy handed</li>
+<li>latex is geared towards pdf; markdown is a lot more flexible, e.g. export to html</li>
+<li>markdown to write your first notes (e.g. on a paper), then you convert to latex</li>
+<li>creating presentations in latex is ... horrendous (and we don't want to talk about Office at all)</li>
+<li><a href="http://jupyter.org/">jupyter notebooks</a> allow you to explain your code with markdown, results in something like <a href="http://janboone.github.io/Deductible_Health_Insurance/">this</a></li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="installation" class="titleslide slide level1"><h1><a href="#/installation">Installation</a></h1></section><section id="what-you-need" class="slide level2">
+<h1><a href="#/what-you-need">what you need</a></h1>
+<ul>
+<li>markdown: nothing</li>
+<li>pandoc: go to <a href="http://pandoc.org/installing.html">pandoc website</a></li>
+<li><p>an editor, e.g. <a href="https://atom.io/">atom</a></p>
+<ul>
+<li>you can use editors like atom and emacs also for latex and lots of other things</li>
+<li>please don't use Scientific Workplace (or any other 'wysiwyg' editor); it is easy at the start, but you will regret such a choice for the rest of your life ...</li>
+</ul></li>
+</ul>
+</section></section>
+<section><section id="markdown" class="titleslide slide level1"><h1><a href="#/markdown">markdown</a></h1></section><section id="simple" class="slide level2">
+<h1><a href="#/simple">simple!</a></h1>
+<ul>
+<li>markdown allows you to create structure in a simple way</li>
+<li>much simpler than latex and more readable in source file</li>
+<li>especially when making presentations this is very useful</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li>examples are:</li>
+</ul>
+<pre><code>
+    this is a heading
+    =================
+
+    subheading
+    ----------
+
+    or when doing a presentation:
+
+    new slide
+    ---------
+
+    * first bullet
+    * second bullet
+
+    [link text](actual link, e.g. http://www.etc)
+
+    ![Alt text for image](/path/to/img.jpg &quot;Optional title&quot;)
+</code></pre>
+<ul>
+<li>look on the web for other syntax like footnotes etc.</li>
+<li>google for &quot;markdown tutorial&quot; to find more details</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li>math you type as in latex</li>
+</ul>
+<pre><code>* $x^2$, $\beta$, $\sqrt{9}$, $\frac{1}{2}$, $\bar x$
+</code></pre>
+<ul>
+<li><p>This yields:</p></li>
+<li><p><span class="math">\(x^2, \beta, \sqrt{9}, \frac{1}{2}, \bar x\)</span></p></li>
+</ul>
+</section><section id="pandoc" class="slide level2">
+<h1><a href="#/pandoc">pandoc</a></h1>
+<ul>
+<li>this is where the magic happens</li>
+<li>you need to be able to work with shell/terminal/command prompt (which is useful for latex as well)</li>
+<li>with pandoc you can convert markdown files into many other file formats</li>
+<li><a href="http://pandoc.org/demos.html">pandoc website</a> contains examples of how to convert from one file format into another</li>
+<li>these commands can be quite elaborate</li>
+</ul>
+</section><section class="slide level2">
+
+<ul>
+<li>the command to turn the markdown version of this presentation into an html file is given by</li>
+</ul>
+<pre><code>pandoc -s --mathjax --slide-level 2 --toc --toc-depth=1 -t revealjs markdown_presentation.md -V theme=solarized -o markdown_presentation.html
+</code></pre>
+<ul>
+<li>if you are really addicted to latex beamer, then do:</li>
+</ul>
+<pre><code>
+pandoc --slide-level 2 --toc --toc-depth=1 -t beamer markdown_presentation.md -V theme:Montpellier -o markdown_presentation.pdf
+</code></pre>
+</section><section class="slide level2">
+
+<ul>
+<li>have fun using pandoc!</li>
+</ul>
+<!--
+
+How to turn this markdown file into a presentation:
+
+pandoc -s --mathjax --slide-level 2 --toc --toc-depth=1 -t revealjs markdown_presentation.md -V theme=solarized -o markdown_presentation.html
+
+pandoc --slide-level 2 --toc --toc-depth=1 -t beamer markdown_presentation.md -V theme:Montpellier -o markdown_presentation.pdf
+
+
+
+
+new slide:
+
+------------
+
+
+-->
+
+
+</section></section>
+    </div>
+  </div>
+
+  <script src="reveal.js/lib/js/head.min.js"></script>
+  <script src="reveal.js/js/reveal.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        theme: 'solarized', // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } },
+//          { src: 'reveal.js/plugin/search/search.js', async: true, condition: function() { return !!document.body.classList; }, }
+//          { src: 'reveal.js/plugin/remotes/remotes.js', async: true, condition: function() { return !!document.body.classList; } }
+]});
+    </script>
+  </body>
+</html>

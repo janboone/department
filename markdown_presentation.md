@@ -140,6 +140,9 @@ pandoc --slide-level 2 --toc --toc-depth=1 -t beamer markdown_presentation.md -V
 
 ```
 
+* [the result](http://janboone.github.io/department/markdown_presentation.pdf)
+* which is not as neat as the html version
+
 ------
 
 

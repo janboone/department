@@ -1,0 +1,492 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title></title>
+<!-- 2017-03-27 Mon 14:06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Org-mode">
+<meta name="author" content="Jan Boone">
+
+<link  href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<style type="text/css">
+/* org mode styles on top of twbs */
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    font-size: 18px;
+    margin-bottom: 105px;
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 101px;
+    background-color: #f5f5f5;
+}
+
+footer > div {
+    padding: 10px;
+}
+
+footer p {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: 16px;
+}
+
+#table-of-contents {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+blockquote p {
+    font-size: 18px;
+}
+
+pre {
+    font-size: 16px;
+}
+
+.footpara {
+    display: inline-block;
+}
+
+figcaption {
+  font-size: 16px;
+  color: #666;
+  font-style: italic;
+  padding-bottom: 15px;
+}
+
+/* from twbs docs */
+
+.bs-docs-sidebar.affix {
+    position: static;
+}
+@media (min-width: 768px) {
+    .bs-docs-sidebar {
+        padding-left: 20px;
+    }
+}
+
+/* All levels of nav */
+.bs-docs-sidebar .nav > li > a {
+    display: block;
+    padding: 4px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+}
+.bs-docs-sidebar .nav > li > a:hover,
+.bs-docs-sidebar .nav > li > a:focus {
+    padding-left: 19px;
+    color: #A1283B;
+    text-decoration: none;
+    background-color: transparent;
+    border-left: 1px solid #A1283B;
+}
+.bs-docs-sidebar .nav > .active > a,
+.bs-docs-sidebar .nav > .active:hover > a,
+.bs-docs-sidebar .nav > .active:focus > a {
+    padding-left: 18px;
+    font-weight: bold;
+    color: #A1283B;
+    background-color: transparent;
+    border-left: 2px solid #A1283B;
+}
+
+/* Nav: second level (shown on .active) */
+.bs-docs-sidebar .nav .nav {
+    display: none; /* Hide by default, but at >768px, show it */
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 30px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav > li > a:focus {
+    padding-left: 29px;
+}
+.bs-docs-sidebar .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav > .active:focus > a {
+    padding-left: 28px;
+    font-weight: 500;
+}
+
+/* Nav: third level (shown on .active) */
+.bs-docs-sidebar .nav .nav .nav {
+    padding-bottom: 10px;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 40px;
+    font-size: 12px;
+    font-weight: normal;
+}
+.bs-docs-sidebar .nav .nav .nav > li > a:hover,
+.bs-docs-sidebar .nav .nav .nav > li > a:focus {
+    padding-left: 39px;
+}
+.bs-docs-sidebar .nav .nav .nav > .active > a,
+.bs-docs-sidebar .nav .nav .nav > .active:hover > a,
+.bs-docs-sidebar .nav .nav .nav > .active:focus > a {
+    padding-left: 38px;
+    font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: 992px) {
+    .bs-docs-sidebar .nav > .active > ul {
+        display: block;
+    }
+    /* Widen the fixed sidebar */
+    .bs-docs-sidebar.affix,
+    .bs-docs-sidebar.affix-bottom {
+        width: 213px;
+    }
+    .bs-docs-sidebar.affix {
+        position: fixed; /* Undo the static from mobile first approach */
+        top: 20px;
+    }
+    .bs-docs-sidebar.affix-bottom {
+        position: absolute; /* Undo the static from mobile first approach */
+    }
+    .bs-docs-sidebar.affix .bs-docs-sidenav,.bs-docs-sidebar.affix-bottom .bs-docs-sidenav {
+        margin-top: 0;
+        margin-bottom: 0
+    }
+}
+@media (min-width: 1200px) {
+    /* Widen the fixed sidebar again */
+    .bs-docs-sidebar.affix-bottom,
+    .bs-docs-sidebar.affix {
+        width: 263px;
+    }
+}
+</style>
+<script type="text/javascript">
+$(function() {
+    'use strict';
+
+    $('.bs-docs-sidebar li').first().addClass('active');
+
+    $(document.body).scrollspy({target: '.bs-docs-sidebar'});
+
+    $('.bs-docs-sidebar').affix();
+});
+</script>
+</head>
+<body>
+<div id="content" class="container">
+<div class="row"><div class="col-md-9"><h1 class="title"></h1>
+
+<div id="outline-container-sec-" class="outline-2">
+<h2 id="sec-">last time</h2>
+<div class="outline-text-2" id="text-">
+<ul class="org-ul">
+<li>questions?
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-2">
+<h2 id="sec-">regulation</h2>
+<div class="outline-text-2" id="text-">
+<ul class="org-ul">
+<li>key to understanding regulation is:
+
+<ul class="org-ul">
+<li>differential impact of regulation instruments
+</li>
+<li>on different types of firms
+</li>
+</ul>
+</li>
+</ul>
+
+
+<figure>
+<p><img src="./regulation.png" class="img-responsive" alt="regulation.png">
+</p>
+</figure>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-2">
+<h2 id="sec-">measuring competition</h2>
+<div class="outline-text-2" id="text-">
+<ul class="org-ul">
+<li>if the market is competitive, less reason to &ldquo;worry&rdquo; for a competition authority
+
+<ul class="org-ul">
+<li>concentration measures
+</li>
+<li>price cost margins
+</li>
+<li>profit levels
+</li>
+<li>&ldquo;misinterpret&rdquo; a firm that becomes more efficient
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">Profit Elasticity</h3>
+<div class="outline-text-3" id="text-">
+
+<figure>
+<p><img src="./competition.png" class="img-responsive" alt="competition.png">
+</p>
+</figure>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-2">
+<h2 id="sec-">health care</h2>
+<div class="outline-text-2" id="text-">
+<ul class="org-ul">
+<li>health care market is &ldquo;complicated&rdquo; due to combination of externalities
+</li>
+<li>and the regulation to address these externalities
+<ul class="org-ul">
+<li>adverse selection; for basic package
+<ul class="org-ul">
+<li>mandatory insurance
+</li>
+<li>community rating
+</li>
+<li>insurers have to accept each customer
+</li>
+<li>risk adjustment
+</li>
+</ul>
+</li>
+<li>moral hazard; for patients
+<ul class="org-ul">
+<li>deductible
+</li>
+</ul>
+</li>
+<li>moral hazard; for physicians
+<ul class="org-ul">
+<li>physicians as employees
+</li>
+<li>insurers use budgets instead of fee-for-service
+</li>
+<li>complicates risk adjustment
+</li>
+</ul>
+</li>
+<li>quality
+<ul class="org-ul">
+<li>hard to measure, report, contract on
+</li>
+<li>look for observable variables correlated with quality; e.g. quantity
+</li>
+<li>if we believe that patients can learn from each other, reward quality
+through quantity; but then: physician moral hazard
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">provider competition</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li>as patients are insured, this hardly happens on price
+</li>
+<li>if patients can learn from each other, this happens on quality
+<ul class="org-ul">
+<li>&ldquo;good quality&rdquo;
+<ul class="org-ul">
+<li>better focus on patient well-being
+</li>
+<li>easier to make appointments; combine appointments with different
+physicians on the same day
+</li>
+<li>quicker recovery
+</li>
+</ul>
+</li>
+<li>&ldquo;bad quality&rdquo;
+<ul class="org-ul">
+<li>easier to get treatment
+</li>
+<li>socially wasteful treatments (e.g. too expensive through upcoding)
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>providers only compete for patients, if they can make a profit on patients
+</li>
+<li>depends on contracts offered by insurers
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">insurer competition</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li>insurers compete on how generous their contracts are compared to their price/premium
+<ul class="org-ul">
+<li>more generous contracts
+<ul class="org-ul">
+<li>make it more likely that patient gets treated
+</li>
+<li>make it more profitable to attract patients through quality
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>adverse selection: if risk adjustment is not perfect, insurer does not want to
+be too attractive for patients with expected high costs
+<ul class="org-ul">
+<li>disadvantage of community rating: this is hidden through services offered
+</li>
+<li>with risk rating this would be observable through prices
+</li>
+</ul>
+</li>
+<li>patients may not understand the value of a new treatment compared to current
+best alternative
+<ul class="org-ul">
+<li>too early adoption at a high price of new treatments
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-sec-" class="outline-2">
+<h2 id="sec-">value of sustainablity</h2>
+<div class="outline-text-2" id="text-">
+<ul class="org-ul">
+<li>ideally, sustainability is priced in the market
+<ul class="org-ul">
+<li>e.g. carbon tax (lack of sustainability)
+</li>
+<li>consumer preference (valuation) for sustainable production, e.g. through certification
+</li>
+</ul>
+</li>
+<li>if so, competition will take care of it
+<ul class="org-ul">
+<li>firms&rsquo; incentives to reduce costs will be socially valuable
+</li>
+</ul>
+</li>
+<li>this is the regulation solution to external effects
+</li>
+<li>if it is not priced into the market:
+<ul class="org-ul">
+<li>competition may not maximize welfare:
+</li>
+<li>coal is cheaper than solar energy and consumers prefer to pay low price
+</li>
+<li>this does not imply that lack of competition (e.g. merger or agreements
+between firms) will improve sustainability
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+<div id="outline-container-sec-" class="outline-3">
+<h3 id="sec-">tradeoffs</h3>
+<div class="outline-text-3" id="text-">
+<ul class="org-ul">
+<li>suppose we can &ldquo;invest&rdquo; now to get more a more sustainable outcome, will this
+be worth it?
+<ul class="org-ul">
+<li>e.g. we allow a joint venture which risks helping firms to coordinate prices as well
+</li>
+</ul>
+</li>
+<li>cost-benefit analysis
+</li>
+<li>if we know the cost of the investment, what is the benefit of sustainability?
+</li>
+<li>what is the value of a reduction in, say, global warming?
+<ul class="org-ul">
+<li>scientific input
+</li>
+<li>this benefit cannot be &ldquo;infinity&rdquo;
+</li>
+</ul>
+</li>
+<li>how do we discount the future value?
+<ul class="org-ul">
+<li>interest rate
+</li>
+<li>weight of population then vs now
+</li>
+<li>probability problem will be solved otherwise
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div><div class="col-md-3"><nav id="table-of-contents">
+<div id="text-table-of-contents" class="bs-docs-sidebar">
+<ul class="nav">
+<li><a href="#sec-">last time</a></li>
+<li><a href="#sec-">regulation</a></li>
+<li><a href="#sec-">measuring competition</a>
+<ul class="nav">
+<li><a href="#sec-">Profit Elasticity</a></li>
+</ul>
+</li>
+<li><a href="#sec-">health care</a>
+<ul class="nav">
+<li><a href="#sec-">provider competition</a></li>
+<li><a href="#sec-">insurer competition</a></li>
+</ul>
+</li>
+<li><a href="#sec-">value of sustainablity</a>
+<ul class="nav">
+<li><a href="#sec-">tradeoffs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+</div></div></div>
+<footer id="postamble" class="">
+<div><p class="author">Author: Jan Boone</p>
+<p class="date">Created: 2017-03-27 Mon 14:06</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.1.1 (<a href="http://orgmode.org">Org-mode</a> 9.0.3)</p>
+</div>
+</footer>
+</body>
+</html>

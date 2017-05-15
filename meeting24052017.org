@@ -1,0 +1,80 @@
+#+Title: Agenda May 24, 2017
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
++ 100% BKO
++ planned date to move to P: 19 and 20 July
++ we've started the appraisal interviews
+  + if you have feedback for us feel free to give this
+  + we will also create a webform to give feedback
++ next dept. meeting: June 13
+  + with drinks afterwards
+  + we can simply have drinks, or you can organize something
++ things we are thinking about at the moment:
+  + criteria for sponsored chairs
+  + next year's thesis allocation
+  + talk to us if you have ideas about these
+
+
+
+* tenure and promotion procedure
+
++ we have the new procedure now for over a year
++ we promised to review it after a year
++ we want to collect your ideas
++ if you want to change things, you can make proposals and we vote on them
+
+
+** positive feedback we received
+
+ + we have clear procedure now
+ + it is democratic
+ + AIS scores seem more reasonable than narrowly defined Center-journal-lists
+   + do we use the right benchmark values? Should they be higher/lower?
+
+
+
+** concerns
+
+ + the speed of the procedure
+   + both a dept. procedure and one at TiSEM
+ + effort investment by committee
+   + one suggestion: perhaps there are cases where the committee does not need to read papers
+ + (mis)match between dept. and faculty procedure
+   + both in terms of criteria and procedure
+ + how should we deal with external money being brought in?
+   + count as AIS points? Good citizenship?
+ + the way we evaluate education: we have not yet received proposals on this.
+
+
+** criteria academic directors
+
+ + people who do not satisfy the standard tenure/promotion criteria
+   + e.g. anyone with a major admin task
+   + like academic directors
+ + we have tried to create ex ante criteria
+   + like every year of AD counts as $x$ AIS points
+   + but we didn't manage
+ + our suggestions is to have a personal plan for people that do not satisfy the standard tenure/promotion criteria
+ + but then we need to be able to commit to AD's about tenure and promotion
+ + we will have a dept. meeting in which we explain our decision and you can ask questions but there will not be a vote
+
+* any other business
+
++ other things we need to discuss (on next meeting)

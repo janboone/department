@@ -41,7 +41,7 @@
 * tenure and promotion procedure
 
 + we have the new procedure now for over a year
-+ we promised to review it after a year
++ we promised to review the procedure
 + we want to collect your ideas
 + if you want to change things, you can make proposals and we vote on them
 
@@ -70,15 +70,19 @@
 
 ** criteria academic directors
 
- + people who do not satisfy the standard tenure/promotion criteria
-   + e.g. anyone with a major admin task
-   + like academic directors
+ + having a big admin task (like AD) reduces your research time
+   + there are big uncertainties (e.g. problems with a skills course)
+   + hard to write a "complete contract"
+   + in the past people received special promises/criteria to do such tasks
  + we have tried to create ex ante criteria
    + like every year of AD counts as $x$ AIS points
-   + but we didn't manage
- + our suggestions is to have a personal plan for people that do not satisfy the standard tenure/promotion criteria
+   + but we didn't manage to come up with something sensible
+ + our suggestion is to have a personal plan for people that do not satisfy the standard tenure/promotion criteria
  + but then we need to be able to commit to AD's about tenure and promotion
- + we will have a dept. meeting in which we explain our decision and you can ask questions but there will not be a vote
+   + if we cannot do this, no one may want to do a major admin task
+ + we will have a dept. meeting in which HoDs explain their decision and dept. can ask questions but there will not be a vote
+   + is this ok? Suggestions for an alternative?
+
 
 * any other business
 

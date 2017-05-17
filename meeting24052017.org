@@ -29,6 +29,7 @@
 + things we are thinking about at the moment:
   + criteria for sponsored chairs
   + next year's thesis allocation
+    + [[http://janboone.github.io/department/ThesisSupervisionAllocationProposal.pdf][proposal Eric]]
   + talk to us if you have ideas about these
 
 

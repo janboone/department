@@ -39,6 +39,12 @@
 + question is: how many "formal" and "informal" meeting rooms would you like to have
 + this is another example of decision under uncertainty
 
+** other points
+
++ Pantries: pantries/multifunctionals can be noisy in the corridors: do we want a room as pantry with mfp --as we have now?
++ Glass: other dept.'s have preference for the doors and panel next to it to be non-transparent glass (as in the Simon building): do we have this preference as well?
++ End of corridors: do we want offices here or do we prefer an open building?
+
 * tenure and promotion procedure
 
 + we have the new procedure now for over a year

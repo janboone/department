@@ -1,0 +1,57 @@
+#+Title: Agenda June 13, 2017
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
+
++ Dept.'s negative reserve
++ we need new Academic Directors:
+  + Bas' term as AD ECO ends this academic year and Louis' term as AD EBE next year
+  + let us know who would be good replacements for these positions
++ Open Access
+  + Faculty Management Team has installed a fund to support researchers who publish an open access article in a journal of high quality and are confronted with Article Processing Charges (APCs)
+  + School’s research policy is to aim at top publications
+  + only the APCs for publications in journals that are in the first quartile of their category in Web of Science will qualify for a contribution from the APC fund
+  + if you want to apply for a contribution from the fund: contact Lisette Barten
+
+
+
+* hiring
+
++ how to proceed with senior recruitment?
+  + wait for more people to fly in?
+  + proceed with current candidate to FMT?
+  + other?
++ next year macro TT: are we be willing to offer higher starting salaries?
+  + macro is a different JM?
+
+
+* education
+
++ BSc ECO
++ Bsc EBE
++ Msc ECO
++ RM
+
+
+* any other business
+
++ other things we need to discuss?
++ topics for meetings next academic year:
+  + thesis allocation procedure
+  + tenure and promotion procedure

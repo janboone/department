@@ -28,7 +28,7 @@
   + School’s research policy is to aim at top publications
   + only the APCs for publications in journals that are in the first quartile of their category in Web of Science will qualify for a contribution from the APC fund
   + if you want to apply for a contribution from the fund: contact Lisette Barten
-
++ [[https://ec.europa.eu/research/mariecurieactions/about/individual-fellowships_en][Marie Sklodowska-Curie fellowship]]
 
 
 * hiring

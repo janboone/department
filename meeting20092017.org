@@ -1,0 +1,64 @@
+#+Title: Agenda September 20, 2017
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
+  - we moved to P over the summer
+    - let us know whether this went ok; whether you can survive for 2 years in the current setting etc.?
+  - we need a chair for the JM Placement committee
+
+* proposals
+
+  - a number of concrete proposals have been made by dept. members for us to discuss
+  - these can be found [[https://economics-department.netlify.com/proposals.html][here]]
+  - we go over them arranged by topic
+  - let us know if you have concrete proposals as well
+
+* tenure and promotion procedure
+
+** concrete proposal:
+ 
+  - committee should not read papers
+    - option A: committee should not read any papers
+    - option B: committee should not read any published papers but can read papers that are in progress (to evaluate "the pipeline")
+    - option C: committee continues as it does now
+
+** other points
+ 
+  - research: AIS scores work? Reasonable benchmark values for tenure/promotion?
+  - bringing in external money? Should this be explicitly acknowledged for tenure/promotion? How?
+    - e.g. NWO grant counts for 2 AIS points?
+  - what documents to share with dept. and which are confidential (only for the committee)
+    - research/education statement, teaching evaluations, motivation letter?
+  - how many days before the dept. meeting should report be sent to dept.?
+  - some people abstain from voting; some do not vote at all; is this a problem?
+
+
+* two other proposals
+
+  - thesis allocation
+    - Eric has made a proposal for two sided matching between faculty and students
+    - simpler alternative: as in the Msc, also in the Bsc faculty specifies list of topics on which they are willing to supervise students. Students give their preference and we try to match as well as we can (you are allowed to deviate if the student comes up with another topic that you would like to supervise)
+  - guidelines for dept. members who join a committee for a sponsored chair
+    - are these guidelines ok? Are things missing/should things be changed?
+
+
+* any other business
+
+
+

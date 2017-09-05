@@ -52,6 +52,7 @@
   - what documents to share with dept. and which are confidential (only for the committee)
     - research/education statement, teaching evaluations, motivation letter?
   - how many days before the dept. meeting should report be sent to dept.?
+  - how active a role can the HoDs play here? e.g. disagree with (parts of) the committee's report?
   - some people abstain from voting; some do not vote at all; is this a problem?
 
 

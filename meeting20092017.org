@@ -41,7 +41,7 @@
 ** other points
  
   - research: AIS scores work? Reasonable benchmark values for tenure/promotion?
-    - our proposal: benchmark for top publication 2.5; AIS < 2 is not a top publication
+    - our proposal: benchmark for top publication becomes 2.5; AIS < 2 is not a top publication
   - bringing in external money? Should this be explicitly acknowledged for tenure/promotion? How?
     - e.g. big external money project counts for 2 AIS points?
 

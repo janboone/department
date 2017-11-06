@@ -1,0 +1,61 @@
+#+Title: Agenda November 14, 2017
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
+  - FMT is choosing dates for two-day BKO training (for seniors without BKO)
+    - you will be contacted about this
+
+* RM 2 courses
+
+  - as discussed last year, we are not (hardly) paid for the RM 2 courses that we teach
+  - this is not sustainable
+  - hence we are now reducing the number of courses that we teach in the RM 2
+  - each "theme" can teach 2 courses in the RM2 
+    - where a theme is defined as "I.O.", "experimental", "macro" etc.
+    - each theme can decide itself how to reduce the number of courses
+    - courses that are taught jointly with existing Msc courses can always be taught
+
+
+
+* tenure and promotion procedure
+
+ - we did not finish this discussion at our last meeting
+
+** procedure
+
+  - what documents to share with dept. and which are confidential (only for the committee)
+    - research/education statement, teaching evaluations, motivation letter?
+  - how many days before the dept. meeting should report be sent to dept.?
+  - how active a role can the HoDs play here? e.g. disagree with (parts of) the committee's report?
+  - some people abstain from voting; some do not vote at all; is this a problem?
+
+
+* two other proposals
+
+  - thesis allocation
+    - Eric has made a proposal for two sided matching between faculty and students, which [[https://economics-department.netlify.com/proposals.html][can be found here]]
+    - simpler alternative: as in the Msc, also in the Bsc faculty specifies list of topics on which they are willing to supervise students. Students give their preference and we try to match as well as we can (you are allowed to deviate if the student comes up with another topic that you would like to supervise)
+  - guidelines for dept. members who join a committee for a sponsored chair [[https://economics-department.netlify.com/proposals.html][can be found here]]
+    - are these guidelines ok? Are things missing/should things be changed?
+
+
+* any other business
+
+
+

@@ -1,0 +1,86 @@
+#+Title: What is wrong with our econometrics curriculum?
+#+Author: Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> created by jan. </p>
+
+
+
+* Introduction
+
+** Caveats
+
++ not meant as critique on econometrics teachers from our or other departments
++ I will exaggerate (a lot)
+
+** Is there a problem?
+
++ figure with average population size per municipality
++ from students Msc and Bsc theses:
+  + "the p-value is bigger than 0.05, so it is not true"
+  + "the p-value is less than 0.05, hence the probability than the null-hypothesis is true, is less than 5%"
++ positioning of our program:
+  + we teach our students statistics/econometrics as Econometrics students with a math-deficiency
+  + goal is that they are able to read papers:
+    + does not mean we have to teach it this way
+    + 95% of our students will never read papers
++ even stuff that they do know, they don't recognize
++ students loose track of the "big picture":
+  + what is the size of the effect?
+  + quantify the uncertainty around this
+  + perhaps you want to test a hypothesis
+
+
+
+** Proposed solution
+
++ We should teach:
+  + simulation based statistics/econometrics: then they know what they are doing
+  + Bayesian statistics
+  + data science type methods
+
+* "standard" statistics is counter-intuitive
+
++ 
+
+* Bayesian statistics
+
+** "unfair" question
+
++ if we do "frequentist" statistics, is there uncertainty over the parameters?
+
+** natural policy question
+
++ you run a regression like $y = \alpha + \beta x$ where $x$ is a policy variable that can be raised at a cost
++ only beneficial to raise $x$ if $\beta \geq 1$
++ "what is the probability that $\beta \geq 1$?"
+
+** Why now?
+
++ If Bayesian statistics is so great, why only use it now?
++ "frequentist" statistics won the 20th century because it is analytically tractable
++ but we have computers now and great software to do Bayesian analysis
+
+** advantages
+
++ teaching Bayesian statistics helps to explain the "frequentist" approach
++ helps our students to give more helpful answers in "real life situations"
++ is easier to explain to colleagues without a statistical background
+
+* Data science
+
++ A major advantage of "big data" methods is that they are "bluntly" intuitive
+  + split data in "training" and "testing" data
+  + you estimate your parameters on the training data and see how well your predictions perform on the testing data
+  + you wonder whether your results are specific to this training-testing split; let's do this a 100 times to see how sensitive it is
+
+

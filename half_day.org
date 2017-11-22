@@ -1,0 +1,108 @@
+* Why I love emacs
+
+
+** what is emacs?
+
++ an editor which was designed in the 70s
++ it is open source so the who world can contribute
++ unlike MS Word, the people working on emacs are "like us"
++ they type papers in latex
++ 
+
+
+** why is it great?
+
+*** latex stuff
+
++ use org-cdlatex-mode
++ add equation
+ref:eq:4
+
+
+\begin{equation}
+\label{eq:4}
+\frac{1}{3} = x^2
+\end{equation}
+
+and here another equation
+
+\begin{equation}
+\label{eq:5}
+ax^2+bx+c=0
+\end{equation}
+
+\begin{equation}
+\label{eq:6}
+ax^2+bx+c=0
+\end{equation}
+
+
++ refer to an equation with C-c (
+
+ref:eq:6
+
+
+[[file:bibtexfile.bib][bib tex file]]
+
+
+
+*** highlighting
+
+Use ov-highlighter
+
+So here we have some text.
+
+
+*** tables
+
+| col 1 | col 2 | col 3 |
+|-------+-------+-------|
+|     4 |     5 |     7 |
+|     6 |     8 |     9 |
+|     4 |     4 |     5 |
+
+
+
+
+
+** programming
+
+#+BEGIN_SRC ipython
+5+5
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+10
+:END:
+
+#+BEGIN_SRC ipython
+import matplotlib.pyplot as plt
+import numpy as np
+%matplotlib inline
+range_x = np.arange(-2,2.1,0.1)
+
+plt.plot(range_x,[x**2 for x in range_x])
+plt.show()
+#+END_SRC
+
+#+RESULTS:
+:RESULTS:
+
+[[file:ipython-inline-images/ob-ipython-a42b581f11792cfe3307ed520fdb09ae.png]]
+<matplotlib.figure.Figure at 0x1092a1210>
+:END:
+
+
+
+
+
+
+
+#  ov-highlight-data: KCg2NTEgNjU1IChvdi10eXBlICJncmVlbiIgb3YtaGlnaGxpZ2h0IHQgZmFjZSAoOmJhY2tncm91bmQgIkRhcmtvbGl2ZWdyZWVuMSIpKSkgKDY1OSA2NjMgKG92LXR5cGUgImNvbW1lbnQiIG92LWhpZ2hsaWdodCB0IGhlbHAtZWNobyAicGVyaGFwcyB0aGlzIGlzIHdyb25nIiBsb2NhbC1tYXAgKGtleW1hcCAobW91c2UtMSBsYW1iZGEgbmlsIChpbnRlcmFjdGl2ZSkgKHNldHEgKm92LXdpbmRvdy1jb25maWd1cmF0aW9uKiAoY3VycmVudC13aW5kb3ctY29uZmlndXJhdGlvbikpIChsZXQgKChjYiAoY3VycmVudC1idWZmZXIpKSAoY3VycmVudC1ub3RlIChvdmVybGF5LWdldCAob3YtaGlnaGxpZ2h0LWdldC1jb21tZW50LW92KSAocXVvdGUgaGVscC1lY2hvKSkpKSAoc3dpdGNoLXRvLWJ1ZmZlciAiKm92LW5vdGUqIikgKGVyYXNlLWJ1ZmZlcikgKG9yZy1tb2RlKSAoaW5zZXJ0IChvciBjdXJyZW50LW5vdGUgIiIpKSAobGV0ICgobWFwIChtYWtlLXNwYXJzZS1rZXltYXApKSkgKHNldHEgaGVhZGVyLWxpbmUtZm9ybWF0ICJDbGljayBoZXJlIG9yIHR5cGUgcy08cmV0dXJuPiB0byBmaW5pc2guIEMteCBrIHRvIGNhbmNlbC4iKSkgKGxvY2FsLXNldC1rZXkgKGtiZCAiQy14IGsiKSAoXGAgKGxhbWJkYSBuaWwgKGludGVyYWN0aXZlKSAoa2lsbC1idWZmZXIpKSkpIChsb2NhbC1zZXQta2V5IChrYmQgInMtPHJldHVybj4iKSAoXGAgKGxhbWJkYSBuaWwgKGludGVyYWN0aXZlKSAobGV0ICgodG9vbHRpcCAoYnVmZmVyLXN1YnN0cmluZy1uby1wcm9wZXJ0aWVzIChwb2ludC1taW4pIChwb2ludC1tYXgpKSkpIChraWxsLWJ1ZmZlcikgKHNldC13aW5kb3ctY29uZmlndXJhdGlvbiAqb3Ytd2luZG93LWNvbmZpZ3VyYXRpb24qKSAoc2V0cSAqb3Ytd2luZG93LWNvbmZpZ3VyYXRpb24qIG5pbCkgKG92ZXJsYXktcHV0IChvdi1oaWdobGlnaHQtZ2V0LWNvbW1lbnQtb3YpIChxdW90ZSBoZWxwLWVjaG8pIHRvb2x0aXApKSkpKSkpKSBtb3VzZS1mYWNlIGhpZ2hsaWdodCBmYWNlICg6YmFja2dyb3VuZCAiT3JhbmdlMSIpKSkp
+
+# Local Variables:
+# eval: (ov-highlight-load)
+# End:
+

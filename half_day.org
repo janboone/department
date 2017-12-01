@@ -1,23 +1,31 @@
 * Why I love emacs
 
 
+
+
 ** what is emacs?
 
 + an editor which was designed in the 70s
-+ it is open source so the who world can contribute
++ it is open source so the whole world can contribute
 + unlike MS Word, the people working on emacs are "like us"
-+ they type papers in latex
-+ 
++ I use "org-mode" developed by [[https://staff.fnwi.uva.nl/c.dominik/][Carsten Dominik]]: prof. at UvA
++ with customizations by [[http://kitchingroup.cheme.cmu.edu/scimax][John Kitchin]]: prof. at Carnegie Mellon
++ these people:
+  + type papers in latex
+  + bibliographies in bibtex: C-c ]
+  + work with data
+  + program
+  + have admin tasks: someone walks in and you have to remember something: C-M-R
+  + teach students: [[https://github.com/jkitchin/techela]]
 
 
 ** why is it great?
 
 *** latex stuff
 
-+ use org-cdlatex-mode
++ this is an org-file but the latex things work in latex as well
++ use M-x org-cdlatex-mode
 + add equation
-ref:eq:4
-
 
 \begin{equation}
 \label{eq:4}
@@ -36,31 +44,35 @@ ax^2+bx+c=0
 ax^2+bx+c=0
 \end{equation}
 
-
 + refer to an equation with C-c (
++ export to latex: C-c C-e 
++ but you can also export to html and reveal
++ export with ox-manuscript: generates submission letter as well
 
-ref:eq:6
-
-
-[[file:bibtexfile.bib][bib tex file]]
-
++ easy to add links e.g. to a [[file:econometrics.org::*Data%20science][presentation at slide Data science]]
++ or to a [[file:bibtexfile.bib][bib tex file]]
++ add bibitex entry from doi-identifier
 
 
 *** highlighting
 
-Use ov-highlighter
-
-So here we have some text.
-
++ most latex editors do not allow for meta data in latex:
++ so most people make comments in bold in latex and pdf; then they send it to a conference...
++ Use M-x ov-highlighter/body
++ So here we have some text.
++ and here we add some comments that will not be exported to pdf
 
 *** tables
+
++ Latex is great, but not with tables...
+
+
 
 | col 1 | col 2 | col 3 |
 |-------+-------+-------|
 |     4 |     5 |     7 |
 |     6 |     8 |     9 |
 |     4 |     4 |     5 |
-
 
 
 
@@ -76,6 +88,7 @@ So here we have some text.
 
 10
 :END:
+
 
 #+BEGIN_SRC ipython
 import matplotlib.pyplot as plt
@@ -100,9 +113,18 @@ plt.show()
 
 
 
-#  ov-highlight-data: KCg2NTEgNjU1IChvdi10eXBlICJncmVlbiIgb3YtaGlnaGxpZ2h0IHQgZmFjZSAoOmJhY2tncm91bmQgIkRhcmtvbGl2ZWdyZWVuMSIpKSkgKDY1OSA2NjMgKG92LXR5cGUgImNvbW1lbnQiIG92LWhpZ2hsaWdodCB0IGhlbHAtZWNobyAicGVyaGFwcyB0aGlzIGlzIHdyb25nIiBsb2NhbC1tYXAgKGtleW1hcCAobW91c2UtMSBsYW1iZGEgbmlsIChpbnRlcmFjdGl2ZSkgKHNldHEgKm92LXdpbmRvdy1jb25maWd1cmF0aW9uKiAoY3VycmVudC13aW5kb3ctY29uZmlndXJhdGlvbikpIChsZXQgKChjYiAoY3VycmVudC1idWZmZXIpKSAoY3VycmVudC1ub3RlIChvdmVybGF5LWdldCAob3YtaGlnaGxpZ2h0LWdldC1jb21tZW50LW92KSAocXVvdGUgaGVscC1lY2hvKSkpKSAoc3dpdGNoLXRvLWJ1ZmZlciAiKm92LW5vdGUqIikgKGVyYXNlLWJ1ZmZlcikgKG9yZy1tb2RlKSAoaW5zZXJ0IChvciBjdXJyZW50LW5vdGUgIiIpKSAobGV0ICgobWFwIChtYWtlLXNwYXJzZS1rZXltYXApKSkgKHNldHEgaGVhZGVyLWxpbmUtZm9ybWF0ICJDbGljayBoZXJlIG9yIHR5cGUgcy08cmV0dXJuPiB0byBmaW5pc2guIEMteCBrIHRvIGNhbmNlbC4iKSkgKGxvY2FsLXNldC1rZXkgKGtiZCAiQy14IGsiKSAoXGAgKGxhbWJkYSBuaWwgKGludGVyYWN0aXZlKSAoa2lsbC1idWZmZXIpKSkpIChsb2NhbC1zZXQta2V5IChrYmQgInMtPHJldHVybj4iKSAoXGAgKGxhbWJkYSBuaWwgKGludGVyYWN0aXZlKSAobGV0ICgodG9vbHRpcCAoYnVmZmVyLXN1YnN0cmluZy1uby1wcm9wZXJ0aWVzIChwb2ludC1taW4pIChwb2ludC1tYXgpKSkpIChraWxsLWJ1ZmZlcikgKHNldC13aW5kb3ctY29uZmlndXJhdGlvbiAqb3Ytd2luZG93LWNvbmZpZ3VyYXRpb24qKSAoc2V0cSAqb3Ytd2luZG93LWNvbmZpZ3VyYXRpb24qIG5pbCkgKG92ZXJsYXktcHV0IChvdi1oaWdobGlnaHQtZ2V0LWNvbW1lbnQtb3YpIChxdW90ZSBoZWxwLWVjaG8pIHRvb2x0aXApKSkpKSkpKSBtb3VzZS1mYWNlIGhpZ2hsaWdodCBmYWNlICg6YmFja2dyb3VuZCAiT3JhbmdlMSIpKSkp
+#  ov-highlight-data: KCgxNTY1IDE1ODggKG92LXR5cGUgImdyZWVuIiBvdi1oaWdobGlnaHQgdCBmYWNlICg6YmFja2dyb3VuZCAiRGFya29saXZlZ3JlZW4xIikpKSAoMTU5OSAxNjE2IChvdi10eXBlICJ5ZWxsb3ciIG92LWhpZ2hsaWdodCB0IGZhY2UgKDpiYWNrZ3JvdW5kICJZZWxsb3ciKSkpICgxNjMyIDE2NDkgKG92LXR5cGUgImNvbW1lbnQiIG92LWhpZ2hsaWdodCB0IGhlbHAtZWNobyAiSSB0aGluayB0aGlzIHByb29mIGlzIGNvbXBsZXRlbHkgd3JvbmciIGxvY2FsLW1hcCAoa2V5bWFwIChtb3VzZS0xIGxhbWJkYSBuaWwgKGludGVyYWN0aXZlKSAoc2V0cSAqb3Ytd2luZG93LWNvbmZpZ3VyYXRpb24qIChjdXJyZW50LXdpbmRvdy1jb25maWd1cmF0aW9uKSkgKGxldCAoKGNiIChjdXJyZW50LWJ1ZmZlcikpIChjdXJyZW50LW5vdGUgKG92ZXJsYXktZ2V0IChvdi1oaWdobGlnaHQtZ2V0LWNvbW1lbnQtb3YpIChxdW90ZSBoZWxwLWVjaG8pKSkpIChzd2l0Y2gtdG8tYnVmZmVyICIqb3Ytbm90ZSoiKSAoZXJhc2UtYnVmZmVyKSAob3JnLW1vZGUpIChpbnNlcnQgKG9yIGN1cnJlbnQtbm90ZSAiIikpIChsZXQgKChtYXAgKG1ha2Utc3BhcnNlLWtleW1hcCkpKSAoc2V0cSBoZWFkZXItbGluZS1mb3JtYXQgIkNsaWNrIGhlcmUgb3IgdHlwZSBzLTxyZXR1cm4+IHRvIGZpbmlzaC4gQy14IGsgdG8gY2FuY2VsLiIpKSAobG9jYWwtc2V0LWtleSAoa2JkICJDLXggayIpIChcYCAobGFtYmRhIG5pbCAoaW50ZXJhY3RpdmUpIChraWxsLWJ1ZmZlcikpKSkgKGxvY2FsLXNldC1rZXkgKGtiZCAicy08cmV0dXJuPiIpIChcYCAobGFtYmRhIG5pbCAoaW50ZXJhY3RpdmUpIChsZXQgKCh0b29sdGlwIChidWZmZXItc3Vic3RyaW5nLW5vLXByb3BlcnRpZXMgKHBvaW50LW1pbikgKHBvaW50LW1heCkpKSkgKGtpbGwtYnVmZmVyKSAoc2V0LXdpbmRvdy1jb25maWd1cmF0aW9uICpvdi13aW5kb3ctY29uZmlndXJhdGlvbiopIChzZXRxICpvdi13aW5kb3ctY29uZmlndXJhdGlvbiogbmlsKSAob3ZlcmxheS1wdXQgKG92LWhpZ2hsaWdodC1nZXQtY29tbWVudC1vdikgKHF1b3RlIGhlbHAtZWNobykgdG9vbHRpcCkpKSkpKSkpIG1vdXNlLWZhY2UgaGlnaGxpZ2h0IGZhY2UgKDpiYWNrZ3JvdW5kICJPcmFuZ2UxIikpKSk=
 
 # Local Variables:
 # eval: (ov-highlight-load)
 # End:
 
+
+
+
+
+
+* Conclusion
+
++ point is not that you have to use emacs
++ but 

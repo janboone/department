@@ -1,4 +1,4 @@
-#+Title: What is wrong with our econometrics curriculum?
+#+Title: Econometrics curriculum
 #+Author: Jan
 #+OPTIONS: num:nil email:nil
 #+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
@@ -21,24 +21,27 @@
 
 + not meant as critique on econometrics teachers from our or other departments
 + I will exaggerate (a lot)
++ points I want to make:
+  + we teach the same statistics/econometrics and in the same way for the past 20 years
+  + we may want to change this
 
 ** Is there a problem?
 
-+ figure with average population size per municipality
++ many students do not learn/remember what we teach them
+
+[[./health_munic_size.png]]
+
 + from students Msc and Bsc theses:
   + "the p-value is bigger than 0.05, so it is not true"
   + "the p-value is less than 0.05, hence the probability than the null-hypothesis is true, is less than 5%"
+
+** Marketing
+
 + positioning of our program:
   + we teach our students statistics/econometrics as Econometrics students with a math-deficiency
   + goal is that they are able to read papers:
     + does not mean we have to teach it this way
     + 95% of our students will never read papers
-+ even stuff that they do know, they don't recognize
-+ students loose track of the "big picture":
-  + what is the size of the effect?
-  + quantify the uncertainty around this
-  + perhaps you want to test a hypothesis
-
 
 
 ** Proposed solution
@@ -46,29 +49,71 @@
 + We should teach:
   + simulation based statistics/econometrics: then they know what they are doing
   + Bayesian statistics
-  + data science type methods
+  + some data science type methods
 
-* "standard" statistics is counter-intuitive
+** Trade offs
 
-+ 
++ but then we need to drop other things, like:
+  + IV
+  + two stages least squares
+  + heteroskedasticity
++ we need to know whether this would cause problems for your courses
+
+* Why is there a problem?
+
++ as our discipline has embraced "frequentist" statistics decades ago, we do not know any better
++ we may grumble a bit about referees' focus on t and p values, but we are used to this way of thinking
++ this is different for our students and especially to their future colleagues in a non-academic environment
++ as many of our students do not fully understand what they do, they cannot communicate their results to colleagues without a statistical background
++ they end up not using their statistical skills
+
+** quick reminder
+
++ frequentists do $p(y|\theta)$
+  + there is no uncertainty about $\theta$; we just do not know it
+  + focus on $H_0: \theta=0$, but no one is interested in $\theta=0$
++ in a policy context:
+  + you run a regression like $y = \alpha + \beta x$ where $x$ is a policy variable that can be raised at a cost
+  + only beneficial to raise $x$ if we are pretty sure that $\beta \geq 1$
+  + "what is the probability that $\beta \geq 1$?"
+  + our student says "I found $b=0.5$ and it is not sign. different from 0"
+  + "is it sign. different from 1?"
+  + "no it is not"
+  + "so now what?"
++ "frequentist" statistics won the 20th century because it is analytically tractable
+
+** consequence of this
+
++ students tend to lose track of the "big picture":
+  + what is the size of the effect?
+  + quantify the uncertainty around this
+  + perhaps you want to test a hypothesis
++ with simulation methods, we can focus on this
+  + e.g. bootstrap from your data to get a sense of uncertainty
++ bootstrapping forces you to think about your hypothesis:
+  + two samples $n_1,n_2$ with two different means $m_1 - m_2 > 0$
+  + are the samples drawn from distributions with the same mean $\mu$?
+  + how do you bootstrap?
+
 
 * Bayesian statistics
 
-** "unfair" question
-
-+ if we do "frequentist" statistics, is there uncertainty over the parameters?
 
 ** natural policy question
 
-+ you run a regression like $y = \alpha + \beta x$ where $x$ is a policy variable that can be raised at a cost
-+ only beneficial to raise $x$ if $\beta \geq 1$
-+ "what is the probability that $\beta \geq 1$?"
++ in policy it is often natural to think $p(\theta|y)$
++ Bayesian analysis allows you to do this
++ Bayesian answer is a distribution of $\theta$:
+  + given the data and other things that we may know (prior), this is the uncertainty left about the population parameter of interest
+  + how likely is it that $\theta > 10$?
++ this can be more easily explained to colleagues without a statistical background
 
 ** Why now?
 
 + If Bayesian statistics is so great, why only use it now?
-+ "frequentist" statistics won the 20th century because it is analytically tractable
++ the main disadvantage of this approach: not analytically solvable
 + but we have computers now and great software to do Bayesian analysis
++ our students are taught programming in R and python
 
 ** advantages
 
@@ -78,9 +123,25 @@
 
 * Data science
 
+** it is "hot"
+
++ big data are all over the news nowadays
++ but our students are not exposed to this
++ think of a job interview for our students:
+  + "I can do 2sls" or
+  + "I understand the algorithm that google uses for face recognition"
+
+** it is easy to explain
+
 + A major advantage of "big data" methods is that they are "bluntly" intuitive
   + split data in "training" and "testing" data
   + you estimate your parameters on the training data and see how well your predictions perform on the testing data
   + you wonder whether your results are specific to this training-testing split; let's do this a 100 times to see how sensitive it is
 
++ prediction is more "intuitive" than statistical significance
 
+* Discussion
+
++ should we keep our Bsc statistics/econometrics curriculum as it is?
++ if we would change it, do you expect problems for your courses?
++ are there other things that we should (not) teach them?

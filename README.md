@@ -1,3 +1,3 @@
 # department
 
-[meeting November 14, 2017](http://janboone.github.io/department/meeting14112017.html)
+[meeting December 12, 2017](http://janboone.github.io/department/meeting12122017.html)

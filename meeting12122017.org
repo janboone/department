@@ -1,0 +1,36 @@
+#+Title: Agenda December 12, 2017
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
++ we are currently thinking of the possibility to buy out thesis supervision using your personal research budget
+  + e.g. for people with budgets above 15,000 euro
+  + price per thesis 2500 euro
+  + always after talking to us
++ we usually have 3 dept. meetings per semester
+  + proposal is to have one of these as a meeting with only core staff to discuss hiring policy
++ let us know what you think
+
+
+
+* any other business
+
+
+* education
+
++ [[http://janboone.github.io/department/econometrics.html][presentation]]

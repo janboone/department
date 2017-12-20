@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>BKO Presentation</title>
+<meta name="author" content="(Jan)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/sky.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">BKO Presentation</h1><h2 class="author">Jan</h2><p class="date">Created: 2017-12-20 Wed 14:28</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org6a251f1">competition policy</a></li>
+<li><a href="#/slide-orgb2812b5">learning activities</a></li>
+<li><a href="#/slide-orgdafdda4">challenges</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+
+<section>
+<section id="slide-org6a251f1">
+<h2 id="org6a251f1">competition policy</h2>
+<ul>
+<li>3rd year Bsc course</li>
+<li>usually about 40 students, but last year 80</li>
+<li>we do not know yet how many students to expect in the Spring</li>
+<li><a href="http://janboone.github.io/competition_policy_and_regulation/">link to course material</a></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgb2812b5">
+<h2 id="orgb2812b5">learning activities</h2>
+<ul>
+<li>video lectures</li>
+<li><a href="https://www.datacamp.com/courses/intro-to-python-for-data-science">datacamp</a>: on line computer assisted learning for students to practice python programming</li>
+<li>in class we go over a python file where we simulate the market activities that are relevant for that week's material (e.g. a merger)</li>
+<li>this allows students to ask questions about the (video) lecture</li>
+<li>for each class students prepare questions from previous exams</li>
+<li>students preparation of these questions/participation in class is graded</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgdafdda4">
+<h2 id="orgdafdda4">challenges</h2>
+<ul>
+<li>last year with 80 students it became hard to grade students' class participation</li>
+<li>we have about 10 classes where we can grade activities, it seems reasonable that students want to have at least 2 grades</li>
+<li>but giving 16 students per class the possibility to say something&#x2026;</li>
+<li>last we year we improvised using google forms; but this is not ideal</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<p> created by jan. </p>
+<script src="./reveal.js/lib/js/head.min.js"></script>
+<script src="./reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: './reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

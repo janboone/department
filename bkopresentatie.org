@@ -1,0 +1,40 @@
+#+Title: BKO Presentation
+#+Author: Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> created by jan. </p>
+
+
+
+* competition policy
+
++ 3rd year Bsc course
++ usually about 40 students, but last year 80
++ we do not know yet how many students to expect in the Spring
++ [[http://janboone.github.io/competition_policy_and_regulation/][link to course material]]
+
+
+* learning activities
+
++ video lectures
++ [[https://www.datacamp.com/courses/intro-to-python-for-data-science][datacamp]]: on line computer assisted learning for students to practice python programming
++ in class we go over a python file where we simulate the market activities that are relevant for that week's material (e.g. a merger)
++ this allows students to ask questions about the (video) lecture
++ for each class students prepare questions from previous exams
++ students preparation of these questions/participation in class is graded
+
+* challenges
+
++ last year with 80 students it became hard to grade students' class participation
++ we have about 10 classes where we can grade activities, it seems reasonable that students want to have at least 2 grades
++ but giving 16 students per class the possibility to say something...
++ last we year we improvised using google forms; but this is not ideal

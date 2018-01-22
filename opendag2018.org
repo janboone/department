@@ -52,7 +52,7 @@
 
 + proton beam therapy
 
-[[./volkskrant1.png]]
+[[./Volkskrant1.png]]
 
 #+REVEAL: split
 

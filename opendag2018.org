@@ -94,13 +94,9 @@
 
 ** solutions
 
-+ exclude some treatments
++ reduce supply: exclude some treatments
 
-+ higher copayment
-
-  + insurance: people are risk averse
-  + solidarity: chronically ill have to pay more
-
++ reduce demand: higher copayment
 
 #+REVEAL: split
 
@@ -108,9 +104,7 @@
 [[./roemer.png]]
 
 #+REVEAL: split
-
-[[./nrc1.png]]
-
+[[./spinraza.png]]
 #+REVEAL: split
 
 
@@ -129,7 +123,7 @@
 
 + we can spend each euro only once
 + should we spend it on education, welfare benefits, the army, health care, consumption (lower taxes)?
-+ return on education is estimated to be around 15% per euro
++ return on education is estimated to be around 15% per euro spent
 + what is the return on health care expenditure?
 + within health: if we face a budget, which treatments should we spend money on?
 
@@ -142,7 +136,6 @@
 
 + in the Netherlands we work with 80,000 euro per life-year
 + the UK with 25,000 pound
-+ economic analysis finds something in the range 100,000-200,000
 + we are trying here to allocate scarce resources optimally and need to know the return on this spending to make the trade offs
 + but: Economists know the price of everything and the value of nothing
 
@@ -185,20 +178,21 @@
 
 + if we would be "more generous" and use 150.000 euro per qaly:
 
-    + more treatments can be covered
-    + seriously ill people do not have to buy expensive treatments themselves
-    + either more money is spent on health care (and not education, welfare, development aid)
-	+ or less money is spent on other treatments that have a higher return
-
-        + then the physician her/him self has to decide who gets treatment and who not
-
-    + pharmaceutical firms that have a monopoly (patent) on the drugs raise their price
+  + more treatments can be covered
+  + seriously ill people do not have to buy expensive treatments themselves
+  + either more money is spent on health care (and not education, welfare, development aid)
+  + or less money is spent on other treatments that have a higher return
+  + pharmaceutical firms that have a monopoly (patent) on the drugs raise their price
 
 
 ** deductible
 
++ use demand side to reduce health care expenditure
 + [[https://www.cpb.nl/publicatie/de-vormgeving-van-eigen-betalingen-in-de-zorg-maakt-uit][CPB]] finds that an increase in the deductible with one euro, reduces health care expenditure per head with 44 cent
-+ how can they know?
++ does not seem much, but
+  + if you reduce deductible by 100 euro
+  + for 15 million people...
++ how can CPB know this?
 
 #+REVEAL: split
 
@@ -246,5 +240,6 @@
 
         + how to determine the value of a qaly?
 
+    + programming in python to do the analysis
 
 

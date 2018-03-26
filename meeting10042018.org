@@ -1,0 +1,36 @@
+#+Title: Agenda Meeting April 10, 2018
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+
+
+
+* announcements
+
+
+* proposal sponsored chairs
+
+- note that there is a university procedure for the appointment of prof. on sponsored chairs
+- we cannot deviate from this procedure
+- [[https://economics-department.netlify.com/proposals.html][the proposal found here]] is "only" a set of guidelines for a colleague of our dept. who is asked to join the committee appointing the chair ("BAC")
+  - are these guidelines ok? Are things missing/should things be changed?
+
+
+* how the dept. is financed
+
+- there have been questions whether we should supervise theses for other dept.'s or teach courses for programs outside TiSEM
+- we will elaborate on how the dept. is financed and why we think this is a good idea
+
+* any other business
+

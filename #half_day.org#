@@ -39,10 +39,10 @@
 *** amazing editor
 + edit columns: get rid of the 2's
 
-111222333
-111222333
-111222333
-111222333
+111333222
+111333222
+111333222
+111333222
 
 + change structure of file
 *** latex stuff
@@ -50,6 +50,11 @@
 + this is an org-file but the latex things work in latex as well
 + use M-x org-cdlatex-mode
 + add equation
+
+\begin{equation}
+\label{eq:2}
+ref:eq:5
+\end{equation}
 
 here are some other equations
 
@@ -90,6 +95,12 @@ ax^2+bx+c=0
 + Latex is great, but not with tables...
 + simple to add a table in emacs
 
+| 1 | 2 | 3 |
+|---+---+---|
+| a | a | a |
+| b | b | b |
+|   |   |   |
+
 + you can do excel stuff with it: C-c } to see "addresses"
 
 #+tblname: data
@@ -119,7 +130,8 @@ plt.savefig('table.png')
 
 ** To do lists
 
-*** TODO bla bla bla; use C-c C-t
+*** DONE bla bla bla; use C-c C-t
+    CLOSED: [2017-12-12 Tue 16:21]
 
 + to add a date: C-c C-s
 

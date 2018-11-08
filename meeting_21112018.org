@@ -1,3 +1,8 @@
+#+Title: Agenda Meeting
+#+Author: Reyer and Jan
+#+Options: num:nil toc:nil
+
+
 * Department meeting Nov. 21st, 2018
 
 
@@ -6,6 +11,11 @@
 + Tisem is going to test our exams for the next accreditation
   + we will create a SURFdrive folder where per program, course etc. you need to save your exam and answers to the exams as pdf
   + the exam committee will need 3 people per dept. to help them evaluate exams
+
+
+#+REVEAL: split
+
+
 + tenure criteria:
   + we voted about our TT research criteria
   + TiSEM wants us to do something with outreach as well
@@ -13,17 +23,23 @@
     + we are open to suggestions, but if we abandon the special procedure, then it should be clear that anyone who gets tenure/promotion will become AD, DGS, HoD etc.
     + then we should draw a schedule for the next 10 years who does what when
     + and when deciding on tenure/promotion, you should take into account: do I look forward to this colleague becoming my HoD etc.
+
+
+#+REVEAL: split
+
+
 + Reyer plans to stop as HoD summer 2019
   + there is someone who is willing to take over from Reyer
   + unless we have alternative candidates, this person will become the next HoD (together with Jan)
   + if there are alternative candidates, we can have a vote
   + note: TiSEM decides on who will become HoD but as a dept. we can suggest a candidate
 
-** grant support
+** Grant support
 
 
-** committee reports
+** Committee reports
 
 + marketing our programs
 + streamlining the GS
 
+** Other points

@@ -6,12 +6,13 @@
 * Department meeting Nov. 21st, 2018
 
 
-** Annoucements
+** Announcements
 
++ Tisem travel reimbursement rules: ask Korine before booking things!
 + Tisem is going to test our exams for the next accreditation
   + we will create a SURFdrive folder where per program, course etc. you need to save your exam and answers to the exams as pdf
   + the exam committee will need 3 people per dept. to help them evaluate exams
-
++ writing reference letters for BA students
 
 #+REVEAL: split
 
@@ -19,9 +20,16 @@
 + tenure criteria:
   + we voted about our TT research criteria
   + TiSEM wants us to do something with outreach as well
+    + we are now looking into a workflow where we get feedback from external parties on our outreach activities
+    + to start with: keep Aislinn informed
+    + by putting it on twitter we have a record of it (for annual reports etc.)
+
+#+REVEAL: split
+
++ tenure criteria (2):
   + we have a special tenure/promotion procedure for people with heavy admin tasks; the HoDs have used this procedure two times till now; some people want to change this
-    + we are open to suggestions, but if we abandon the special procedure, then it should be clear that anyone who gets tenure/promotion will become AD, DGS, HoD etc.
-    + then we should draw a schedule for the next 10 years who does what when
+    + we are open to suggestions, but if we abandon the special procedure, then it should be clear that /anyone/ who gets tenure/promotion will become AD, DGS, HoD etc.
+    + then we should draw a (proxy) schedule for the next 10 years who does what when
     + and when deciding on tenure/promotion, you should take into account: do I look forward to this colleague becoming my HoD etc.
 
 
@@ -43,3 +51,6 @@
 + streamlining the GS
 
 ** Other points
+
++ any other points?
++ next dept. meeting: Dec 19, starting at 13:00 till late into the night!

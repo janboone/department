@@ -1,0 +1,24 @@
+#+Title: Agenda Meeting
+#+Author: Reyer and Jan
+#+Options: num:nil toc:nil
+
+
+* Department meeting Dec. 19, 2018
+
+** Announcements
+
++ by the end of this year, the dept. has a positive reserve of 324k, but:
+  + coming years do not look great
+  + outlook for the Netherlands is that compensation per student will fall in years to come
++ new "thesis system" TiSEM
+
+
+** Electronic reimbursements
+
+
+** Graduate School committee
+
+** Micro sequence committee
+
+** Other points
+

@@ -1,0 +1,209 @@
+% Created 2019-02-04 Mon 12:14
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[theorems, skins]{tcolorbox}
+\usepackage[version=3]{mhchem}
+\usepackage[numbers,super,sort&compress]{natbib}
+\usepackage{natmove}
+\usepackage{url}
+\usepackage{minted}
+\usepackage{underscore}
+\usepackage[linktocpage,pdfstartview=FitH,colorlinks,
+linkcolor=blue,anchorcolor=blue,
+citecolor=blue,filecolor=blue,menucolor=blue,urlcolor=blue]{hyperref}
+\usepackage{attachfile}
+\usetheme{default}
+\author{Jan Boone}
+\date{\today}
+\title{}
+\begin{document}
+
+
+
+\begin{frame}[label={sec:org09dbb08}]{RMS Titanic: Machine learning from disaster}
+Myrthe Boone 6E
+
+7 februari 2019
+
+Profielwerkstuk Wiskunde D  
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=150]{./Titanic.png}
+\caption{RMS Titanic}
+\end{figure}
+\end{frame}
+
+\begin{frame}[label={sec:org06908ed}]{Inhoudsopgave}
+\begin{itemize}
+\item Introductie
+\item Wat is machine learning?
+\item Mijn onderzoek
+\begin{itemize}
+\item Algoritmes
+\item Hoofd- en deelvragen
+\end{itemize}
+\item Resultaten
+\item Conclusie
+\item Discussie
+\item Afsluiting
+\end{itemize}
+\end{frame}
+
+\section*{Introductie}
+\label{sec:orgb0d6435}
+
+\begin{frame}[label={sec:org4663e78}]{Waarom dit onderwerp?}
+\begin{itemize}
+\item Meer weten over machine learning en programmeren in Python
+\item Overal om ons heen
+\item Organiseren en analyseren van de werkelijkheid
+\item TU Eindhoven
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org2e7acb5}]{Titanic}
+\begin{itemize}
+\item Voorspellen welke groep passagiers een grotere kans had om te overleven.
+\item 'Vrouwen en kinderen eerst' beleid
+\item Geluk, geslacht, leeftijd, klasse en prijs betaald voor een ticket
+\end{itemize}
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=200]{./Deck3.png}
+\caption{\label{}
+Deck Titanic}
+\end{figure}
+\end{frame}
+
+
+\section*{Wat is machine learning?}
+\label{sec:orge38d414}
+
+\begin{frame}[label={sec:org1ec8526}]{Machine learning}
+\begin{itemize}
+\item Zonder specifiek geprogrammeerd te zijn voor de taken
+\item Voorbeeld: spam emails, Google zoekopdrachten
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org1100fcd}]{Soorten machine learning}
+\begin{itemize}
+\item Supervised, unsupervised en reinforcement learning
+\item Unsupervised: Correcte labels zijn \alert{niet} gegeven
+\item Supervised: Computer weet welke categorieën er zijn
+\item Supervised learning kan ingedeeld worden in regression en classification
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=300]{./typesmachinelearning.png}
+\caption{Machine learning}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgd9c3061}]{Soorten machine learning}
+\begin{itemize}
+\item Classification: categorieën
+\item Regression: continue variabelen
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgcd7091f}]{Soorten machine learning}
+\begin{itemize}
+\item Titanic is supervised learning
+\item Binary classification
+\item 1 = overleefd
+\item 0 = niet overleefd
+\end{itemize}
+\end{frame}
+
+
+\section*{Mijn onderzoek: algoritmes}
+\label{sec:orga491c8b}
+
+\begin{frame}[label={sec:orgb99d471}]{Werkplan}
+\begin{itemize}
+\item We splitsen onze dataset in een training en een test set
+\item We trainen / fitten ons model op de training set
+\item We voorspellen op de test set
+\item Dus we gebruiken de gegevens van de passagiers (leeftijd, geslacht, prijs betaald voor een ticket, klasse)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org336a168}]{Logistic Regression}
+\begin{itemize}
+\item Gebaseerd op de logistische functie
+\item Grenswaarde \(p>0.5\), passagier heeft het overleefd
+\end{itemize}
+
+\begin{equation}
+\label{eq:2}
+\sigma(y) = \frac{e^y}{1+e^y}
+\end{equation}
+
+\begin{itemize}
+\item Vier variabelen dus \(y\) is in dit geval:
+\end{itemize}
+
+\begin{equation}
+y=a_1x_1+a_2x_2+a_3x_3+b+\varepsilon_{i} 
+\end{equation}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=150]{./LogisticCurve.png}
+\caption{Logistische functie}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}[label={sec:org75bd861}]{Hoofd- en deelvragen}
+\begin{itemize}
+\item Is het mogelijk een nauwkeurige voorspelling te maken of de passagiers aan boord van de Titanic het hebben overleefd met behulp van informatie over geslacht, klasse, leeftijd en prijs betaald voor een ticket? 
+\begin{itemize}
+\item Wat is de invloed van geslacht op de overlevingskans?
+\item Wat is de invloed van klasse op de overlevingskans?
+\item Wat is de invloed van leeftijd op de overlevingskans?
+\item Wat is de invloed van prijs betaald voor een ticket op de overlevingskans?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\section*{Resultaten}
+\label{sec:orgc4bd0cc}
+
+\begin{frame}[label={sec:org03cb064}]{Resultaten}
+\begin{itemize}
+\item begonnen met plots maken, dataset ontdekken
+\item coëfficiënten
+\end{itemize}
+
+\begin{figure}[htbp]
+\centering
+\includegraphics[width=300]{./ClassCount.png}
+\caption{Plot van reisklasse}
+\end{figure}
+\end{frame}
+\end{document}

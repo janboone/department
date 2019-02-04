@@ -1,4 +1,16 @@
+#+AUTHOR: Myrthe Boone
+#+TITLE: Profielwerkstuk Wiskunde D  
 #+OPTIONS: toc:nil num:nil H:2
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 1
+#+REVEAL_POSTAMBLE: <p> created by myrthe. </p>
 #+LaTeX_CLASS: beamer
 #+LaTeX_CLASS_OPTIONS: [presentation]
 #+BEAMER_FRAME_LEVEL: 2
@@ -11,7 +23,7 @@ Myrthe Boone 6E
 
 7 februari 2019
 
-Profielwerkstuk Wiskunde D  
+
 
 #+caption: RMS Titanic
 #+attr_html: :width 400px

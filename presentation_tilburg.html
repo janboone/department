@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title></title>
+<meta name="author" content="(Jan Boone)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h2 class="author">Jan Boone</h2><p class="date">Created: 2019-02-02 Sat 11:18</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org9b4af8f">1. Opening slide</a></li>
+<li><a href="#/slide-org4a674aa">2. Introduction</a></li>
+<li><a href="#/slide-org2975eaf">3. Why Bayesian?</a></li>
+<li><a href="#/slide-orgd7feedc">4. Model</a></li>
+<li><a href="#/slide-orge258d45">5. Estimation</a></li>
+<li><a href="#/slide-org110c6de">6. Fit</a>
+<ul>
+<li><a href="#/slide-org6e6319b">6.1. Fit on averages</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgf132490">7. Simulations</a></li>
+<li><a href="#/slide-orgfea18ca">8. What's next?</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<section id="slide-org9b4af8f">
+<h2 id="org9b4af8f"><span class="section-number-2">1</span> Opening slide</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org4a674aa">
+<h2 id="org4a674aa"><span class="section-number-2">2</span> Introduction</h2>
+<ul>
+<li>objective: calculate effects of different sizes and types of cost-sharing in healthcare</li>
+<li>empirical literature too specific</li>
+<li>theoretical models hard to estimate</li>
+<li>develop a model which solves both points</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2975eaf">
+<h2 id="org2975eaf"><span class="section-number-2">3</span> Why Bayesian?</h2>
+<ul>
+<li>only a deductible and similar types of cost-sharing in the Netherlands</li>
+<li>distributions important for other types</li>
+<li>&lt;example figure 1&gt;</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgd7feedc">
+<h2 id="orgd7feedc"><span class="section-number-2">4</span> Model</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-orge258d45">
+<h2 id="orge258d45"><span class="section-number-2">5</span> Estimation</h2>
+
+</section>
+</section>
+<section>
+<section id="slide-org110c6de">
+<h2 id="org110c6de"><span class="section-number-2">6</span> Fit</h2>
+<ul>
+<li>fit op het gemiddelde plaatje (slider??)</li>
+<li>qq plot</li>
+<li>fit op de verdeling (density)</li>
+<li>fit # nullen</li>
+
+</ul>
+
+</section>
+<section id="slide-org6e6319b">
+<h3 id="org6e6319b"><span class="section-number-3">6.1</span> Fit on averages</h3>
+<iframe width="840" height="300" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf132490">
+<h2 id="orgf132490"><span class="section-number-2">7</span> Simulations</h2>
+<ul>
+<li>deductibles &amp; co-insurance rates
+<ul>
+<li>plaatjes
+<ul>
+<li>gemiddeld per leeftijd</li>
+<li>plot x deductible size, y mean expenditure</li>
+
+</ul></li>
+<li>summary statistics:
+<ul>
+<li>moral hazard reduction in euro/pp</li>
+<li>oop in euro/pp</li>
+<li></li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgfea18ca">
+<h2 id="orgfea18ca"><span class="section-number-2">8</span> What's next?</h2>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

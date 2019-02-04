@@ -1,0 +1,59 @@
+#+TITLE: A Cost-Sharing Model for Health Care
+#+AUTHOR: Jan Boone, Minke Remmerswaal, and Bram Wouterse
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 1
+#+REVEAL_POSTAMBLE: <p> Created by jan. </p>
+
+* Opening slide
+
+* Introduction
+
++ objective: calculate effects of different sizes and types of cost-sharing in healthcare
++ empirical literature too specific 
++ theoretical models hard to estimate
++ develop a model which solves both points
+
+* Why Bayesian?
+
++ only a deductible and similar types of cost-sharing in the Netherlands
++ distributions important for other types
++ <example figure 1>
+
+* Model
+
+* Estimation
+
+* Fit
+
++ fit op het gemiddelde plaatje (slider??)
++ qq plot
++ fit op de verdeling (density) 
++ fit # nullen 
+
+** Fit on averages
+
+#+REVEAL_HTML: <iframe width="840" height="300" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
+
+
+* Simulations
+
++ deductibles & co-insurance rates
+  + plaatjes
+    + gemiddeld per leeftijd
+    + plot x deductible size, y mean expenditure
+  + summary statistics:
+    + moral hazard reduction in euro/pp
+    + oop in euro/pp
+    + 
+
+* What's next?
+
+

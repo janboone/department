@@ -3,15 +3,14 @@
 #+Options: num:nil toc:nil
 
 
-* Department meeting Dec. 19, 2018
+* Department meeting Feb. 13, 2019
 
 ** Announcements
 
-+ by the end of this year, the dept. has a positive reserve of 324k (expectation in 2015 was a reserve of -3,000k by the end of 2018), but:
-  + coming years do not look great
-  + outlook for the Netherlands is that compensation per student will fall in years to come
-+ new "thesis system" TiSEM
-  + EBE thesis system
++ AD ECO
++ Tuesday seminars and PhDs
++ AEA2 and thesis process
+
 
 
 ** Electronic reimbursements

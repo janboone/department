@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Health Care Expenditures</title>
+<meta name="author" content="(Jan Boone, Minke Remmerswaal, and Bram Wouterse)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/sky.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Health Care Expenditures</h1><h2 class="author">Jan Boone, Minke Remmerswaal, and Bram Wouterse</h2>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgc3a6912">Introduction</a></li>
+<li><a href="#/slide-org7b7b83e">Model</a></li>
+<li><a href="#/slide-org2102a7d">Estimation</a></li>
+<li><a href="#/slide-orgdf7b7a0">Fit</a></li>
+<li><a href="#/slide-org7781ce1">Simulations</a></li>
+<li><a href="#/slide-org0dfb911">Where do we stand</a></li>
+<li><a href="#/slide-orgbc69141">Appendix</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+
+<section>
+<section id="slide-orgc3a6912">
+<h2 id="orgc3a6912">Introduction</h2>
+<div class="outline-text-2" id="text-orgc3a6912">
+</div>
+</section>
+<section id="slide-org4a07b1e">
+<h3 id="org4a07b1e">Introduction</h3>
+<ul>
+<li>objective:
+<ul>
+<li>calculate effects of different cost-sharing schemes on healthcare spending</li>
+
+</ul></li>
+<li>difficulties: 
+<ul>
+<li>after the reform, the Netherlands has only featured deductible (like) cost sharing</li>
+<li>empirical literature too specific</li>
+<li>theoretical models hard to estimate</li>
+
+</ul></li>
+<li>our aim is to develop a model which solves both points</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd068eec">
+<h3 id="orgd068eec">Why Bayesian?</h3>
+<ul>
+<li>distributions of healthcare spending are important for cost-sharing schemes
+<ul>
+<li>simulation should also cover e.g. a "donut"</li>
+
+</ul></li>
+<li>"standard" econometrics works with sampling variation
+<ul>
+<li>but we have data on the whole population</li>
+
+</ul></li>
+<li>we want policy recommendations like:
+<ul>
+<li>there is 60% probability that a deductible of 500 euro reduces expenditures by at least 10% (compared to 350 euro)</li>
+
+</ul></li>
+<li>Bayesian approach can easily work with distributions</li>
+
+</ul>
+
+<div class="figure">
+<p><img src="./ExpenditureOverAge.png" alt="ExpenditureOverAge.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org7b7b83e">
+<h2 id="org7b7b83e">Model</h2>
+<div class="outline-text-2" id="text-org7b7b83e">
+</div>
+</section>
+<section id="slide-org8c863f3">
+<h3 id="org8c863f3">Total healthcare expenditure in a year</h3>
+<ul>
+<li>\(H(z)\): distribution of healthcare expenditure in a year
+<ul>
+<li>where \(z=x+y\)</li>
+<li>\(x\): exogenous, not affected by cost-sharing, high-value care
+<ul>
+<li>if you break your leg, you get "plastered up"</li>
+
+</ul></li>
+<li>\(y\): endogenous, affected by cost-sharing
+<ul>
+<li>if you have a running injury, perhaps you skip the physiotherapy</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org81932fa">
+<h3 id="org81932fa">Idea of the model</h3>
+<ul>
+<li>"at the start of the year", person \(i\) is offered one \(y\) treatment with value \(v_y\) and expected out-of-pocket cost \(OOP\)</li>
+<li>\(i\) accepts if \(v_y\) exceeds expected \(OOP\)</li>
+
+<li>\(OOP\) depends on:
+<ul>
+<li>\(f(x)\) ex-ante distribution of exogenous healthcare expenditure</li>
+<li>\(g(y)\) cost distribution of offered treatment \(y\)</li>
+<li>cost-sharing scheme</li>
+
+</ul></li>
+<li>for a deductible \(D\), \(OOP\) equals \(\int_0^{+\infty} \int_0^{+\infty} (\min\{x+y,D\}-\min\{x,D\})f(x)g(y)dxdy\)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2102a7d">
+<h2 id="org2102a7d">Estimation</h2>
+<div class="outline-text-2" id="text-org2102a7d">
+</div>
+</section>
+<section id="slide-orgb1d296e">
+<h3 id="orgb1d296e">Parametric specification</h3>
+<ul>
+<li>"everybody knows" that healthcare expenditures are log-normally distributed:
+<ul>
+<li>log transformation of positive healthcare costs are normally distributed</li>
+<li>we model the propability on zero healthcare costs</li>
+<li>benefits of log-normal distribution:
+<ul>
+<li>analytical expression for \(OOP\) with deductible (estimation)</li>
+<li>analytical expression for distribution of \(x+y\)</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org19f26cf">
+<h3 id="org19f26cf">Example</h3>
+
+<div id="org5e9db39" class="figure">
+<p><img src="./DistributionExpenditure.png" alt="DistributionExpenditure.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Illustrative distributions for <i>positive</i> healthcare costs (left in levels, right in logs)</p>
+</div>
+
+
+</section>
+<section id="slide-org027eb73">
+<h3 id="org027eb73">Four components</h3>
+<ul>
+<li>define categories age by gender (current model: \(38*2\)) 
+<ul>
+<li>each category has a <i>distribution</i> of (log) healthcare costs \(z\)</li>
+
+</ul></li>
+<li>distribution is mixture of 4 components:
+<ul>
+<li>\(x \sim N(\mu_x,\sigma_x)\), with age and year FE by gender</li>
+<li>same for \(y\)</li>
+<li>\(\psi\) is probability treatment is offered (\(x > 0\)), with age FE by gender (and year FE women 21+)</li>
+<li>\(\phi\) is same for \(y > 0\)</li>
+<li>people in each category know their \(\psi,\phi\) and their distributions of \(x,y\)</li>
+
+</ul></li>
+<li>calculate \(OOP_y\) per age, gender, year with \(x,y,\psi,D\)</li>
+<li>compute probability \(F\) that \(y\) is rejected (\(v_y < OOP\))
+<ul>
+<li>\(v_y \sim N(\mu,\sigma)\) by age and gender</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orge40450d">
+<h3 id="orge40450d">Probabilities</h3>
+<ul>
+<li>calculate probability for each mixture component</li>
+
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">component</td>
+<td class="org-left">probability</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x=y=0\)</td>
+<td class="org-left">\((1-\psi)(1-\phi + \phi F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x>0=y\)</td>
+<td class="org-left">\(\psi*(1-\phi + \phi F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(y>0=x\)</td>
+<td class="org-left">\((1-\psi)\phi(1-F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x,y>0\)</td>
+<td class="org-left">\(\psi \phi (1-F)\)</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-org5365838">
+<h3 id="org5365838">Technique</h3>
+<ul>
+<li>specify priors for parameters:
+<ul>
+<li>5,000,000 observations per year</li>
+<li>on average 65,000 observations per category per year</li>
+
+</ul></li>
+<li>estimation with variational inference (ADVI, Auto-diff Variational Inference) and minibatches
+<ul>
+<li>standard Markov Chain Monte Carlo methods (Metropolis, NUTS etc.) do not scale well with data size</li>
+
+</ul></li>
+<li>python and pymc3 fun to work with
+<ul>
+<li>parameter \(\phi\) has age and gender fixed effects:
+<code>ϕ = pm.Deterministic('ϕ', phi[age,sex])</code></li>
+
+</ul></li>
+<li>for each age-gender category, we draw 10,000 samples of the model parameters</li>
+<li>for each sample we draw one \(x,y\) and \(z\)</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgdf7b7a0">
+<h2 id="orgdf7b7a0">Fit</h2>
+<div class="outline-text-2" id="text-orgdf7b7a0">
+</div>
+</section>
+<section id="slide-org4cbb8a7">
+<h3 id="org4cbb8a7">How to measure fit</h3>
+<ul>
+<li>not obvious how to measure the fit of the model</li>
+<li>we can compare: 
+<ul>
+<li>average expenditure per age-gender category (fit vs observed)</li>
+<li>distributions via QQ plots</li>
+<li>predicted vs realized zero-expenditures per category (but what is "zero"?)</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org7096962">
+<h3 id="org7096962">Fit on average costs by age, year and sex</h3>
+<iframe width="840" height="400" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
+
+</section>
+<section id="slide-orgada0142">
+<h3 id="orgada0142">QQ plot for 30 year old woman in 2013</h3>
+
+<div class="figure">
+<p><img src="./qq_female_age30_2013.png" alt="qq_female_age30_2013.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7781ce1">
+<h2 id="org7781ce1">Simulations</h2>
+<div class="outline-text-2" id="text-org7781ce1">
+</div>
+</section>
+<section id="slide-org05b29e4">
+<h3 id="org05b29e4">Deductible (women)</h3>
+
+<div class="figure">
+<p><img src="./simulation_deductibles_log_female.png" alt="simulation_deductibles_log_female.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge698be7">
+<h3 id="orge698be7">Deductible (men)</h3>
+
+<div class="figure">
+<p><img src="./simulation_deductibles_log_male.png" alt="simulation_deductibles_log_male.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orge3beca8">
+<h3 id="orge3beca8">Deductible (women)</h3>
+<p>
+Average expenditure and OOP 
+</p>
+
+<div class="figure">
+<p><img src="./mean_expenditure_oop_deductible_women.png" alt="mean_expenditure_oop_deductible_women.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org96ff774">
+<h3 id="org96ff774">Deductible (men)</h3>
+
+<div class="figure">
+<p><img src="./mean_expenditure_oop_deductible_men.png" alt="mean_expenditure_oop_deductible_men.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org59d0511">
+<h3 id="org59d0511">25% co-insurance rate with cap (women)</h3>
+
+<div class="figure">
+<p><img src="./simulation_25p_deductibles_log_female.png" alt="simulation_25p_deductibles_log_female.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgfe790bb">
+<h3 id="orgfe790bb">25% co-insurance rate with cap (men)</h3>
+
+<div class="figure">
+<p><img src="./simulation_25p_deductibles_log_male.png" alt="simulation_25p_deductibles_log_male.png" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-org95d831d">
+<h3 id="org95d831d">25% co-insurance rate with cap (women)</h3>
+<p>
+Average expenditure and OOP 
+</p>
+
+<div class="figure">
+<p><img src="./mean_expenditure_oop_25p_women.png" alt="mean_expenditure_oop_25p_women.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgb385c6b">
+<h3 id="orgb385c6b">25% co-insurance rate with cap (men)</h3>
+
+<div class="figure">
+<p><img src="./mean_expenditure_oop_25p_men.png" alt="mean_expenditure_oop_25p_men.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org0dfb911">
+<h2 id="org0dfb911">Where do we stand</h2>
+<ul>
+<li>estimation "works" and goes quite fast</li>
+<li>model needs to be fine-tuned
+<ul>
+<li>e.g. distribution parameters for \(x\) vary around 18</li>
+
+</ul></li>
+<li>simulations work as well</li>
+<li>simulations slow down when working with 10,000 samples and simulated OOP</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgbc69141">
+<h2 id="orgbc69141">Appendix</h2>
+<div class="outline-text-2" id="text-orgbc69141">
+</div>
+</section>
+<section id="slide-org85d2879">
+<h3 id="org85d2879">Comparison deductible and 25% co-insurance rate</h3>
+<iframe width="840" height="300" src="./sim_logdeductible_25p_averaged_age_logs.html" frameborder="0" allowfullscreen></iframe>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

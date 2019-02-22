@@ -1,0 +1,932 @@
+
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.js" type="text/javascript"></script>
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.13.0.min.js" type="text/javascript"></script>
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.13.0.min.js" type="text/javascript"></script>
+<script src="https://cdn.pydata.org/bokeh/release/bokeh-gl-0.13.0.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.20/require.min.js" type="text/javascript"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js" type="text/javascript"></script>
+<script type="text/javascript">function HoloViewsWidget() {
+}
+
+HoloViewsWidget.prototype.init_slider = function(init_val){
+  if(this.load_json) {
+    this.from_json()
+  } else {
+    this.update_cache();
+  }
+}
+
+HoloViewsWidget.prototype.populate_cache = function(idx){
+  this.cache[idx].innerHTML = this.frames[idx];
+  if (this.embed) {
+    delete this.frames[idx];
+  }
+}
+
+HoloViewsWidget.prototype.process_error = function(msg){
+}
+
+HoloViewsWidget.prototype.from_json = function() {
+  var data_url = this.json_path + this.id + '.json';
+  $.getJSON(data_url, $.proxy(function(json_data) {
+    this.frames = json_data;
+    this.update_cache();
+    this.update(0);
+  }, this));
+}
+
+HoloViewsWidget.prototype.dynamic_update = function(current){
+  if (current === undefined) {
+    return
+  }
+  this.current = current;
+  if (this.comm) {
+    var msg = {comm_id: this.id+'_client', content: current}
+    this.comm.send(msg);
+  }
+}
+
+HoloViewsWidget.prototype.update_cache = function(force){
+  var frame_len = Object.keys(this.frames).length;
+  for (var i=0; i<frame_len; i++) {
+    if(!this.load_json || this.dynamic)  {
+      var frame = Object.keys(this.frames)[i];
+    } else {
+      var frame = i;
+    }
+    if(!(frame in this.cache) || force) {
+      if ((frame in this.cache) && force) { this.cache[frame].remove() }
+      var div = document.createElement("div");
+      var parent = document.getElementById("_anim_img"+this.id);
+      div.style.display = "none";
+      parent.appendChild(div)
+      this.cache[frame] = div;
+      var cache_id = "_anim_img"+this.id+"_"+frame;
+      this.populate_cache(frame);
+    }
+  }
+}
+
+HoloViewsWidget.prototype.update = function(current){
+  if(current in this.cache) {
+    for (var index in this.cache) {
+      this.cache[index].style.display = "none";
+    }
+    this.cache[current].style.display = "";
+    this.wait = false;
+  }
+}
+
+HoloViewsWidget.prototype.init_comms = function() {
+  var that = this
+  HoloViews.comm_manager.register_target(this.plot_id, this.id, function (msg) { that.process_msg(msg) })
+  if (!this.cached || this.dynamic) {
+    function ack_callback(msg) {
+      msg = JSON.parse(msg.content.data);
+      var comm_id = msg["comm_id"]
+      var comm_status = HoloViews.comm_status[comm_id];
+      if (that.queue.length > 0) {
+        that.time = Date.now();
+        that.dynamic_update(that.queue[that.queue.length-1]);
+        that.queue = [];
+      } else {
+        that.wait = false;
+      }
+      if ((msg.msg_type == "Ready") && msg.content) {
+        console.log("Python callback returned following output:", msg.content);
+      } else if (msg.msg_type == "Error") {
+        console.log("Python failed with the following traceback:", msg['traceback'])
+      }
+    }
+    var comm = HoloViews.comm_manager.get_client_comm(this.plot_id, this.id+'_client', ack_callback);
+    return comm
+  }
+}
+
+HoloViewsWidget.prototype.process_msg = function(msg) {
+}
+
+function SelectionWidget(frames, id, slider_ids, keyMap, dim_vals, notFound, load_json, mode, cached, json_path, dynamic, plot_id){
+  this.frames = frames;
+  this.id = id;
+  this.plot_id = plot_id;
+  this.slider_ids = slider_ids;
+  this.keyMap = keyMap
+  this.current_frame = 0;
+  this.current_vals = dim_vals;
+  this.load_json = load_json;
+  this.mode = mode;
+  this.notFound = notFound;
+  this.cached = cached;
+  this.dynamic = dynamic;
+  this.cache = {};
+  this.json_path = json_path;
+  this.init_slider(this.current_vals[0]);
+  this.queue = [];
+  this.wait = false;
+  if (!this.cached || this.dynamic) {
+    this.comm = this.init_comms();
+  }
+}
+
+SelectionWidget.prototype = new HoloViewsWidget;
+
+
+SelectionWidget.prototype.get_key = function(current_vals) {
+  var key = "(";
+  for (var i=0; i<this.slider_ids.length; i++)
+  {
+    var val = this.current_vals[i];
+    if (!(typeof val === 'string')) {
+      if (val % 1 === 0) { val = val.toFixed(1); }
+      else { val = val.toFixed(10); val = val.slice(0, val.length-1);}
+    }
+    key += "'" + val + "'";
+    if(i != this.slider_ids.length-1) { key += ', ';}
+    else if(this.slider_ids.length == 1) { key += ',';}
+  }
+  key += ")";
+  return this.keyMap[key];
+}
+
+SelectionWidget.prototype.set_frame = function(dim_val, dim_idx){
+  this.current_vals[dim_idx] = dim_val;
+  var key = this.current_vals;
+  if (!this.dynamic) {
+    key = this.get_key(key)
+  }
+  if (this.dynamic || !this.cached) {
+    if ((this.time !== undefined) && ((this.wait) && ((this.time + 10000) > Date.now()))) {
+      this.queue.push(key);
+      return
+    }
+    this.queue = [];
+    this.time = Date.now();
+    this.current_frame = key;
+    this.wait = true;
+    this.dynamic_update(key)
+  } else if (key !== undefined) {
+    this.update(key)
+  }
+}
+
+
+/* Define the ScrubberWidget class */
+function ScrubberWidget(frames, num_frames, id, interval, load_json, mode, cached, json_path, dynamic, plot_id){
+  this.slider_id = "_anim_slider" + id;
+  this.loop_select_id = "_anim_loop_select" + id;
+  this.id = id;
+  this.plot_id = plot_id;
+  this.interval = interval;
+  this.current_frame = 0;
+  this.direction = 0;
+  this.dynamic = dynamic;
+  this.timer = null;
+  this.load_json = load_json;
+  this.mode = mode;
+  this.cached = cached;
+  this.frames = frames;
+  this.cache = {};
+  this.length = num_frames;
+  this.json_path = json_path;
+  document.getElementById(this.slider_id).max = this.length - 1;
+  this.init_slider(0);
+  this.wait = false;
+  this.queue = [];
+  if (!this.cached || this.dynamic) {
+    this.comm = this.init_comms()
+  }
+}
+
+ScrubberWidget.prototype = new HoloViewsWidget;
+
+ScrubberWidget.prototype.set_frame = function(frame){
+  this.current_frame = frame;
+  var widget = document.getElementById(this.slider_id);
+  if (widget === null) {
+    this.pause_animation();
+    return
+  }
+  widget.value = this.current_frame;
+  if (this.dynamic || !this.cached) {
+    if ((this.time !== undefined) && ((this.wait) && ((this.time + 10000) > Date.now()))) {
+      this.queue.push(frame);
+      return
+    }
+    this.queue = [];
+    this.time = Date.now();
+    this.wait = true;
+    this.dynamic_update(frame)
+  } else {
+    this.update(frame)
+  }
+}
+
+ScrubberWidget.prototype.get_loop_state = function(){
+  var button_group = document[this.loop_select_id].state;
+  for (var i = 0; i < button_group.length; i++) {
+    var button = button_group[i];
+    if (button.checked) {
+      return button.value;
+    }
+  }
+  return undefined;
+}
+
+
+ScrubberWidget.prototype.next_frame = function() {
+  this.set_frame(Math.min(this.length - 1, this.current_frame + 1));
+}
+
+ScrubberWidget.prototype.previous_frame = function() {
+  this.set_frame(Math.max(0, this.current_frame - 1));
+}
+
+ScrubberWidget.prototype.first_frame = function() {
+  this.set_frame(0);
+}
+
+ScrubberWidget.prototype.last_frame = function() {
+  this.set_frame(this.length - 1);
+}
+
+ScrubberWidget.prototype.slower = function() {
+  this.interval /= 0.7;
+  if(this.direction > 0){this.play_animation();}
+  else if(this.direction < 0){this.reverse_animation();}
+}
+
+ScrubberWidget.prototype.faster = function() {
+  this.interval *= 0.7;
+  if(this.direction > 0){this.play_animation();}
+  else if(this.direction < 0){this.reverse_animation();}
+}
+
+ScrubberWidget.prototype.anim_step_forward = function() {
+  if(this.current_frame < this.length - 1){
+    this.next_frame();
+  }else{
+    var loop_state = this.get_loop_state();
+    if(loop_state == "loop"){
+      this.first_frame();
+    }else if(loop_state == "reflect"){
+      this.last_frame();
+      this.reverse_animation();
+    }else{
+      this.pause_animation();
+      this.last_frame();
+    }
+  }
+}
+
+ScrubberWidget.prototype.anim_step_reverse = function() {
+  if(this.current_frame > 0){
+    this.previous_frame();
+  } else {
+    var loop_state = this.get_loop_state();
+    if(loop_state == "loop"){
+      this.last_frame();
+    }else if(loop_state == "reflect"){
+      this.first_frame();
+      this.play_animation();
+    }else{
+      this.pause_animation();
+      this.first_frame();
+    }
+  }
+}
+
+ScrubberWidget.prototype.pause_animation = function() {
+  this.direction = 0;
+  if (this.timer){
+    clearInterval(this.timer);
+    this.timer = null;
+  }
+}
+
+ScrubberWidget.prototype.play_animation = function() {
+  this.pause_animation();
+  this.direction = 1;
+  var t = this;
+  if (!this.timer) this.timer = setInterval(function(){t.anim_step_forward();}, this.interval);
+}
+
+ScrubberWidget.prototype.reverse_animation = function() {
+  this.pause_animation();
+  this.direction = -1;
+  var t = this;
+  if (!this.timer) this.timer = setInterval(function(){t.anim_step_reverse();}, this.interval);
+}
+
+function extend(destination, source) {
+  for (var k in source) {
+    if (source.hasOwnProperty(k)) {
+      destination[k] = source[k];
+    }
+  }
+  return destination;
+}
+
+function update_widget(widget, values) {
+  if (widget.hasClass("ui-slider")) {
+    widget.slider('option', {
+      min: 0,
+      max: values.length-1,
+      dim_vals: values,
+      value: 0,
+      dim_labels: values
+    })
+    widget.slider('option', 'slide').call(widget, event, {value: 0})
+  } else {
+    widget.empty();
+    for (var i=0; i<values.length; i++){
+      widget.append($("<option>", {
+        value: i,
+        text: values[i]
+      }))
+    };
+    widget.data('values', values);
+    widget.data('value', 0);
+    widget.trigger("change");
+  };
+}
+
+function init_slider(id, plot_id, dim, values, next_vals, labels, dynamic, step, value, next_dim,
+                     dim_idx, delay, jQueryUI_CDN, UNDERSCORE_CDN) {
+  // Slider JS Block START
+  function loadcssfile(filename){
+    var fileref=document.createElement("link")
+    fileref.setAttribute("rel", "stylesheet")
+    fileref.setAttribute("type", "text/css")
+    fileref.setAttribute("href", filename)
+    document.getElementsByTagName("head")[0].appendChild(fileref)
+  }
+  loadcssfile("https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css");
+  /* Check if jQuery and jQueryUI have been loaded
+     otherwise load with require.js */
+  var jQuery = window.jQuery,
+    // check for old versions of jQuery
+    oldjQuery = jQuery && !!jQuery.fn.jquery.match(/^1\.[0-4](\.|$)/),
+    jquery_path = '',
+    paths = {},
+    noConflict;
+  var jQueryUI = jQuery.ui;
+  // check for jQuery
+  if (!jQuery || oldjQuery) {
+    // load if it's not available or doesn't meet min standards
+    paths.jQuery = jQuery;
+    noConflict = !!oldjQuery;
+  } else {
+    // register the current jQuery
+    define('jquery', [], function() { return jQuery; });
+  }
+  if (!jQueryUI) {
+    paths.jQueryUI = jQueryUI_CDN.slice(null, -3);
+  } else {
+    define('jQueryUI', [], function() { return jQuery.ui; });
+  }
+  paths.underscore = UNDERSCORE_CDN.slice(null, -3);
+  var jquery_require = {
+    paths: paths,
+    shim: {
+      "jQueryUI": {
+        exports:"$",
+        deps: ['jquery']
+      },
+      "underscore": {
+        exports: '_'
+      }
+    }
+  }
+  require.config(jquery_require);
+  require(["jQueryUI", "underscore"], function(jUI, _){
+    if (noConflict) $.noConflict(true);
+    var vals = values;
+    if (dynamic && vals.constructor === Array) {
+      var default_value = parseFloat(value);
+      var min = parseFloat(vals[0]);
+      var max = parseFloat(vals[vals.length-1]);
+      var wstep = step;
+      var wlabels = [default_value];
+      var init_label = default_value;
+    } else {
+      var min = 0;
+      if (dynamic) {
+        var max = Object.keys(vals).length - 1;
+        var init_label = labels[value];
+        var default_value = values[value];
+      } else {
+        var max = vals.length - 1;
+        var init_label = labels[value];
+        var default_value = value;
+      }
+      var wstep = 1;
+      var wlabels = labels;
+    }
+    function adjustFontSize(text) {
+      var width_ratio = (text.parent().width()/8)/text.val().length;
+      var size = Math.min(0.9, Math.max(0.6, width_ratio))+'em';
+      text.css('font-size', size);
+    }
+    var slider = $('#_anim_widget'+id+'_'+dim);
+    slider.slider({
+      animate: "fast",
+      min: min,
+      max: max,
+      step: wstep,
+      value: default_value,
+      dim_vals: vals,
+      dim_labels: wlabels,
+      next_vals: next_vals,
+      slide: function(event, ui) {
+        var vals = slider.slider("option", "dim_vals");
+        var next_vals = slider.slider("option", "next_vals");
+        var dlabels = slider.slider("option", "dim_labels");
+        if (dynamic) {
+          var dim_val = ui.value;
+          if (vals.constructor === Array) {
+            var label = ui.value;
+          } else {
+            var label = dlabels[ui.value];
+          }
+        } else {
+          var dim_val = vals[ui.value];
+          var label = dlabels[ui.value];
+        }
+        var text = $('#textInput'+id+'_'+dim);
+        text.val(label);
+        adjustFontSize(text);
+        HoloViews.index[plot_id].set_frame(dim_val, dim_idx);
+        if (Object.keys(next_vals).length > 0) {
+          var new_vals = next_vals[dim_val];
+          var next_widget = $('#_anim_widget'+id+'_'+next_dim);
+          update_widget(next_widget, new_vals);
+        }
+      }
+    });
+    slider.keypress(function(event) {
+      if (event.which == 80 || event.which == 112) {
+        var start = slider.slider("option", "value");
+        var stop =  slider.slider("option", "max");
+        for (var i=start; i<=stop; i++) {
+          var delay = i*delay;
+          $.proxy(function doSetTimeout(i) { setTimeout($.proxy(function() {
+            var val = {value:i};
+            slider.slider('value',i);
+            slider.slider("option", "slide")(null, val);
+          }, slider), delay);}, slider)(i);
+        }
+      }
+      if (event.which == 82 || event.which == 114) {
+        var start = slider.slider("option", "value");
+        var stop =  slider.slider("option", "min");
+        var count = 0;
+        for (var i=start; i>=stop; i--) {
+          var delay = count*delay;
+          count = count + 1;
+          $.proxy(function doSetTimeout(i) { setTimeout($.proxy(function() {
+            var val = {value:i};
+            slider.slider('value',i);
+            slider.slider("option", "slide")(null, val);
+          }, slider), delay);}, slider)(i);
+        }
+      }
+    });
+    var textInput = $('#textInput'+id+'_'+dim)
+    textInput.val(init_label);
+    adjustFontSize(textInput);
+  });
+}
+
+function init_dropdown(id, plot_id, dim, vals, value, next_vals, labels, next_dim, dim_idx, dynamic) {
+  var widget = $("#_anim_widget"+id+'_'+dim);
+  widget.data('values', vals)
+  for (var i=0; i<vals.length; i++){
+    if (dynamic) {
+      var val = vals[i];
+    } else {
+      var val = i;
+    }
+    widget.append($("<option>", {
+      value: val,
+      text: labels[i]
+    }));
+  };
+  widget.data("next_vals", next_vals);
+  widget.val(value);
+  widget.on('change', function(event, ui) {
+    if (dynamic) {
+      var dim_val = parseInt(this.value);
+    } else {
+      var dim_val = $.data(this, 'values')[this.value];
+    }
+    var next_vals = $.data(this, "next_vals");
+    if (Object.keys(next_vals).length > 0) {
+      var new_vals = next_vals[dim_val];
+      var next_widget = $('#_anim_widget'+id+'_'+next_dim);
+      update_widget(next_widget, new_vals);
+    }
+    var widgets = HoloViews.index[plot_id]
+    if (widgets) {
+      widgets.set_frame(dim_val, dim_idx);
+    }
+  });
+}
+
+
+if (window.HoloViews === undefined) {
+  window.HoloViews = {}
+  window.PyViz = window.HoloViews
+} else if (window.PyViz === undefined) {
+  window.PyViz = window.HoloViews
+}
+
+
+var _namespace = {
+  init_slider: init_slider,
+  init_dropdown: init_dropdown,
+  comms: {},
+  comm_status: {},
+  index: {},
+  plot_index: {},
+  kernels: {},
+  receivers: {}
+}
+
+for (var k in _namespace) {
+  if (!(k in window.HoloViews)) {
+    window.HoloViews[k] = _namespace[k];
+  }
+}
+
+var JS_MIME_TYPE = 'application/javascript';
+var HTML_MIME_TYPE = 'text/html';
+var EXEC_MIME_TYPE = 'application/vnd.holoviews_exec.v0+json';
+var CLASS_NAME = 'output';
+
+/**
+ * Render data to the DOM node
+ */
+function render(props, node) {
+  var div = document.createElement("div");
+  var script = document.createElement("script");
+  node.appendChild(div);
+  node.appendChild(script);
+}
+
+/**
+ * Handle when a new output is added
+ */
+function handle_add_output(event, handle) {
+  var output_area = handle.output_area;
+  var output = handle.output;
+  if (!output.data.hasOwnProperty(EXEC_MIME_TYPE)) {
+    return
+  }
+  var id = output.metadata[EXEC_MIME_TYPE]["id"];
+  var toinsert = output_area.element.find("." + CLASS_NAME.split(' ')[0]);
+  if (id !== undefined) {
+    var nchildren = toinsert.length;
+    toinsert[nchildren-1].children[0].innerHTML = output.data[HTML_MIME_TYPE];
+    toinsert[nchildren-1].children[1].textContent = output.data[JS_MIME_TYPE];
+    output_area._hv_plot_id = id;
+    if ((window.Bokeh !== undefined) && (id in Bokeh.index)) {
+      HoloViews.plot_index[id] = Bokeh.index[id];
+    } else {
+      HoloViews.plot_index[id] = null;
+    }
+  }
+}
+
+/**
+ * Handle when an output is cleared or removed
+ */
+function handle_clear_output(event, handle) {
+  var id = handle.cell.output_area._hv_plot_id;
+  if ((id === undefined) || !(id in HoloViews.plot_index)) { return; }
+  var comm = window.HoloViews.comm_manager.get_client_comm("hv-extension-comm", "hv-extension-comm", function () {});
+  if (comm !== null) {
+    comm.send({event_type: 'delete', 'id': id});
+  }
+  delete HoloViews.plot_index[id];
+  if ((window.Bokeh !== undefined) & (id in window.Bokeh.index)) {
+    window.Bokeh.index[id].model.document.clear();
+    delete Bokeh.index[id];
+  }
+}
+
+/**
+ * Handle kernel restart event
+ */
+function handle_kernel_cleanup(event, handle) {
+  delete HoloViews.comms["hv-extension-comm"];
+  window.HoloViews.plot_index = {}
+}
+
+/**
+ * Handle update_display_data messages
+ */
+function handle_update_output(event, handle) {
+  handle_clear_output(event, {cell: {output_area: handle.output_area}})
+  handle_add_output(event, handle)
+}
+
+function register_renderer(events, OutputArea) {
+  function append_mime(data, metadata, element) {
+    // create a DOM node to render to
+    var toinsert = this.create_output_subarea(
+    metadata,
+    CLASS_NAME,
+    EXEC_MIME_TYPE
+    );
+    this.keyboard_manager.register_events(toinsert);
+    // Render to node
+    var props = {data: data, metadata: metadata[EXEC_MIME_TYPE]};
+    render(props, toinsert[0]);
+    element.append(toinsert);
+    return toinsert
+  }
+
+  events.on('output_added.OutputArea', handle_add_output);	
+  events.on('output_updated.OutputArea', handle_update_output);
+  events.on('clear_output.CodeCell', handle_clear_output);
+  events.on('delete.Cell', handle_clear_output);
+  events.on('kernel_ready.Kernel', handle_kernel_cleanup);
+
+  OutputArea.prototype.register_mime_type(EXEC_MIME_TYPE, append_mime, {
+    safe: true,
+    index: 0
+  });
+}
+
+if (window.Jupyter !== undefined) {
+  try {
+    var events = require('base/js/events');
+    var OutputArea = require('notebook/js/outputarea').OutputArea;
+    if (OutputArea.prototype.mime_types().indexOf(EXEC_MIME_TYPE) == -1) {
+      register_renderer(events, OutputArea);
+    }
+  } catch(err) {
+  }
+}
+
+// Define Bokeh specific subclasses
+function BokehSelectionWidget() {
+  SelectionWidget.apply(this, arguments);
+}
+
+function BokehScrubberWidget() {
+  ScrubberWidget.apply(this, arguments);
+}
+
+// Let them inherit from the baseclasses
+BokehSelectionWidget.prototype = Object.create(SelectionWidget.prototype);
+BokehScrubberWidget.prototype = Object.create(ScrubberWidget.prototype);
+
+// Define methods to override on widgets
+var BokehMethods = {
+  update_cache : function(){
+    for (var index in this.frames) {
+      this.frames[index] = JSON.parse(this.frames[index]);
+    }
+  },
+  update : function(current){
+    if (current === undefined) {
+      return;
+    }
+    var data = this.frames[current];
+    if (data !== undefined) {
+      if (data.root in HoloViews.plot_index) {
+        var doc = HoloViews.plot_index[data.root].model.document;
+      } else {
+        var doc = Bokeh.index[data.root].model.document;
+      }
+      doc.apply_json_patch(data.content);
+    }
+  },
+  init_comms: function() {
+    if (Bokeh.protocol !== undefined) {
+      this.receiver = new Bokeh.protocol.Receiver()
+    } else {
+      this.receiver = null;
+    }
+    return HoloViewsWidget.prototype.init_comms.call(this);
+  },
+  process_msg : function(msg) {
+    if (this.plot_id in HoloViews.plot_index) {
+      var doc = HoloViews.plot_index[this.plot_id].model.document;
+    } else {
+      var doc = Bokeh.index[this.plot_id].model.document;
+    }
+    if (this.receiver === null) { return }
+    var receiver = this.receiver;
+    if (msg.buffers.length > 0) {
+      receiver.consume(msg.buffers[0].buffer)
+    } else {
+      receiver.consume(msg.content.data)
+    }
+    const comm_msg = receiver.message;
+    if ((comm_msg != null) && (doc != null)) {
+      doc.apply_json_patch(comm_msg.content, comm_msg.buffers)
+    }
+  }
+}
+
+// Extend Bokeh widgets with backend specific methods
+extend(BokehSelectionWidget.prototype, BokehMethods);
+extend(BokehScrubberWidget.prototype, BokehMethods);
+
+window.HoloViews.BokehSelectionWidget = BokehSelectionWidget
+window.HoloViews.BokehScrubberWidget = BokehScrubberWidget
+</script>
+<script type="text/javascript">
+    function JupyterCommManager() {
+    }
+
+    JupyterCommManager.prototype.register_target = function(plot_id, comm_id, msg_handler) {
+      if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        comm_manager.register_target(comm_id, function(comm) {
+          comm.on_msg(msg_handler);
+        });
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        window.PyViz.kernels[plot_id].registerCommTarget(comm_id, function(comm) {
+          comm.onMsg = msg_handler;
+        });
+      }
+    }
+
+    JupyterCommManager.prototype.get_client_comm = function(plot_id, comm_id, msg_handler) {
+      if (comm_id in window.PyViz.comms) {
+        return window.PyViz.comms[comm_id];
+      } else if (window.comm_manager || ((window.Jupyter !== undefined) && (Jupyter.notebook.kernel != null))) {
+        var comm_manager = window.comm_manager || Jupyter.notebook.kernel.comm_manager;
+        var comm = comm_manager.new_comm(comm_id, {}, {}, {}, comm_id);
+        if (msg_handler) {
+          comm.on_msg(msg_handler);
+        }
+      } else if ((plot_id in window.PyViz.kernels) && (window.PyViz.kernels[plot_id])) {
+        var comm = window.PyViz.kernels[plot_id].connectToComm(comm_id);
+        comm.open();
+        if (msg_handler) {
+          comm.onMsg = msg_handler;
+        }
+      }
+
+      window.PyViz.comms[comm_id] = comm;
+      return comm;
+    }
+
+    window.PyViz.comm_manager = new JupyterCommManager();
+    </script>
+
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-0.13.0.min.css">
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-widgets-0.13.0.min.css">
+<link rel="stylesheet" href="https://cdn.pydata.org/bokeh/release/bokeh-tables-0.13.0.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<style>div.bk-hbox {
+    display: flex;
+    justify-content: center;
+}
+
+div.bk-hbox div.bk-plot {
+    padding: 8px;
+}
+
+div.bk-hbox div.bk-data-table {
+    padding: 20px;
+}
+
+div.hololayout {
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+div.holoframe {
+  width: 75%;
+}
+
+div.holowell {
+  display: flex;
+  align-items: center;
+}
+
+form.holoform {
+  background-color: #fafafa;
+  border-radius: 5px;
+  overflow: hidden;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  padding-top: 0.4em;
+  padding-bottom: 0.4em;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.05);
+  margin-bottom: 20px;
+  border: 1px solid #e3e3e3;
+}
+
+div.holowidgets {
+  padding-right: 0;
+  width: 25%;
+}
+
+div.holoslider {
+  min-height: 0 !important;
+  height: 0.8em;
+  width: 100%;
+}
+
+div.holoformgroup {
+  padding-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+div.hologroup {
+  padding-left: 0;
+  padding-right: 0.8em;
+  width: 100%;
+}
+
+.holoselect {
+  width: 92%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.holotext {
+  padding-left:  0.5em;
+  padding-right: 0;
+  width: 100%;
+}
+
+.holowidgets .ui-resizable-se {
+  visibility: hidden
+}
+
+.holoframe > .ui-resizable-se {
+  visibility: hidden
+}
+
+.holowidgets .ui-resizable-s {
+  visibility: hidden
+}
+
+
+/* CSS rules for noUISlider based slider used by JupyterLab extension  */
+
+.noUi-handle {
+  width: 20px !important;
+  height: 20px !important;
+  left: -5px !important;
+  top: -5px !important;
+}
+
+.noUi-handle:before, .noUi-handle:after {
+  visibility: hidden;
+  height: 0px;
+}
+
+.noUi-target {
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+</style><div style='display: table; margin: 0 auto;'>
+
+
+
+
+
+
+  <div class="bk-root" id="9e91c0c3-79e4-454c-a9ce-6e51d90545a3"></div>
+
+<script type="text/javascript">
+  (function(root) {
+  function embed_document(root) {
+    
+  var docs_json = {"3c19cc58-b092-4cb1-9fdd-391d41c2d058":{"roots":{"references":[{"attributes":{"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"f0b8bdba-30ad-4c98-b423-2a8359f70a32","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"08203dff-6756-47ca-a081-2df3c6cb4920","type":"Line"},{"attributes":{},"id":"9080da3c-5e88-4159-99c3-3480d68c0649","type":"UnionRenderers"},{"attributes":{},"id":"d4353b29-397e-411e-97a4-2a7946a8196c","type":"Selection"},{"attributes":{"source":{"id":"c0dd823d-0999-4cbf-8fbe-8041b16191bc","type":"ColumnDataSource"}},"id":"e2564c81-85ec-4ef7-afca-b22a49eeced6","type":"CDSView"},{"attributes":{},"id":"4f7e9631-6cec-4a40-a595-623af9743450","type":"UnionRenderers"},{"attributes":{"label":{"value":"1000.0"},"renderers":[{"id":"9218afc9-2612-4e38-aacb-edd615398fec","type":"GlyphRenderer"}]},"id":"de93cc43-f979-43b1-9b2a-29fc44c84f8d","type":"LegendItem"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"hblZo0CFCUA3ZD55EpAJQDDjt/l8ZgtAzoXvABJdDkDzh4RdE8QQQP3XTn5HJRJAtmzyXefdEUA9VR94+tkRQMY2D52/QRFAoCUtm3+8EUA7QgZl7+sRQBsColf3yhFAiM/E5QPjEUB+Wpo+9bIRQNZgiEcaGBJAQZvIEKJWEkD1c8+/Z2ISQIg3sKKYfxJAEk2XyZ/GEkCSc5/kQaMSQPjNoBUDchJAITV7vbMFEkCH4N8b0C4SQDBPP1yv0BFAoQr6FZGbEUB2bvNR06IRQEzLm8AFehFAoY4LNH2SEUBPCXl0jmMRQPgR5a6/ZxFA6drisT9wEUDn9bWqMSMRQP5DeDXzfRFAaLPzjaaUEUAgZICZH34RQLFt/PtMqRFAkUvjIlGrEUD4NLJ4rhoSQA==","dtype":"float64","shape":[38]}},"selected":{"id":"d4353b29-397e-411e-97a4-2a7946a8196c","type":"Selection"},"selection_policy":{"id":"4a28c951-b0d5-4aee-a759-08e26bffb790","type":"UnionRenderers"}},"id":"2ccd9312-05f5-4466-804a-53d384b1c9b5","type":"ColumnDataSource"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"IARkKEWUCUC47OxeZZ0JQH/4tf5dRAlAzoQPR/DQCUD23OUb618KQK+tj+0V4ApAHrZKV7dtCEBDMt9e+CcIQFp68CtCWghAKQYsh9ZBCEB2d3XDX70HQDfhQIaoTwdAzLFumiZYB0Axk5ZRXWwHQEIDsdgIAgdAuloswqnHB0APIf1/lZIHQA/+ZzmHVwdA9bkB6yvbB0BOk222AfgHQEZ6dv+rFghABzxYKUtpCECNcy+Wu38IQCc6bKHtyQhApry4E+tmCUBgt82LHPIIQKW7jcFjgQlAuOZoKKX7CEAIKvfhf5UJQO6MpAqgqAlA550fK+fhCUC0kmF5UoQJQO4AJ29wAwpAv1Hc2DxTCkDhzz9vT1cKQO0G3kyLswpAFVyR4gP2CkDEAXtBBCULQA==","dtype":"float64","shape":[38]}},"selected":{"id":"f92b3972-f285-4902-9ab0-6acd360929a6","type":"Selection"},"selection_policy":{"id":"4c0740a8-b631-4fff-b6b2-5864bc8fa7f0","type":"UnionRenderers"}},"id":"a2ab1eb3-7227-4354-b957-dc5d35b451ba","type":"ColumnDataSource"},{"attributes":{"label":{"value":"1100.0"},"renderers":[{"id":"95a45ce1-1bf2-4c3c-900c-dc49e248636b","type":"GlyphRenderer"}]},"id":"c59c4ad1-0a55-4448-97cd-6816251ea328","type":"LegendItem"},{"attributes":{"line_alpha":0.1,"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"c8cb6556-ed2b-4ae3-bb84-277e01f2dc22","type":"Line"},{"attributes":{"data_source":{"id":"c0dd823d-0999-4cbf-8fbe-8041b16191bc","type":"ColumnDataSource"},"glyph":{"id":"f0b8bdba-30ad-4c98-b423-2a8359f70a32","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"6f058f8e-b14a-443c-ae99-0814949fecf0","type":"Line"},"nonselection_glyph":{"id":"08203dff-6756-47ca-a081-2df3c6cb4920","type":"Line"},"selection_glyph":null,"view":{"id":"e2564c81-85ec-4ef7-afca-b22a49eeced6","type":"CDSView"}},"id":"e2227942-b3f5-45c8-ba8a-cba56f9a13b6","type":"GlyphRenderer"},{"attributes":{"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"67814be7-d27f-48f2-9355-6976b272b04b","type":"Line"},{"attributes":{"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"90563925-ebe0-4710-8d2a-2074cf34f48f","type":"Line"},{"attributes":{},"id":"d523e217-c831-46c9-8339-4da74ec3cab0","type":"Selection"},{"attributes":{},"id":"27db92c7-3215-41a1-b1e4-2cdbdbd0d376","type":"Selection"},{"attributes":{},"id":"766aa0d4-d5bd-4d6a-9c6a-62051f1a6689","type":"UnionRenderers"},{"attributes":{},"id":"f32e142d-8357-4f99-94b4-d31cdd98b412","type":"UnionRenderers"},{"attributes":{"data_source":{"id":"c751e97e-c5f8-4204-9886-6cc3fa75212e","type":"ColumnDataSource"},"glyph":{"id":"f719daa9-4d60-4f37-9bdd-6cdf93348edd","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"26b179cb-044d-408e-938b-5be0a8bff73e","type":"Line"},"nonselection_glyph":{"id":"c8cb6556-ed2b-4ae3-bb84-277e01f2dc22","type":"Line"},"selection_glyph":null,"view":{"id":"732588f2-6b9d-468d-90ea-3e34662907b8","type":"CDSView"}},"id":"9218afc9-2612-4e38-aacb-edd615398fec","type":"GlyphRenderer"},{"attributes":{},"id":"d0a4c35e-89d2-4a1d-a645-46de54635398","type":"UnionRenderers"},{"attributes":{"source":{"id":"c751e97e-c5f8-4204-9886-6cc3fa75212e","type":"ColumnDataSource"}},"id":"732588f2-6b9d-468d-90ea-3e34662907b8","type":"CDSView"},{"attributes":{"line_alpha":0.2,"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"26b179cb-044d-408e-938b-5be0a8bff73e","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"02fd1612-c5e1-4f88-92f4-694e6b2fb18a","type":"Line"},{"attributes":{"label":{"value":"900.0"},"renderers":[{"id":"4e403403-ca35-4a33-9623-5d6cdb82b821","type":"GlyphRenderer"}]},"id":"b1aa32b9-5ee0-457a-8070-1369f8d71859","type":"LegendItem"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"NJqhubSECUCMAHjmVT8JQMQGkgvImglAOkilz/ITCkBAs8NiSEAKQFJRjjidtApAgKgz1LqxCEDpJwJDUyEJQBY2dIaGEQlACVShDN/kCEANCpFxioQIQIm7Wj2gnAhArkqCPhI5CEBIjz8DQC0IQDUSzQnUDwhAStTlZ6UlCEBFZwi4IKYHQGKfWZWxaAhAjiTILFXTCEAJUJSvzwIJQMZVXSW7QwlAXfaDVDZLCUCul//jeM4JQPxV+uDURwpA7W7vy7xQCkBWio+ESaEKQOyrCcnmdQpAIeMrX7neCkDWdY9HdO4KQD9H9LSUZAtAqXBvZAfpCkA89jRoMJcLQH3QsS6CZQtA6uCWRuAyDEBwWvgrFncMQHQ8QLvXjgxAIjmHAHqvDECkuKhRV58MQA==","dtype":"float64","shape":[38]}},"selected":{"id":"2e965951-cd89-42ec-8533-b0933b0e9a59","type":"Selection"},"selection_policy":{"id":"1cad6710-c444-470a-9341-bc53fe1d65cb","type":"UnionRenderers"}},"id":"a805caf6-dffd-43b4-9e06-d8548aaa5811","type":"ColumnDataSource"},{"attributes":{},"id":"1b57c774-b352-40ca-81e9-fed84cfe1cd0","type":"Selection"},{"attributes":{"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"f719daa9-4d60-4f37-9bdd-6cdf93348edd","type":"Line"},{"attributes":{},"id":"fa2f3767-9885-45a7-9039-82a82768308c","type":"Selection"},{"attributes":{},"id":"0d207a1d-8712-4060-899b-aa82d202a51b","type":"UnionRenderers"},{"attributes":{"source":{"id":"a2ab1eb3-7227-4354-b957-dc5d35b451ba","type":"ColumnDataSource"}},"id":"65611265-3ae2-4981-8529-495cd767b35d","type":"CDSView"},{"attributes":{"label":{"value":"1100.0"},"renderers":[{"id":"0eae4c82-cc20-46c3-a629-5763317b3f8a","type":"GlyphRenderer"}]},"id":"ba7ef542-8b97-49a7-85a6-fa7674486e92","type":"LegendItem"},{"attributes":{"callback":null,"end":4.76893208716013,"reset_end":4.76893208716013,"reset_start":2.860877687419633,"start":2.860877687419633},"id":"7fbec965-fcfd-4e53-80a7-1cfc73ee8824","type":"Range1d"},{"attributes":{"source":{"id":"2ccd9312-05f5-4466-804a-53d384b1c9b5","type":"ColumnDataSource"}},"id":"e92d8f30-1c62-4fb7-b82b-d5157223c31b","type":"CDSView"},{"attributes":{},"id":"d9ce285c-ce40-49dd-b185-dd71084cf366","type":"UnionRenderers"},{"attributes":{"below":[{"id":"8bbccf04-4a58-4b24-85f0-8243a5aa48f1","type":"LinearAxis"}],"left":[{"id":"190b3645-4837-46da-aabc-ba02fc014c36","type":"LinearAxis"}],"min_border_bottom":10,"min_border_left":10,"min_border_right":10,"min_border_top":10,"plot_height":450,"plot_width":450,"renderers":[{"id":"8bbccf04-4a58-4b24-85f0-8243a5aa48f1","type":"LinearAxis"},{"id":"5a2d914c-9508-4f87-897e-df7fe8612ef3","type":"Grid"},{"id":"190b3645-4837-46da-aabc-ba02fc014c36","type":"LinearAxis"},{"id":"4a585570-1b7f-4d89-b7e0-0781582fca50","type":"Grid"},{"id":"ad5a0b23-89b3-4c89-a167-c7e3076e1767","type":"BoxAnnotation"},{"id":"ff4c4ccf-95f8-49d1-9e53-b287f7590652","type":"Legend"},{"id":"8f678d31-8802-43a0-a6c8-c790bb19f32c","type":"GlyphRenderer"},{"id":"c5dfa6ad-0307-4778-90d0-161aed892b96","type":"GlyphRenderer"},{"id":"d52e1deb-a764-4025-923f-0564aad57aa0","type":"GlyphRenderer"},{"id":"e2227942-b3f5-45c8-ba8a-cba56f9a13b6","type":"GlyphRenderer"},{"id":"3ee97f79-36b2-45cb-8c49-f1f7af6e3481","type":"GlyphRenderer"},{"id":"3b83323b-6eb4-4c8d-895d-45eed349b8c7","type":"GlyphRenderer"},{"id":"fd406ea9-95b1-4f44-804b-926d637507bc","type":"GlyphRenderer"},{"id":"81f64a8f-1789-45eb-b84b-03dac8a2f4e9","type":"GlyphRenderer"},{"id":"17f4caef-ea7d-434d-bd61-657c518bf2a9","type":"GlyphRenderer"},{"id":"c67ceb69-c5c3-4e22-8264-1f6aca773f71","type":"GlyphRenderer"},{"id":"a96a46a2-154a-45a9-b8d8-abc793cd46e5","type":"GlyphRenderer"},{"id":"0eae4c82-cc20-46c3-a629-5763317b3f8a","type":"GlyphRenderer"}],"title":{"id":"55f7e3be-3fe4-4dbd-96ee-4ce2b47bae51","type":"Title"},"toolbar":{"id":"62a39c85-34aa-4c86-8bcd-0f569965a5bf","type":"Toolbar"},"toolbar_location":null,"x_range":{"id":"ba74b608-8cc9-4cc9-bea8-be312fd6d8d8","type":"Range1d"},"x_scale":{"id":"dbfbe446-d1f5-4630-a3a0-c3c0d67cbb50","type":"LinearScale"},"y_range":{"id":"7fbec965-fcfd-4e53-80a7-1cfc73ee8824","type":"Range1d"},"y_scale":{"id":"88a21f56-b074-4dcb-9f2c-c922e05529a7","type":"LinearScale"}},"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},{"attributes":{"data_source":{"id":"01d79719-ab7d-4607-b761-549a19d95022","type":"ColumnDataSource"},"glyph":{"id":"23eb62fb-0fce-4ba7-8db5-0d6581dec78f","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"e31baac4-63f1-4bd8-970a-3377df1af5f2","type":"Line"},"nonselection_glyph":{"id":"6d8b2ddc-faf9-4c64-80c4-749a97799717","type":"Line"},"selection_glyph":null,"view":{"id":"8e26d02e-1777-4bd8-8486-a783eb21a8c1","type":"CDSView"}},"id":"4e403403-ca35-4a33-9623-5d6cdb82b821","type":"GlyphRenderer"},{"attributes":{"label":{"value":"200.0"},"renderers":[{"id":"d52e1deb-a764-4025-923f-0564aad57aa0","type":"GlyphRenderer"}]},"id":"dfb123b4-93a6-41f9-9976-bc198efdd40e","type":"LegendItem"},{"attributes":{"plot":null,"text":"","text_color":{"value":"black"},"text_font_size":{"value":"12pt"}},"id":"55f7e3be-3fe4-4dbd-96ee-4ce2b47bae51","type":"Title"},{"attributes":{},"id":"5d351f43-2457-46bf-8c7d-2e4eb6768edd","type":"Selection"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"12694510-c916-4069-b6da-b4cce7aa3c87","type":"SaveTool"},{"id":"b9821c57-63fa-4ca9-a449-b6b5b3cdd9cc","type":"PanTool"},{"id":"b9cd490f-afa1-407a-9819-be3adcddf79a","type":"WheelZoomTool"},{"id":"e44e40f4-a1b0-404f-8039-c3747f0dde79","type":"BoxZoomTool"},{"id":"6d072511-4d5e-47df-a5fc-1439a6af4e49","type":"ResetTool"}]},"id":"62a39c85-34aa-4c86-8bcd-0f569965a5bf","type":"Toolbar"},{"attributes":{"line_alpha":0.2,"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"6f058f8e-b14a-443c-ae99-0814949fecf0","type":"Line"},{"attributes":{},"id":"4a28c951-b0d5-4aee-a759-08e26bffb790","type":"UnionRenderers"},{"attributes":{},"id":"f75b314b-7bc0-4c8a-a7a3-58f0df407440","type":"Selection"},{"attributes":{},"id":"262b74ae-f7fa-4313-ae58-dc1c6f465e77","type":"Selection"},{"attributes":{"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"9903648b-0ac9-4cc3-b130-762cf4018288","type":"Line"},{"attributes":{"callback":null,"end":50,"reset_end":50,"reset_start":12,"start":12},"id":"ba74b608-8cc9-4cc9-bea8-be312fd6d8d8","type":"Range1d"},{"attributes":{"label":{"value":"300.0"},"renderers":[{"id":"e2227942-b3f5-45c8-ba8a-cba56f9a13b6","type":"GlyphRenderer"}]},"id":"59c852fa-02f5-49af-b3d8-8af930f75ff7","type":"LegendItem"},{"attributes":{"source":{"id":"f99cbe17-7528-45c9-8953-e9869b246d4e","type":"ColumnDataSource"}},"id":"2577b947-c5d9-4636-99c6-4b632f84aeb9","type":"CDSView"},{"attributes":{"data_source":{"id":"f99cbe17-7528-45c9-8953-e9869b246d4e","type":"ColumnDataSource"},"glyph":{"id":"9903648b-0ac9-4cc3-b130-762cf4018288","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"3b75b263-28d4-4a08-94cb-078d2d896065","type":"Line"},"nonselection_glyph":{"id":"9f8f9912-d399-4cb8-817a-f2c2aedf786e","type":"Line"},"selection_glyph":null,"view":{"id":"2577b947-c5d9-4636-99c6-4b632f84aeb9","type":"CDSView"}},"id":"0eae4c82-cc20-46c3-a629-5763317b3f8a","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.2,"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"3b75b263-28d4-4a08-94cb-078d2d896065","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"89eac6ad-b018-403e-a551-50e8b1a93ecb","type":"Line"},{"attributes":{"source":{"id":"5d85998d-c7a5-43c2-91aa-2d981bb6dc44","type":"ColumnDataSource"}},"id":"590c71f5-2081-41d4-a419-928859dced18","type":"CDSView"},{"attributes":{"source":{"id":"01d79719-ab7d-4607-b761-549a19d95022","type":"ColumnDataSource"}},"id":"8e26d02e-1777-4bd8-8486-a783eb21a8c1","type":"CDSView"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"yOlxieAZCUB44+3047QJQO0JcRjgegtAZBBdoVOoDkBLaj1GQuoQQCB5DzYMLRJAaD6NCsDeEUCe1atMs6IRQIvCzU3BDxFAsxy0w4a5EUByTIt9T80RQCfyU3IMnxFAHpjwGhu6EUDuBB/wVd0RQABB8ztR7hFADj8tC/E+EkDCrOs5Xy0SQJOszNsXhRJACv9yvdWrEkBt3Yu8yHcSQP1VLnVlfxJAfvabWE1FEkA5vvIO61YSQLMYxIFB0xFAJdaH47eJEUAdX03ANJ0RQEWR3g+/VxFARX6HwtNtEUC4VwRo0HYRQDm5FHgRMxFAllvTSExrEUCbsbGUp08RQLSGa0vCeRFAISBGR2ttEUCxMw/Gw4URQFWPfdjPiBFAkkvNS+3OEUAVgscRCwoSQA==","dtype":"float64","shape":[38]}},"selected":{"id":"b3aa6be4-1254-4eb4-9ac8-2448de94071d","type":"Selection"},"selection_policy":{"id":"2538eee8-8a3b-4ae3-962c-585959cc3016","type":"UnionRenderers"}},"id":"8264398d-7572-46b6-9bcb-8f24c90a0c32","type":"ColumnDataSource"},{"attributes":{"data_source":{"id":"5d85998d-c7a5-43c2-91aa-2d981bb6dc44","type":"ColumnDataSource"},"glyph":{"id":"a4699252-2426-4fee-94ea-018a78ea826b","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"c5169114-294e-4cf8-ba6b-9f5365cb2392","type":"Line"},"nonselection_glyph":{"id":"58cd86f6-a836-404a-9826-fa3400aad53a","type":"Line"},"selection_glyph":null,"view":{"id":"590c71f5-2081-41d4-a419-928859dced18","type":"CDSView"}},"id":"a96a46a2-154a-45a9-b8d8-abc793cd46e5","type":"GlyphRenderer"},{"attributes":{"data_source":{"id":"2ccd9312-05f5-4466-804a-53d384b1c9b5","type":"ColumnDataSource"},"glyph":{"id":"90563925-ebe0-4710-8d2a-2074cf34f48f","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"02fd1612-c5e1-4f88-92f4-694e6b2fb18a","type":"Line"},"nonselection_glyph":{"id":"89eac6ad-b018-403e-a551-50e8b1a93ecb","type":"Line"},"selection_glyph":null,"view":{"id":"e92d8f30-1c62-4fb7-b82b-d5157223c31b","type":"CDSView"}},"id":"3ee97f79-36b2-45cb-8c49-f1f7af6e3481","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.1,"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"9f8f9912-d399-4cb8-817a-f2c2aedf786e","type":"Line"},{"attributes":{"data_source":{"id":"b08031a0-6b6a-4bb6-ade8-bb3928ef2a36","type":"ColumnDataSource"},"glyph":{"id":"8e505abc-0391-4e8d-8d0b-4ba4e95658da","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"6332db20-dcc1-47e8-af65-05a15319cf06","type":"Line"},"nonselection_glyph":{"id":"759c9c63-d6da-4ef6-aaf7-c91dc10d927b","type":"Line"},"selection_glyph":null,"view":{"id":"b5738fa9-3a01-4fec-95a5-fe435974dcc2","type":"CDSView"}},"id":"846316ab-fa98-4262-b385-4502397a06a3","type":"GlyphRenderer"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"hQbIijlCCUBmklUz60YJQNO6xrggRAlAAr6/mPbyCUCDu9JbZhoKQPGnaSEX1wpAodlvw5dKCEC91aQBJ5gIQIyLgiOdewhAxpVKqMuuCECBwMJKRj8IQPtcYWMjIghA5gt8IAjmB0DyUBFpUaAHQNRbr0lMcAdAz7TkOGzlB0BzbqmFR88HQGxsO6/OZQdAfmMXpGcCCEDXstODnWEIQCYYh1ufpQhA/sE5WHXMCEAwZMHh04MIQGeXCzjdaAlAc4ZfIcOvCUBYgm33z3UJQPt6UvHTxglA09FKKCO1CUBhnE734ukJQBKBF4NHPgpAmT7wuko2CkDOEkWDdVYKQNHNxda70wpAuge1WkHTCkDaBB4fgAoLQEC7cO8hJgtAurLGgq55C0BfOcNfvRoMQA==","dtype":"float64","shape":[38]}},"selected":{"id":"b99a41ed-f6a0-4456-9b56-37ab96f84cce","type":"Selection"},"selection_policy":{"id":"e127d914-0011-4e27-a921-6011bd73ab35","type":"UnionRenderers"}},"id":"5f0f8380-d03a-4ecc-b08d-b92bf94ff134","type":"ColumnDataSource"},{"attributes":{"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"f46e89ca-0ff1-4fd5-b2c1-870a4355e593","type":"Line"},{"attributes":{},"id":"6c3b4b02-ff2f-4e04-aaae-b75ccc732a1f","type":"UnionRenderers"},{"attributes":{},"id":"1cad6710-c444-470a-9341-bc53fe1d65cb","type":"UnionRenderers"},{"attributes":{"line_alpha":0.2,"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"6332db20-dcc1-47e8-af65-05a15319cf06","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"51df8996-a6c4-42a2-af2f-e5bcd187c6ec","type":"Line"},{"attributes":{"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"b09a1b90-8194-4f1f-a068-5e15b53d6ac3","type":"Line"},{"attributes":{"label":{"value":"0.0"},"renderers":[{"id":"78628e35-7459-4b9f-91c6-08dd0ff4962e","type":"GlyphRenderer"}]},"id":"5223876d-0e7f-4ceb-b657-0e40a52af317","type":"LegendItem"},{"attributes":{"line_alpha":0.1,"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"b5d78f3e-6b41-4fcf-888e-03e9bcd03f65","type":"Line"},{"attributes":{"source":{"id":"b08031a0-6b6a-4bb6-ade8-bb3928ef2a36","type":"ColumnDataSource"}},"id":"b5738fa9-3a01-4fec-95a5-fe435974dcc2","type":"CDSView"},{"attributes":{"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"19d6d129-5b83-4bac-ab57-6ada44226b83","type":"Line"},{"attributes":{"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"2f69432a-4a04-4acd-8aeb-8fc1557c535e","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"d2f0f8ad-119d-499f-8598-e8978fded753","type":"Line"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"RkJmuciuCUAF25d2Vt0IQH5N1MELvQlAiKnRnBKwCUC7hagE/swJQKnHS7MIFQtASb9GaQHVCEDTKPNfW1cIQHm72m1wUwhAjFcW2cfTCEDKfP4D+1YIQDZ+b0Xf8QdAojhxTGnJB0D6vCM7Hp0HQDk/6cPJ+QdAbboAc8YVCEBtakVCV1EIQHxJKP4WNghAAtnjRM2nCEDB9M4uVIQIQIyRZcb0eghALIwXD/oFCUD8ZqLiwWUJQKOlbbdeswlAHfVo7DvVCUAwaAUWsMkJQHQEWfj1GQpAPBJIlG80CkBbP12e1WIKQFvp65/D+ApA+RTaVtqOCkBXl+ytVwELQHpJx8kDDAtA0xYY1QtyC0B2bOclvboLQER9Fk0X7AtALOVVvBrVC0Dg4oDZ6H0MQA==","dtype":"float64","shape":[38]}},"selected":{"id":"52257587-0658-4023-a73a-c6a66bbf6cf3","type":"Selection"},"selection_policy":{"id":"6c3b4b02-ff2f-4e04-aaae-b75ccc732a1f","type":"UnionRenderers"}},"id":"0363c2bb-eb6c-4621-9ab4-24866a571d2e","type":"ColumnDataSource"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"OfcKw86wCUCTsdOoJ5MJQLLcid2baglAttyWypX7CUB2Jnxjc6cJQAIg99MKIQtA+y+Wm6utCEArFhr4WBcJQMvopWvEXQhAR1ARdTR5CEBTkGdfxRoIQFVwAR5tLghAsQX9qVEhCECQG7wwk5UHQB8idYnSAghAwbpodaFaCEBqxz+YaGgIQCFJnEXlFwhALoxKxThKCEBWzxPfEvkIQCi94HRn8ghA7CeM/epCCUAFSbhs3yEJQDosqUw0bglAktssTyc2CkAghQ1M0RcKQBpY+UGJTwpAUV8lPc+ICkC4mAWuaYwKQGqhhKHqNAtAU4W22c15CkCMcsdNSPMKQKHTp9vAmwtA2rC3dA9yC0CS3Dvy+dALQORnn09J6QtAiBTxrWlNDECN1Lr6JJ4MQA==","dtype":"float64","shape":[38]}},"selected":{"id":"fdc046b7-1512-4bce-818c-032b7ab22b92","type":"Selection"},"selection_policy":{"id":"b4bd69a0-a690-4dbf-9753-5f49dd16a705","type":"UnionRenderers"}},"id":"c0e0d498-44e7-4c36-9ade-188143359407","type":"ColumnDataSource"},{"attributes":{"overlay":{"id":"46e5d5ef-92e4-4681-87fb-8cdf413a6bf3","type":"BoxAnnotation"}},"id":"822461f7-44ec-4832-97f0-6bbf78a80c5f","type":"BoxZoomTool"},{"attributes":{"data_source":{"id":"a2ab1eb3-7227-4354-b957-dc5d35b451ba","type":"ColumnDataSource"},"glyph":{"id":"67814be7-d27f-48f2-9355-6976b272b04b","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"3b3e92e4-afac-41b3-8499-4330e0ddf4da","type":"Line"},"nonselection_glyph":{"id":"592b560c-ad20-41e4-857f-9f580b03bb92","type":"Line"},"selection_glyph":null,"view":{"id":"65611265-3ae2-4981-8529-495cd767b35d","type":"CDSView"}},"id":"95a45ce1-1bf2-4c3c-900c-dc49e248636b","type":"GlyphRenderer"},{"attributes":{"source":{"id":"548af525-16aa-431a-a9b6-8d1aaf06d7c2","type":"ColumnDataSource"}},"id":"a3f4bc7b-1e8e-421b-a624-e6b241d2aea1","type":"CDSView"},{"attributes":{},"id":"136ccd32-22ee-4a37-ae3b-72c27467c95e","type":"UnionRenderers"},{"attributes":{"label":{"value":"700.0"},"renderers":[{"id":"6040acce-5f68-4e4e-a8f0-739a6f4133a7","type":"GlyphRenderer"}]},"id":"52b45f6a-018d-4bb9-b4ee-8e545d855dc5","type":"LegendItem"},{"attributes":{},"id":"b66c1fd2-4425-4d31-8e50-2a28d85b9fff","type":"UnionRenderers"},{"attributes":{"source":{"id":"a805caf6-dffd-43b4-9e06-d8548aaa5811","type":"ColumnDataSource"}},"id":"b2e6a53a-355d-49d6-b65c-aaacee3a54c2","type":"CDSView"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"8R5un0WqCUDZx15AzWoJQPPwdIDliwlA56ENYyc+CkC41O4oyiMKQAlnNqRKKAtAheMO9EYwCEBn6GkKtkEIQBc7fuqCPwhAJHNO+v1HCEB0Rj+GGKkHQOuzDeWSfwdAIZxJGk+cB0Ar1H9GiHwHQGWWStcT4wZAiu0SDVmCB0A4vHi6BYwHQDRqK4TBkQdAg7TIPvnlB0BnaPAhgSEIQGQjnBULNQhAdWxU0ucxCEDS3KKKEegIQFT4rtc/xghA6ksBLPcTCUCFKRmd3xkJQONJNRNSGglAVDRy0YqSCUAy3abwAlEJQInivDpdHQpAig8ycHXuCUDe6ey54jcKQN3kTB9xcgpAKl0FwgDwCUA51d+yF7UKQAWdS/DtHQtAseHrdlG6CkCJMbBnqIsLQA==","dtype":"float64","shape":[38]}},"selected":{"id":"27db92c7-3215-41a1-b1e4-2cdbdbd0d376","type":"Selection"},"selection_policy":{"id":"766aa0d4-d5bd-4d6a-9c6a-62051f1a6689","type":"UnionRenderers"}},"id":"01d79719-ab7d-4607-b761-549a19d95022","type":"ColumnDataSource"},{"attributes":{"click_policy":"mute","items":[{"id":"5223876d-0e7f-4ceb-b657-0e40a52af317","type":"LegendItem"},{"id":"c9d79d4b-fa1c-4ed7-a90a-16f4aa16a4a5","type":"LegendItem"},{"id":"fc25487e-6284-4e48-bf83-359acaa186bf","type":"LegendItem"},{"id":"255eef66-3080-4a53-92fe-a07fb839d5cf","type":"LegendItem"},{"id":"d6eb9294-40b2-4a1a-9ea7-630a60d18b38","type":"LegendItem"},{"id":"05401bf0-8a23-4d82-b94c-a705e0b7ba5a","type":"LegendItem"},{"id":"b374a08b-0e30-4023-9a3f-00727f4a97bf","type":"LegendItem"},{"id":"52b45f6a-018d-4bb9-b4ee-8e545d855dc5","type":"LegendItem"},{"id":"653cd5f8-fe81-4258-bc7e-5964727a7d94","type":"LegendItem"},{"id":"b1aa32b9-5ee0-457a-8070-1369f8d71859","type":"LegendItem"},{"id":"de93cc43-f979-43b1-9b2a-29fc44c84f8d","type":"LegendItem"},{"id":"c59c4ad1-0a55-4448-97cd-6816251ea328","type":"LegendItem"}],"plot":{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"}},"id":"9089fd96-0b3e-4d24-9a6c-f39abf5e5633","type":"Legend"},{"attributes":{},"id":"f9563f51-4ef9-46f3-b4ae-3f23f3103395","type":"UnionRenderers"},{"attributes":{},"id":"c5b5a2a1-bb53-4d24-8967-7e403a1e8abc","type":"Selection"},{"attributes":{"line_alpha":0.1,"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"153a8f54-1291-413f-befc-8ff15265a8a6","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"c99f0714-eac2-4234-b144-8b9b9dff347b","type":"Line"},{"attributes":{},"id":"4880b054-a52b-4f13-9b37-2fc9aa2bb6f7","type":"ResetTool"},{"attributes":{"line_alpha":0.1,"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"592b560c-ad20-41e4-857f-9f580b03bb92","type":"Line"},{"attributes":{},"id":"a0680739-7aa8-477f-bcbe-a12c6725f643","type":"Selection"},{"attributes":{"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"e4297871-64ed-4aba-b875-56624f34939f","type":"Line"},{"attributes":{"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"9a6242a5-0355-49f4-b3c1-01027e49e0f7","type":"Line"},{"attributes":{"source":{"id":"c0e0d498-44e7-4c36-9ade-188143359407","type":"ColumnDataSource"}},"id":"3f454251-aa71-4c03-ac9e-3390e24765bf","type":"CDSView"},{"attributes":{"source":{"id":"0751b15d-2794-4c57-95ae-3e0d5fc46555","type":"ColumnDataSource"}},"id":"1b37bc63-72df-47ce-a2a0-c66159599c1e","type":"CDSView"},{"attributes":{"data_source":{"id":"0751b15d-2794-4c57-95ae-3e0d5fc46555","type":"ColumnDataSource"},"glyph":{"id":"9a6242a5-0355-49f4-b3c1-01027e49e0f7","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"7f9e1fb7-0e1e-457d-a915-d22452731bea","type":"Line"},"nonselection_glyph":{"id":"c99f0714-eac2-4234-b144-8b9b9dff347b","type":"Line"},"selection_glyph":null,"view":{"id":"1b37bc63-72df-47ce-a2a0-c66159599c1e","type":"CDSView"}},"id":"a707b8f6-a6c2-4ae1-b098-bb315b1ad61b","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.2,"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"e5a65ffd-441e-4ada-bb8a-71e3d65f647c","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"7f9e1fb7-0e1e-457d-a915-d22452731bea","type":"Line"},{"attributes":{},"id":"fdc046b7-1512-4bce-818c-032b7ab22b92","type":"Selection"},{"attributes":{"data_source":{"id":"c0e0d498-44e7-4c36-9ade-188143359407","type":"ColumnDataSource"},"glyph":{"id":"f46e89ca-0ff1-4fd5-b2c1-870a4355e593","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"e5a65ffd-441e-4ada-bb8a-71e3d65f647c","type":"Line"},"nonselection_glyph":{"id":"51df8996-a6c4-42a2-af2f-e5bcd187c6ec","type":"Line"},"selection_glyph":null,"view":{"id":"3f454251-aa71-4c03-ac9e-3390e24765bf","type":"CDSView"}},"id":"56b113f7-514e-4323-9043-1c67f57c5343","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.1,"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"6d8b2ddc-faf9-4c64-80c4-749a97799717","type":"Line"},{"attributes":{"data_source":{"id":"005557a6-1542-4b89-b97a-e56eed14f6aa","type":"ColumnDataSource"},"glyph":{"id":"2f69432a-4a04-4acd-8aeb-8fc1557c535e","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"39d3ec73-7d9e-4648-be28-7d612fee8d87","type":"Line"},"nonselection_glyph":{"id":"ef1e658e-961d-4190-8d2c-3674da56b14a","type":"Line"},"selection_glyph":null,"view":{"id":"135cbab3-771f-454c-8a31-aac6b4368672","type":"CDSView"}},"id":"7381b1fd-a05a-43d2-b79f-2cb8b462f6fa","type":"GlyphRenderer"},{"attributes":{"label":{"value":"800.0"},"renderers":[{"id":"a707b8f6-a6c2-4ae1-b098-bb315b1ad61b","type":"GlyphRenderer"}]},"id":"653cd5f8-fe81-4258-bc7e-5964727a7d94","type":"LegendItem"},{"attributes":{"line_alpha":0.2,"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"39d3ec73-7d9e-4648-be28-7d612fee8d87","type":"Line"},{"attributes":{},"id":"264db84d-d970-4e6f-a18f-8b1fdcd095d0","type":"Selection"},{"attributes":{"label":{"value":"200.0"},"renderers":[{"id":"56b113f7-514e-4323-9043-1c67f57c5343","type":"GlyphRenderer"}]},"id":"fc25487e-6284-4e48-bf83-359acaa186bf","type":"LegendItem"},{"attributes":{"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"23eb62fb-0fce-4ba7-8db5-0d6581dec78f","type":"Line"},{"attributes":{},"id":"312317b5-3e28-43b4-b93e-c000cf655e11","type":"WheelZoomTool"},{"attributes":{"line_alpha":0.2,"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"0d1b7e05-887a-4f12-ab53-5da7c6804300","type":"Line"},{"attributes":{},"id":"543828f5-5ea0-4b19-9e25-21e08271780e","type":"PanTool"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"fy9+oLKlCUBxPElorIAJQKFZ8I5vhwlASMGL0GIWCkACDlGAxzUKQO72kipFPwtAsQpSSKB7CEDHNJjODoAIQDvFPH3PQQhAJHM+sd+JCEDv6JGC6lcIQGjnZl5n3QdArb1CO5uRB0B6Uq7uuIAHQBvS5+IWfwdARElX+GGZB0ABarm25+cHQDREgD4X6AdA6n6bUIEBCEBuwRwN7dYIQEWKO11K7ghAXv/4amWiCEBDutXT2C8JQGwB6wlpIQlAmgKOqjo5CUBmKrvdfRMJQESlYt1NqglAGVKZNR3ZCUA/UtX5CrsJQA1ZsTmh9glAcc9uuhcOCkBjZ8qjRhYKQIM1UvPgwApACeMElxYFC0CoT8k3mDwLQJSiE3oAWgtA/mkQmFqPC0CKUgkNTf0LQA==","dtype":"float64","shape":[38]}},"selected":{"id":"c5b5a2a1-bb53-4d24-8967-7e403a1e8abc","type":"Selection"},"selection_policy":{"id":"b66c1fd2-4425-4d31-8e50-2a28d85b9fff","type":"UnionRenderers"}},"id":"005557a6-1542-4b89-b97a-e56eed14f6aa","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.1,"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"ef1e658e-961d-4190-8d2c-3674da56b14a","type":"Line"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"5CQRq3K5CUAMs1cbIzEJQKFXQzja3glAJrjn8xcTCkBjx1r3PDcKQOVKcxZKIwtAgAN95ApWCED+ab0fa7QIQNUpY6nUeQhAJnmMIgrnB0CLGnj7fdIHQFeJ0YTdsAdAxsJ5romTB0Ai2F6hB1UHQHAr+vW0ggdA4t5GcwA/B0DajJ7dbLcHQJuU55LkowdAO++7X3DMB0Al1mfZ7tAHQMIi5pBGpQhAXZgg5BdECECt+3SKGXIIQLaqgZTm1AhAaeWnRjY4CUDUgq0ri0sJQDprlsWTMwlA7gMzV8T2CEBgu6qZumgJQHQXS+novglApOKcLBDICUCwGmhAxs8JQA4PPs+l7wlASJWiP6u/CkAOO/9BWbAKQP6JRRLU4ApAco0BElEgC0DlvG3VgiELQA==","dtype":"float64","shape":[38]}},"selected":{"id":"d523e217-c831-46c9-8339-4da74ec3cab0","type":"Selection"},"selection_policy":{"id":"f32e142d-8357-4f99-94b4-d31cdd98b412","type":"UnionRenderers"}},"id":"c751e97e-c5f8-4204-9886-6cc3fa75212e","type":"ColumnDataSource"},{"attributes":{},"id":"f684398e-82b1-4ebb-9ee5-43c413d47baf","type":"SaveTool"},{"attributes":{"line_alpha":0.1,"line_color":"yellowgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"2dbc99c6-6933-42c9-8e95-dfe2722b8674","type":"Line"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"plot":null,"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"46e5d5ef-92e4-4681-87fb-8cdf413a6bf3","type":"BoxAnnotation"},{"attributes":{},"id":"b4bd69a0-a690-4dbf-9753-5f49dd16a705","type":"UnionRenderers"},{"attributes":{"data_source":{"id":"a805caf6-dffd-43b4-9e06-d8548aaa5811","type":"ColumnDataSource"},"glyph":{"id":"19d6d129-5b83-4bac-ab57-6ada44226b83","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"d2f0f8ad-119d-499f-8598-e8978fded753","type":"Line"},"nonselection_glyph":{"id":"e57bbfdd-3122-424c-81f1-d365536b60eb","type":"Line"},"selection_glyph":null,"view":{"id":"b2e6a53a-355d-49d6-b65c-aaacee3a54c2","type":"CDSView"}},"id":"78628e35-7459-4b9f-91c6-08dd0ff4962e","type":"GlyphRenderer"},{"attributes":{"label":{"value":"100.0"},"renderers":[{"id":"846316ab-fa98-4262-b385-4502397a06a3","type":"GlyphRenderer"}]},"id":"c9d79d4b-fa1c-4ed7-a90a-16f4aa16a4a5","type":"LegendItem"},{"attributes":{"source":{"id":"0363c2bb-eb6c-4621-9ab4-24866a571d2e","type":"ColumnDataSource"}},"id":"19566dbd-4a4d-4873-9ca5-7565d246c887","type":"CDSView"},{"attributes":{"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"f6a4fd44-48b2-4fb3-b585-8aaabfde26d8","type":"Line"},{"attributes":{"data_source":{"id":"0363c2bb-eb6c-4621-9ab4-24866a571d2e","type":"ColumnDataSource"},"glyph":{"id":"e4297871-64ed-4aba-b875-56624f34939f","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"0d1b7e05-887a-4f12-ab53-5da7c6804300","type":"Line"},"nonselection_glyph":{"id":"2dbc99c6-6933-42c9-8e95-dfe2722b8674","type":"Line"},"selection_glyph":null,"view":{"id":"19566dbd-4a4d-4873-9ca5-7565d246c887","type":"CDSView"}},"id":"3ef687df-a284-4197-98d9-7a403b38bdfc","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.2,"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"e31baac4-63f1-4bd8-970a-3377df1af5f2","type":"Line"},{"attributes":{"label":{"value":"400.0"},"renderers":[{"id":"019f5757-2d42-4e0b-93cc-906d7cb98459","type":"GlyphRenderer"}]},"id":"d6eb9294-40b2-4a1a-9ea7-630a60d18b38","type":"LegendItem"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"+tNvMjZoCUAHIRo4HYIJQAxAedMwbglA/jkHO6v2CUBT8kjxWg0KQHD+QuOOFwtAgBSuNGzdCEAvMCECZ3EIQI/8wn+NtwhAtVOXAgDNCEDSo+B0Bz8IQGHUzYomxAdAztigIQG1B0DMYrx1aYwHQIrAwfN4qAdA9xTzH3+sB0D/eq7l4JEHQFQVgR3CGAhA0KNEhzicCEB0oFYytIEIQHgQ3erCWwhATZthd2P3CEBRe0KgU00JQA4siLzYpwlAcRPQapBrCUAcZWhkbnAJQILAVZjT3QlANQZEWR7ZCUCW128zzWUKQMFU5J2uowpAN9oj9R1+CkCNH56YoYQKQDSCpy1VlQpAvUuSOscbC0DeUqoKwQsLQP7U3cOqmQtA0c4TQIcRDECfRDPhG2AMQA==","dtype":"float64","shape":[38]}},"selected":{"id":"29c50427-ab6c-48da-ba3c-3177d7505ee2","type":"Selection"},"selection_policy":{"id":"2357244d-c6c4-4246-a83c-e8473e602ddb","type":"UnionRenderers"}},"id":"e69035cd-9e92-48b9-8f84-f06357dd288f","type":"ColumnDataSource"},{"attributes":{"label":{"value":"300.0"},"renderers":[{"id":"3ef687df-a284-4197-98d9-7a403b38bdfc","type":"GlyphRenderer"}]},"id":"255eef66-3080-4a53-92fe-a07fb839d5cf","type":"LegendItem"},{"attributes":{"axis_label":"predicted_logs","bounds":"auto","formatter":{"id":"9de9cd03-5475-4ce0-a875-2fcabc394f1e","type":"BasicTickFormatter"},"major_label_orientation":"horizontal","plot":{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"},"ticker":{"id":"6e4f38f4-c2b8-4d7c-815d-7a1e1e701da9","type":"BasicTicker"}},"id":"e5075cc3-6054-4ee1-8afb-e620deb5c31e","type":"LinearAxis"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"s4aYMox5CUCaR9nszk8JQOPZwIcVqglA4Q3TXqirCUDPYp/LfI8KQLE3/0NtYAtA6wHyXQzJCEDzUt5AdxEJQFXc2oX89ghAtfGcs3b3CEA+ErAynPUIQHx+Xd69ZghALFcj8McdCEAKxWtvQcoHQBdP/pzuzwdAUCgleK1UCEA81ug5vusHQJSmN20+wAhAQF3YuL+pCEDcOTHTna8IQM6ePNU+KwlAQYDLIV83CUBd9kXJ7ZEJQEd9EgNLLApAYaVPahYOCkDfPmO1XzYKQPc2m6kwkApAihTOyMWmCkDQ5zgy1LQKQBXhdPZZMQtATPrEkmYCC0Du+2IZ4yALQJjc9DAgUwtAVOhQ/drnC0B9/pLO3tILQFHLcgtS8QtAWf5N5IW3DEBRB+Fld64MQA==","dtype":"float64","shape":[38]}},"selected":{"id":"a0680739-7aa8-477f-bcbe-a12c6725f643","type":"Selection"},"selection_policy":{"id":"f9563f51-4ef9-46f3-b4ae-3f23f3103395","type":"UnionRenderers"}},"id":"b08031a0-6b6a-4bb6-ade8-bb3928ef2a36","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.2,"line_color":"yellow","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"dc4ae964-ecc8-4c0c-9fff-5484faf89f6e","type":"Line"},{"attributes":{"source":{"id":"e69035cd-9e92-48b9-8f84-f06357dd288f","type":"ColumnDataSource"}},"id":"ba7a7f3c-fb6b-4bee-bdf8-eba935dd929b","type":"CDSView"},{"attributes":{"data_source":{"id":"e69035cd-9e92-48b9-8f84-f06357dd288f","type":"ColumnDataSource"},"glyph":{"id":"f6a4fd44-48b2-4fb3-b585-8aaabfde26d8","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"dc4ae964-ecc8-4c0c-9fff-5484faf89f6e","type":"Line"},"nonselection_glyph":{"id":"b5d78f3e-6b41-4fcf-888e-03e9bcd03f65","type":"Line"},"selection_glyph":null,"view":{"id":"ba7a7f3c-fb6b-4bee-bdf8-eba935dd929b","type":"CDSView"}},"id":"019f5757-2d42-4e0b-93cc-906d7cb98459","type":"GlyphRenderer"},{"attributes":{"dimension":1,"grid_line_color":{"value":null},"plot":{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"},"ticker":{"id":"6e4f38f4-c2b8-4d7c-815d-7a1e1e701da9","type":"BasicTicker"}},"id":"39e389f5-d59c-46f9-b47a-e7d9fa6eaeae","type":"Grid"},{"attributes":{"line_alpha":0.1,"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"e57bbfdd-3122-424c-81f1-d365536b60eb","type":"Line"},{"attributes":{},"id":"52257587-0658-4023-a73a-c6a66bbf6cf3","type":"Selection"},{"attributes":{},"id":"2e965951-cd89-42ec-8533-b0933b0e9a59","type":"Selection"},{"attributes":{},"id":"6e4f38f4-c2b8-4d7c-815d-7a1e1e701da9","type":"BasicTicker"},{"attributes":{"line_alpha":0.2,"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"b4b138d5-1e97-43b8-b076-2d6380847214","type":"Line"},{"attributes":{"label":{"value":"500.0"},"renderers":[{"id":"3b83323b-6eb4-4c8d-895d-45eed349b8c7","type":"GlyphRenderer"}]},"id":"fc52a5da-09ba-4fc7-9e66-24e22566683e","type":"LegendItem"},{"attributes":{"line_alpha":0.1,"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"ce0f6ec7-c7e6-4358-bb46-badaca4f87db","type":"Line"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"3CXf/tNGCUA1q/XGgp4JQO/xR9u6NAtAhrrGrsKdDkAmktGe4+UQQDjabCHOPxJA2mmC9mrmEUAQ5FmPw8gRQFA0X9l6QhFAVMi3AsXDEUDdApNeCt4RQFvbAdfByhFA2buiz9DlEUDWgYcdcfMRQC5O89t/FBJAvSY+9RBMEkCvbGIAt3sSQJqk5iUnjhJA2B/dyJzLEkD7B1pwh7cSQCqt8UfbgBJA9dlRjA5SEkBkSlOAkDsSQBj50b3QFBJA6xx+LaPTEUDE5Lbp45MRQAXMBDeymBFAcW3c0i69EUB+l0gA6ZwRQPO3mEEHhBFAu0kYMZeCEUA3K//w7cMRQCvUzo0GphFA8hruAf6aEUBVEJwZ/6wRQAFzedfGzxFAsakBk8yYEUBrG5Gu8UASQA==","dtype":"float64","shape":[38]}},"selected":{"id":"90385c08-95a6-4ded-9d3f-22fbbe9527ae","type":"Selection"},"selection_policy":{"id":"9080da3c-5e88-4159-99c3-3480d68c0649","type":"UnionRenderers"}},"id":"c0dd823d-0999-4cbf-8fbe-8041b16191bc","type":"ColumnDataSource"},{"attributes":{"source":{"id":"afc1a1f4-0030-49b7-ab55-86402041adad","type":"ColumnDataSource"}},"id":"9ce5471d-f80a-4321-83b8-c4ead1108d2a","type":"CDSView"},{"attributes":{"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"08aca6c1-e2cd-4a1e-8a33-d9faa950daa5","type":"Line"},{"attributes":{"source":{"id":"5f0f8380-d03a-4ecc-b08d-b92bf94ff134","type":"ColumnDataSource"}},"id":"b52c8273-45eb-476d-a0bb-290205ee4e7a","type":"CDSView"},{"attributes":{"source":{"id":"873f0483-6a6e-4270-acbb-5a34c6d461f8","type":"ColumnDataSource"}},"id":"a755f82a-dbd6-4da1-b591-4913b469a051","type":"CDSView"},{"attributes":{"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"8e505abc-0391-4e8d-8d0b-4ba4e95658da","type":"Line"},{"attributes":{},"id":"1eec7c78-c4c2-4663-86c0-4b38873ae79a","type":"UnionRenderers"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"I1QC/bj+CEDp+8TxU7QJQFZr0Z9TywtAlL7mG6brDUDR4V+i2dMQQG/rRV6oFhJAK7vT0lq4EUBN6c7yEpQRQN+bT/VdEhFAutjA21uaEUBhOI9BAJARQNFq5tBkrRFAyIxoe8WvEUBmBRSYdKkRQHRpHDod2xFATdlv5UYzEkASYd5OSzISQB1mg0KIPBJAowqNnFiXEkB87DU/rFgSQGtMgQVcKxJAJUgen4APEkC47329ufkRQPz8K7hFtBFA8EhS1rhiEUCVwzUWJmsRQMAJWJitXRFAHXaSxx1bEUBoHFUJXUMRQHGzmBWGORFAPTzB9Bw4EUCjYVqojRoRQMVUF76qQRFAjCDARgFfEUCguNiE8mkRQPro8kAojxFAILkd3+iQEUAayAomxR8SQA==","dtype":"float64","shape":[38]}},"selected":{"id":"447300e2-66c1-47dc-a5d8-b211f502a06d","type":"Selection"},"selection_policy":{"id":"bc2288a6-d8f1-4e1d-a3d0-25d54bde67b0","type":"UnionRenderers"}},"id":"afc1a1f4-0030-49b7-ab55-86402041adad","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.2,"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"4d6ce882-2d64-4bdd-9af6-d7d1bdea1576","type":"Line"},{"attributes":{"below":[{"id":"cb357438-d629-4b0e-963e-911df50ee56e","type":"LinearAxis"}],"left":[{"id":"e5075cc3-6054-4ee1-8afb-e620deb5c31e","type":"LinearAxis"}],"min_border_bottom":10,"min_border_left":10,"min_border_right":10,"min_border_top":10,"plot_height":450,"plot_width":450,"renderers":[{"id":"cb357438-d629-4b0e-963e-911df50ee56e","type":"LinearAxis"},{"id":"640abd2c-c244-458d-ad00-4e0b3a521926","type":"Grid"},{"id":"e5075cc3-6054-4ee1-8afb-e620deb5c31e","type":"LinearAxis"},{"id":"39e389f5-d59c-46f9-b47a-e7d9fa6eaeae","type":"Grid"},{"id":"46e5d5ef-92e4-4681-87fb-8cdf413a6bf3","type":"BoxAnnotation"},{"id":"9089fd96-0b3e-4d24-9a6c-f39abf5e5633","type":"Legend"},{"id":"78628e35-7459-4b9f-91c6-08dd0ff4962e","type":"GlyphRenderer"},{"id":"846316ab-fa98-4262-b385-4502397a06a3","type":"GlyphRenderer"},{"id":"56b113f7-514e-4323-9043-1c67f57c5343","type":"GlyphRenderer"},{"id":"3ef687df-a284-4197-98d9-7a403b38bdfc","type":"GlyphRenderer"},{"id":"019f5757-2d42-4e0b-93cc-906d7cb98459","type":"GlyphRenderer"},{"id":"86414fc8-071b-46f7-8c71-b81938813d39","type":"GlyphRenderer"},{"id":"7381b1fd-a05a-43d2-b79f-2cb8b462f6fa","type":"GlyphRenderer"},{"id":"6040acce-5f68-4e4e-a8f0-739a6f4133a7","type":"GlyphRenderer"},{"id":"a707b8f6-a6c2-4ae1-b098-bb315b1ad61b","type":"GlyphRenderer"},{"id":"4e403403-ca35-4a33-9623-5d6cdb82b821","type":"GlyphRenderer"},{"id":"9218afc9-2612-4e38-aacb-edd615398fec","type":"GlyphRenderer"},{"id":"95a45ce1-1bf2-4c3c-900c-dc49e248636b","type":"GlyphRenderer"}],"title":{"id":"577aead1-702c-483b-8ba9-406386102da3","type":"Title"},"toolbar":{"id":"d628c0db-27a7-47d3-806e-3dce0e3a47ba","type":"Toolbar"},"toolbar_location":null,"x_range":{"id":"ba74b608-8cc9-4cc9-bea8-be312fd6d8d8","type":"Range1d"},"x_scale":{"id":"62e420b2-2309-426a-8321-975b1a8ef924","type":"LinearScale"},"y_range":{"id":"7fbec965-fcfd-4e53-80a7-1cfc73ee8824","type":"Range1d"},"y_scale":{"id":"5612806f-3431-4e5e-bac6-0aafdc09b77c","type":"LinearScale"}},"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"},{"attributes":{"plot":null,"text":"","text_color":{"value":"black"},"text_font_size":{"value":"12pt"}},"id":"577aead1-702c-483b-8ba9-406386102da3","type":"Title"},{"attributes":{"line_alpha":0.1,"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"2cfad248-eb5c-4955-83c3-88f27a563b58","type":"Line"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"s6kP81qECUDux1i6snEJQKUM1EAp4gtAqpjdbIY4DkCIl9+01esQQFBh25jUGBJAPFotVzbwEUCGZfrm6LMRQMz5FU4PAxFADO7jYoK9EUAoe2kf/J4RQJmINYWitRFA74z7SBaqEUASVvCIA6sRQHZDNYiyvBFA2+m3tcPLEUAwQGQGuhwSQJp/vNG/SRJASe/OuA1uEkAd2weUljASQDTBf3uiQRJAgweWjETnEUCCbqFuNxoSQPUm/Zx4uxFAEZyumvBXEUBLz95kJkcRQDZdqKKpWBFAX+H65ccjEUBTqDJo7DkRQNdea9RtDhFA9Nq+g7JCEUDsb9k9oSERQDSkzWWhSRFAKLLZyc9dEUAtf8L1SFURQCnKsHiRWRFAGWlJWX1CEUBTVk/f7NcRQA==","dtype":"float64","shape":[38]}},"selected":{"id":"fb6b4d03-c26b-4f4f-a9fc-eefa7fc90dc1","type":"Selection"},"selection_policy":{"id":"e2c9a25b-de06-463f-a989-45f48b07ef9a","type":"UnionRenderers"}},"id":"1acc3b8b-fb66-4464-9e61-8df8bf2e1ea5","type":"ColumnDataSource"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"945rKCFpCUBhFLfxXBIKQLLlxFpOUgtAUzqMHRFNDkCyAjpSvPkQQEnF89XaLxJASk21qr4TEkDUHfpqBOcRQP8qGhnMXRFAsQUneQH3EUBIwVCpyyQSQHit09AA4RFA4BjU0x/3EUCBxmzYvy0SQOhgXp6GHhJAGsgCk8VIEkAXQ6qrMWoSQLdnThIpnBJAh8rc7mITE0AzJJXq9OoSQGZbMARJsBJA982DE9mUEkAHgVjOMJASQKmzu+bNPxJAk5J4RYwMEkAXpx+7U8wRQG2r21XlzhFAnBhTGZvOEUB/leZPy+QRQK9xvjBQvxFA/9/ns6jSEUBFhUf3vL8RQIMbc4Y01xFAFxUvFXLIEUBIfG6sBMgRQIKyGGil6RFAye+57QzbEUAgeBsGOk0SQA==","dtype":"float64","shape":[38]}},"selected":{"id":"f75b314b-7bc0-4c8a-a7a3-58f0df407440","type":"Selection"},"selection_policy":{"id":"c8ad2820-f9b9-4152-962b-028ca0909bf8","type":"UnionRenderers"}},"id":"873f0483-6a6e-4270-acbb-5a34c6d461f8","type":"ColumnDataSource"},{"attributes":{},"id":"7ca5c088-6cc3-48b1-bba5-8889065ab7bd","type":"BasicTickFormatter"},{"attributes":{"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"bc5a4c48-2b96-4b41-bc49-ef5830c59608","type":"Line"},{"attributes":{},"id":"b99a41ed-f6a0-4456-9b56-37ab96f84cce","type":"Selection"},{"attributes":{"label":{"value":"600.0"},"renderers":[{"id":"fd406ea9-95b1-4f44-804b-926d637507bc","type":"GlyphRenderer"}]},"id":"65619d59-57cb-478c-856a-b1fdd9445d89","type":"LegendItem"},{"attributes":{"source":{"id":"005557a6-1542-4b89-b97a-e56eed14f6aa","type":"ColumnDataSource"}},"id":"135cbab3-771f-454c-8a31-aac6b4368672","type":"CDSView"},{"attributes":{},"id":"9de9cd03-5475-4ce0-a875-2fcabc394f1e","type":"BasicTickFormatter"},{"attributes":{},"id":"5612806f-3431-4e5e-bac6-0aafdc09b77c","type":"LinearScale"},{"attributes":{"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"3e08fa3a-42ad-4f71-a3ab-51a78c1db405","type":"Line"},{"attributes":{"label":{"value":"400.0"},"renderers":[{"id":"3ee97f79-36b2-45cb-8c49-f1f7af6e3481","type":"GlyphRenderer"}]},"id":"a0e7dd20-cead-4724-b193-ef9ebccde8f5","type":"LegendItem"},{"attributes":{"grid_line_color":{"value":null},"plot":{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"},"ticker":{"id":"669a2a01-41b5-4c10-80fa-59130f4e7e73","type":"BasicTicker"}},"id":"640abd2c-c244-458d-ad00-4e0b3a521926","type":"Grid"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"cctdEvJmCUDdIUSU82MJQCknRdW9ZAtAxaPkAEqDDkBtpSUp19wQQBSSSQQ9DRJANl+sPjecEUDaTQQon6MRQC7oMJeG4hBAjc8RipRpEUAhO23QXIgRQHKFvUl0lRFAaP45jI1sEUDL/6D1bYsRQK3st2V2tBFAWPK3NBbXEUBYoGigMOIRQNtuiCUvHRJARsBf2E5UEkBeA2selQASQA4vsbLnLxJAEwd6s2HsEUB5lcynX78RQL9H8vPBhxFAGCjq6dAgEUB0dD3QnzIRQJ6eJbUuPhFAEWXClbwtEUCLp+jTeAkRQDCCKSXSLBFA22v0daYZEUBZhYatriARQPUYt9WPOxFAIz2n+vQsEUCG+8r6iS8RQCLTLZoYERFA2d6IIwVKEUA6Z5vHBbwRQA==","dtype":"float64","shape":[38]}},"selected":{"id":"fa2f3767-9885-45a7-9039-82a82768308c","type":"Selection"},"selection_policy":{"id":"d0a4c35e-89d2-4a1d-a645-46de54635398","type":"UnionRenderers"}},"id":"f99cbe17-7528-45c9-8953-e9869b246d4e","type":"ColumnDataSource"},{"attributes":{},"id":"669a2a01-41b5-4c10-80fa-59130f4e7e73","type":"BasicTicker"},{"attributes":{"data_source":{"id":"afc1a1f4-0030-49b7-ab55-86402041adad","type":"ColumnDataSource"},"glyph":{"id":"cd6291b5-4db2-4f37-93a3-d99f8e840274","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"b4b138d5-1e97-43b8-b076-2d6380847214","type":"Line"},"nonselection_glyph":{"id":"ce0f6ec7-c7e6-4358-bb46-badaca4f87db","type":"Line"},"selection_glyph":null,"view":{"id":"9ce5471d-f80a-4321-83b8-c4ead1108d2a","type":"CDSView"}},"id":"81f64a8f-1789-45eb-b84b-03dac8a2f4e9","type":"GlyphRenderer"},{"attributes":{"axis_label":"age","bounds":"auto","formatter":{"id":"7ca5c088-6cc3-48b1-bba5-8889065ab7bd","type":"BasicTickFormatter"},"major_label_orientation":"horizontal","plot":{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"},"ticker":{"id":"669a2a01-41b5-4c10-80fa-59130f4e7e73","type":"BasicTicker"}},"id":"cb357438-d629-4b0e-963e-911df50ee56e","type":"LinearAxis"},{"attributes":{},"id":"b3aa6be4-1254-4eb4-9ac8-2448de94071d","type":"Selection"},{"attributes":{},"id":"f76b8061-a442-45b8-bf2c-c4108e438343","type":"Selection"},{"attributes":{},"id":"2f98c06c-c1a7-4926-8650-3f263826a371","type":"UnionRenderers"},{"attributes":{"label":{"value":"0.0"},"renderers":[{"id":"8f678d31-8802-43a0-a6c8-c790bb19f32c","type":"GlyphRenderer"}]},"id":"55a75fcf-341e-4280-822f-47a9f54ac588","type":"LegendItem"},{"attributes":{"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"cd6291b5-4db2-4f37-93a3-d99f8e840274","type":"Line"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"jhg/gysoCUBB7Ws+7AoKQMN0+2yQmgtAYeodqHZjDkCQMTSDi6sQQH11kjXiLBJAMEdUJU89EkBYdC3PsfERQA9FmROcgRFAGXizKUfqEUCBsAofrgYSQMe8MsC9GRJAYWs9na2+EUBh4tGjJysSQOC+/wB6LhJAClHCjDBiEkB/j7oL3noSQMi4v5wwzhJAITexSqjxEkBvKP30fvwSQKQbWUwryhJAgqPAbNiHEkC4UDtoenESQKA5f1ynSxJAw8feltvtEUAJiiMyIOcRQNv4fxqgwRFA7X+RWQfsEUCr3vcHjbwRQKS2wEuV1BFAYhf2QkG9EUAipE2aW3kRQOOCiCd+1xFABPx0KmmxEUDaFy8t3c8RQMtWVrGzExJALTS2eGznEUA3D982f1kSQA==","dtype":"float64","shape":[38]}},"selected":{"id":"a4fe61c2-1881-416f-9fe0-265f60314771","type":"Selection"},"selection_policy":{"id":"1eec7c78-c4c2-4663-86c0-4b38873ae79a","type":"UnionRenderers"}},"id":"cf6ee04c-6a54-483b-a9f6-f12a51bcc53a","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.1,"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"4822c161-4032-405c-849f-5e736d8b179b","type":"Line"},{"attributes":{},"id":"62e420b2-2309-426a-8321-975b1a8ef924","type":"LinearScale"},{"attributes":{"active_drag":"auto","active_inspect":"auto","active_multi":null,"active_scroll":"auto","active_tap":"auto","tools":[{"id":"f684398e-82b1-4ebb-9ee5-43c413d47baf","type":"SaveTool"},{"id":"543828f5-5ea0-4b19-9e25-21e08271780e","type":"PanTool"},{"id":"312317b5-3e28-43b4-b93e-c000cf655e11","type":"WheelZoomTool"},{"id":"822461f7-44ec-4832-97f0-6bbf78a80c5f","type":"BoxZoomTool"},{"id":"4880b054-a52b-4f13-9b37-2fc9aa2bb6f7","type":"ResetTool"}]},"id":"d628c0db-27a7-47d3-806e-3dce0e3a47ba","type":"Toolbar"},{"attributes":{"click_policy":"mute","items":[{"id":"55a75fcf-341e-4280-822f-47a9f54ac588","type":"LegendItem"},{"id":"23efc8d1-fa0d-429d-934d-90dc1bcbe9e4","type":"LegendItem"},{"id":"dfb123b4-93a6-41f9-9976-bc198efdd40e","type":"LegendItem"},{"id":"59c852fa-02f5-49af-b3d8-8af930f75ff7","type":"LegendItem"},{"id":"a0e7dd20-cead-4724-b193-ef9ebccde8f5","type":"LegendItem"},{"id":"fc52a5da-09ba-4fc7-9e66-24e22566683e","type":"LegendItem"},{"id":"65619d59-57cb-478c-856a-b1fdd9445d89","type":"LegendItem"},{"id":"2ccf1e52-41b2-4e50-91fb-d1ee934393e1","type":"LegendItem"},{"id":"1767f544-b6ed-46b0-9ebe-90b931d55f23","type":"LegendItem"},{"id":"263b94ec-aa06-4394-a331-f55026f58e40","type":"LegendItem"},{"id":"92b32793-3f06-4cbc-9f0d-fd4a82aa3f25","type":"LegendItem"},{"id":"ba7ef542-8b97-49a7-85a6-fa7674486e92","type":"LegendItem"}],"plot":{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"}},"id":"ff4c4ccf-95f8-49d1-9e53-b287f7590652","type":"Legend"},{"attributes":{"label":{"value":"100.0"},"renderers":[{"id":"c5dfa6ad-0307-4778-90d0-161aed892b96","type":"GlyphRenderer"}]},"id":"23efc8d1-fa0d-429d-934d-90dc1bcbe9e4","type":"LegendItem"},{"attributes":{"children":[{"id":"ed715d38-851a-4653-a7c3-6cf32dac3888","type":"Row"}]},"id":"e102cf2b-2f75-4b05-9c65-1705819bbbe9","type":"Column"},{"attributes":{"label":{"value":"700.0"},"renderers":[{"id":"81f64a8f-1789-45eb-b84b-03dac8a2f4e9","type":"GlyphRenderer"}]},"id":"2ccf1e52-41b2-4e50-91fb-d1ee934393e1","type":"LegendItem"},{"attributes":{"line_alpha":0.2,"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"55ed4d9b-8341-4827-adc1-00619887a6ac","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"coral","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"5de99fda-3804-488e-88ed-2f3ce885e8b2","type":"Line"},{"attributes":{},"id":"a4fe61c2-1881-416f-9fe0-265f60314771","type":"Selection"},{"attributes":{"data_source":{"id":"873f0483-6a6e-4270-acbb-5a34c6d461f8","type":"ColumnDataSource"},"glyph":{"id":"0b8aba64-3227-412c-b469-eda36180d2d3","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"2b80b930-033d-4f58-8b9a-3a932df2d167","type":"Line"},"nonselection_glyph":{"id":"2cfad248-eb5c-4955-83c3-88f27a563b58","type":"Line"},"selection_glyph":null,"view":{"id":"a755f82a-dbd6-4da1-b591-4913b469a051","type":"CDSView"}},"id":"c5dfa6ad-0307-4778-90d0-161aed892b96","type":"GlyphRenderer"},{"attributes":{},"id":"2538eee8-8a3b-4ae3-962c-585959cc3016","type":"UnionRenderers"},{"attributes":{"line_alpha":0.1,"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"6002c82e-9990-4d92-bd88-4199ad1dd04b","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"4ca77588-a7a9-445b-b184-d11c48e824cc","type":"Line"},{"attributes":{"data_source":{"id":"73f5ef41-84c7-49c4-980d-96843ef51b38","type":"ColumnDataSource"},"glyph":{"id":"3e08fa3a-42ad-4f71-a3ab-51a78c1db405","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"9532a496-127f-4b4f-8ccf-c44c1163f357","type":"Line"},"nonselection_glyph":{"id":"6002c82e-9990-4d92-bd88-4199ad1dd04b","type":"Line"},"selection_glyph":null,"view":{"id":"770262b5-0917-4ab2-93a6-0bb5327b594c","type":"CDSView"}},"id":"fd406ea9-95b1-4f44-804b-926d637507bc","type":"GlyphRenderer"},{"attributes":{"source":{"id":"73f5ef41-84c7-49c4-980d-96843ef51b38","type":"ColumnDataSource"}},"id":"770262b5-0917-4ab2-93a6-0bb5327b594c","type":"CDSView"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"lsA2D8z+CEASv6eBdDUJQIUvOsPDkQlAtVJb35fiCUBWGQqx40oKQD1Cx9gubQtAGQYv3f3CCEBxWFZWH1sIQLKWDIzwpghAjUfrCNHLCEBdEC7lwngIQDqWMRX+zQdARJXi9wOMB0BIKvM4iE4HQIg6ivgNWgdAsekK7wkXB0CXvhWMJJsHQAcqUiKg7AdANyAfSiIDCECRIWHw1mQIQKm6MtyC5AdAOaIH6SVICEDbd6eNrAUJQG3vm5W6xQhA8fc5qcxCCUBvxrxCAEcJQP7w+PWp2wlAFV0EnmmnCUDvCE4BDcsJQKyb4U8HHwpAhmbuu59sCkB9+zG2FmUKQBU1H+WxbgpAIfciVUOhCkBtkWgPwgYLQKBKNydQAwtA05gT1pivC0B9IleHOJsLQA==","dtype":"float64","shape":[38]}},"selected":{"id":"264db84d-d970-4e6f-a18f-8b1fdcd095d0","type":"Selection"},"selection_policy":{"id":"136ccd32-22ee-4a37-ae3b-72c27467c95e","type":"UnionRenderers"}},"id":"548af525-16aa-431a-a9b6-8d1aaf06d7c2","type":"ColumnDataSource"},{"attributes":{"data_source":{"id":"5f0f8380-d03a-4ecc-b08d-b92bf94ff134","type":"ColumnDataSource"},"glyph":{"id":"b09a1b90-8194-4f1f-a068-5e15b53d6ac3","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"4d6ce882-2d64-4bdd-9af6-d7d1bdea1576","type":"Line"},"nonselection_glyph":{"id":"153a8f54-1291-413f-befc-8ff15265a8a6","type":"Line"},"selection_glyph":null,"view":{"id":"b52c8273-45eb-476d-a0bb-290205ee4e7a","type":"CDSView"}},"id":"86414fc8-071b-46f7-8c71-b81938813d39","type":"GlyphRenderer"},{"attributes":{"line_alpha":0.2,"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"2b80b930-033d-4f58-8b9a-3a932df2d167","type":"Line"},{"attributes":{"source":{"id":"8264398d-7572-46b6-9bcb-8f24c90a0c32","type":"ColumnDataSource"}},"id":"3e6105e9-097c-4b58-8eee-5e919fc6efec","type":"CDSView"},{"attributes":{"label":{"value":"1000.0"},"renderers":[{"id":"a96a46a2-154a-45a9-b8d8-abc793cd46e5","type":"GlyphRenderer"}]},"id":"92b32793-3f06-4cbc-9f0d-fd4a82aa3f25","type":"LegendItem"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"8DKk0/mPCUC5rYvsnzwKQNWDtn3hYgtA+fO60/59DkD1019/ec0QQKwl931pVRJAToHqD0HEEUDIPn6r2bwRQBY7afGeDBFAdw+6puWYEUClHB+uUJsRQFhMB8DglxFAL/mb69zEEUDA19EguOURQOjBn3Ml2BFAyl1vXNFCEkCOPHBZUBUSQKz3fSBUdxJAP5HkwJajEkBQHudczWQSQG/HxcM+URJAb+JtHeUQEkC5n3g3r/wRQCPy0F2IwhFA6ZWU9qmTEUDdSTVb43ARQLzMP/mDahFAdUjPgw9oEUDKVv43dz0RQDd+onxDUBFAJcWkYgt0EUCsvpvDdV8RQCuc14ExiBFAOkh0AoFQEUBGTjJT85QRQIB3alHQexFAAD9rvdueEUD6/7t+UQASQA==","dtype":"float64","shape":[38]}},"selected":{"id":"f76b8061-a442-45b8-bf2c-c4108e438343","type":"Selection"},"selection_policy":{"id":"2f98c06c-c1a7-4926-8650-3f263826a371","type":"UnionRenderers"}},"id":"73f5ef41-84c7-49c4-980d-96843ef51b38","type":"ColumnDataSource"},{"attributes":{"label":{"value":"500.0"},"renderers":[{"id":"86414fc8-071b-46f7-8c71-b81938813d39","type":"GlyphRenderer"}]},"id":"05401bf0-8a23-4d82-b94c-a705e0b7ba5a","type":"LegendItem"},{"attributes":{"data_source":{"id":"548af525-16aa-431a-a9b6-8d1aaf06d7c2","type":"ColumnDataSource"},"glyph":{"id":"bc5a4c48-2b96-4b41-bc49-ef5830c59608","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"5de99fda-3804-488e-88ed-2f3ce885e8b2","type":"Line"},"nonselection_glyph":{"id":"4822c161-4032-405c-849f-5e736d8b179b","type":"Line"},"selection_glyph":null,"view":{"id":"a3f4bc7b-1e8e-421b-a624-e6b241d2aea1","type":"CDSView"}},"id":"6040acce-5f68-4e4e-a8f0-739a6f4133a7","type":"GlyphRenderer"},{"attributes":{"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"0b8aba64-3227-412c-b469-eda36180d2d3","type":"Line"},{"attributes":{"line_alpha":0.1,"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"9e0fba9f-a394-4588-90f0-8418d5c84eed","type":"Line"},{"attributes":{},"id":"2357244d-c6c4-4246-a83c-e8473e602ddb","type":"UnionRenderers"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"w7lnzQB8CUCl0W259/0JQHcqX3GjfgtAczNX7CCcDkDyHq/IwusQQBco4eK4MRJAKS171HcKEkCDFZni++oRQC+7jsXKRBFALq5fnw3xEUCyvMvnlP8RQFzxK3OlwhFAipx2SdbrEUCm1fpAm/ERQJl9cFXALhJAM8xjwDNiEkDOa3z7f4ASQHqpkLMHuxJAoUD+fu3hEkDs8eJmtqESQEGUcNpPmRJAOZqOSHSDEkDBQAqy7XcSQGyjQwfrBxJAeTpuMxK+EUCX+fDyZpcRQFnxTaQQpxFAxWzBe0jNEUAXKFThQa8RQJlZy8NGkRFAFehKfm6FEUABfKQTCKgRQH+vNGGE9BFATueNgaquEUBCqvKUE7gRQL3OkTyQxRFAaZItX3ufEUBjtUNESWgSQA==","dtype":"float64","shape":[38]}},"selected":{"id":"262b74ae-f7fa-4313-ae58-dc1c6f465e77","type":"Selection"},"selection_policy":{"id":"4f7e9631-6cec-4a40-a595-623af9743450","type":"UnionRenderers"}},"id":"362ec797-c475-4e20-a811-08c9d9d6bf81","type":"ColumnDataSource"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"PMnUsTRtCUAjFt8SBJYJQOe0kIqRYgtArhPwUMyUDkAITpB0cNgQQGZT49dcNRJAwEWKY5+0EUBNYewvApYRQLzdTLWOChFAQQYFBYGPEUAX3vaGY5cRQAuOh3ezixFAF9vBObuVEUDGDDGQ0scRQDC+yQuRpxFAMsq1Ii3xEUBSPofr2w4SQACZ5bLgIRJAxGK5xdd4EkBdoW8RXzESQE9Xj3CPLhJAIB8KNVD3EUAUF2ghuu0RQKJLPh1xixFAuT2TpMhqEUBHLA5FnUYRQCJsWN0cBxFAXS60snEYEUCBEoQj1CARQDDcIRNTCxFAk/rHg/kPEUCddlHM5xcRQPpwsHqYJhFACvcu7qBWEUCP4RyPVjURQDdcj96KQRFAUZh4btiGEUD332qMDAgSQA==","dtype":"float64","shape":[38]}},"selected":{"id":"12dc3c2b-ce73-418c-9ad3-0938be42364a","type":"Selection"},"selection_policy":{"id":"1f856200-bc3d-4041-9a2b-6be4ac859c0f","type":"UnionRenderers"}},"id":"1918bb78-f6ac-4b7b-ab70-d1c59662c698","type":"ColumnDataSource"},{"attributes":{"line_alpha":0.1,"line_color":"cornflowerblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"759c9c63-d6da-4ef6-aaf7-c91dc10d927b","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"cfe6c85e-7b90-4772-b283-bbcee0184eb2","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"plum","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"3b3e92e4-afac-41b3-8499-4330e0ddf4da","type":"Line"},{"attributes":{"label":{"value":"600.0"},"renderers":[{"id":"7381b1fd-a05a-43d2-b79f-2cb8b462f6fa","type":"GlyphRenderer"}]},"id":"b374a08b-0e30-4023-9a3f-00727f4a97bf","type":"LegendItem"},{"attributes":{"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"43608461-e36f-47a4-9146-1d34492aff96","type":"Line"},{"attributes":{},"id":"e127d914-0011-4e27-a921-6011bd73ab35","type":"UnionRenderers"},{"attributes":{"line_alpha":0.2,"line_color":"tan","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"9532a496-127f-4b4f-8ccf-c44c1163f357","type":"Line"},{"attributes":{"data_source":{"id":"8264398d-7572-46b6-9bcb-8f24c90a0c32","type":"ColumnDataSource"},"glyph":{"id":"eda5b0bd-0b8f-4b18-9681-e1250ac2bddc","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"cfe6c85e-7b90-4772-b283-bbcee0184eb2","type":"Line"},"nonselection_glyph":{"id":"9e0fba9f-a394-4588-90f0-8418d5c84eed","type":"Line"},"selection_glyph":null,"view":{"id":"3e6105e9-097c-4b58-8eee-5e919fc6efec","type":"CDSView"}},"id":"3b83323b-6eb4-4c8d-895d-45eed349b8c7","type":"GlyphRenderer"},{"attributes":{},"id":"29c50427-ab6c-48da-ba3c-3177d7505ee2","type":"Selection"},{"attributes":{"data_source":{"id":"362ec797-c475-4e20-a811-08c9d9d6bf81","type":"ColumnDataSource"},"glyph":{"id":"43608461-e36f-47a4-9146-1d34492aff96","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"55ed4d9b-8341-4827-adc1-00619887a6ac","type":"Line"},"nonselection_glyph":{"id":"c6dd32c3-78e7-40d7-b3d5-a02c42da9e63","type":"Line"},"selection_glyph":null,"view":{"id":"41050cc4-9e5b-4078-9b1b-ce603b164ef9","type":"CDSView"}},"id":"d52e1deb-a764-4025-923f-0564aad57aa0","type":"GlyphRenderer"},{"attributes":{"line_color":"papayawhip","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"eda5b0bd-0b8f-4b18-9681-e1250ac2bddc","type":"Line"},{"attributes":{},"id":"c8ad2820-f9b9-4152-962b-028ca0909bf8","type":"UnionRenderers"},{"attributes":{"line_alpha":0.1,"line_color":"forestgreen","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"c6dd32c3-78e7-40d7-b3d5-a02c42da9e63","type":"Line"},{"attributes":{},"id":"90385c08-95a6-4ded-9d3f-22fbbe9527ae","type":"Selection"},{"attributes":{"source":{"id":"362ec797-c475-4e20-a811-08c9d9d6bf81","type":"ColumnDataSource"}},"id":"41050cc4-9e5b-4078-9b1b-ce603b164ef9","type":"CDSView"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"bviygVtpCUAiY+Tx0kQJQIwTpXSNiQlA3PZWvvRHCkD7ckeBwQ4KQGY7CDTXXgtAs8BFiUAiCEAAqfh360gIQGgXTuKJXghAS6S7hJ1/CEC8NU33ad0HQGK6TZjtyAdAOsNuAuDcB0DW0uVyXiEHQOXWBfmTfQdAaL1fJaY7B0DBxqolBlMHQI1CZQqi3AdA9+UiZbb0B0B0wJmMCgkIQFiPvIq9OAhAI8fDkB6FCEDZXnueMbsIQJ+vNzdY7ghAqIDISusTCUA2b+2ZpTIJQAteRvVSNAlA3Ht/wAJ1CUDZpQESIFQJQCKaQM9ljglALwFni17mCUAcdcughsYJQMhT58tnXQpAlmuZLCuxCkCz62zsPOAKQKpqWV1XKAtAuRhhYl6GC0D8oS9z3ZkLQA==","dtype":"float64","shape":[38]}},"selected":{"id":"1b57c774-b352-40ca-81e9-fed84cfe1cd0","type":"Selection"},"selection_policy":{"id":"0d207a1d-8712-4060-899b-aa82d202a51b","type":"UnionRenderers"}},"id":"0751b15d-2794-4c57-95ae-3e0d5fc46555","type":"ColumnDataSource"},{"attributes":{},"id":"6250be6d-3e3e-4d12-a543-70c22e1acaab","type":"BasicTicker"},{"attributes":{"line_alpha":0.2,"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"47bbfe8b-7f1f-4af2-ae1b-6d888c5e18a0","type":"Line"},{"attributes":{"axis_label":"age","bounds":"auto","formatter":{"id":"67e3fdcb-390f-47c1-933a-366c18fb53a3","type":"BasicTickFormatter"},"major_label_orientation":"horizontal","plot":{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},"ticker":{"id":"82429818-1209-490c-94af-05752937a4b8","type":"BasicTicker"}},"id":"8bbccf04-4a58-4b24-85f0-8243a5aa48f1","type":"LinearAxis"},{"attributes":{},"id":"12694510-c916-4069-b6da-b4cce7aa3c87","type":"SaveTool"},{"attributes":{"dimension":1,"grid_line_color":{"value":null},"plot":{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},"ticker":{"id":"6250be6d-3e3e-4d12-a543-70c22e1acaab","type":"BasicTicker"}},"id":"4a585570-1b7f-4d89-b7e0-0781582fca50","type":"Grid"},{"attributes":{},"id":"82429818-1209-490c-94af-05752937a4b8","type":"BasicTicker"},{"attributes":{"source":{"id":"cf6ee04c-6a54-483b-a9f6-f12a51bcc53a","type":"ColumnDataSource"}},"id":"8bc4d724-16c1-4360-82d0-819b2502717c","type":"CDSView"},{"attributes":{"axis_label":"predicted_logs","bounds":"auto","formatter":{"id":"de49375b-3813-429b-bb78-bae676438370","type":"BasicTickFormatter"},"major_label_orientation":"horizontal","plot":{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},"ticker":{"id":"6250be6d-3e3e-4d12-a543-70c22e1acaab","type":"BasicTicker"}},"id":"190b3645-4837-46da-aabc-ba02fc014c36","type":"LinearAxis"},{"attributes":{"data_source":{"id":"cf6ee04c-6a54-483b-a9f6-f12a51bcc53a","type":"ColumnDataSource"},"glyph":{"id":"b7740a9a-85aa-4ce9-9dbd-a77160dd70a7","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"47bbfe8b-7f1f-4af2-ae1b-6d888c5e18a0","type":"Line"},"nonselection_glyph":{"id":"cfe809eb-689c-4448-b0ee-fd7f103f60df","type":"Line"},"selection_glyph":null,"view":{"id":"8bc4d724-16c1-4360-82d0-819b2502717c","type":"CDSView"}},"id":"8f678d31-8802-43a0-a6c8-c790bb19f32c","type":"GlyphRenderer"},{"attributes":{"label":{"value":"800.0"},"renderers":[{"id":"17f4caef-ea7d-434d-bd61-657c518bf2a9","type":"GlyphRenderer"}]},"id":"1767f544-b6ed-46b0-9ebe-90b931d55f23","type":"LegendItem"},{"attributes":{},"id":"88a21f56-b074-4dcb-9f2c-c922e05529a7","type":"LinearScale"},{"attributes":{"line_alpha":0.1,"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"cfe809eb-689c-4448-b0ee-fd7f103f60df","type":"Line"},{"attributes":{},"id":"dbfbe446-d1f5-4630-a3a0-c3c0d67cbb50","type":"LinearScale"},{"attributes":{"line_color":"darkblue","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"b7740a9a-85aa-4ce9-9dbd-a77160dd70a7","type":"Line"},{"attributes":{},"id":"67e3fdcb-390f-47c1-933a-366c18fb53a3","type":"BasicTickFormatter"},{"attributes":{"grid_line_color":{"value":null},"plot":{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},"ticker":{"id":"82429818-1209-490c-94af-05752937a4b8","type":"BasicTicker"}},"id":"5a2d914c-9508-4f87-897e-df7fe8612ef3","type":"Grid"},{"attributes":{},"id":"de49375b-3813-429b-bb78-bae676438370","type":"BasicTickFormatter"},{"attributes":{"overlay":{"id":"ad5a0b23-89b3-4c89-a167-c7e3076e1767","type":"BoxAnnotation"}},"id":"e44e40f4-a1b0-404f-8039-c3747f0dde79","type":"BoxZoomTool"},{"attributes":{"bottom_units":"screen","fill_alpha":{"value":0.5},"fill_color":{"value":"lightgrey"},"left_units":"screen","level":"overlay","line_alpha":{"value":1.0},"line_color":{"value":"black"},"line_dash":[4,4],"line_width":{"value":2},"plot":null,"render_mode":"css","right_units":"screen","top_units":"screen"},"id":"ad5a0b23-89b3-4c89-a167-c7e3076e1767","type":"BoxAnnotation"},{"attributes":{},"id":"447300e2-66c1-47dc-a5d8-b211f502a06d","type":"Selection"},{"attributes":{"source":{"id":"1acc3b8b-fb66-4464-9e61-8df8bf2e1ea5","type":"ColumnDataSource"}},"id":"e0147f13-cd44-4b89-aa8d-ae68025c0790","type":"CDSView"},{"attributes":{},"id":"6d072511-4d5e-47df-a5fc-1439a6af4e49","type":"ResetTool"},{"attributes":{"children":[{"id":"3bd9f1eb-d717-4f0d-a300-7dc092a3c335","subtype":"Figure","type":"Plot"},{"id":"0504e307-6bc1-47a2-b871-e966111a771a","subtype":"Figure","type":"Plot"}]},"id":"ed715d38-851a-4653-a7c3-6cf32dac3888","type":"Row"},{"attributes":{"data_source":{"id":"1acc3b8b-fb66-4464-9e61-8df8bf2e1ea5","type":"ColumnDataSource"},"glyph":{"id":"08aca6c1-e2cd-4a1e-8a33-d9faa950daa5","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"b1e81fc3-3296-422e-bcac-bd4746fe363b","type":"Line"},"nonselection_glyph":{"id":"4ca77588-a7a9-445b-b184-d11c48e824cc","type":"Line"},"selection_glyph":null,"view":{"id":"e0147f13-cd44-4b89-aa8d-ae68025c0790","type":"CDSView"}},"id":"17f4caef-ea7d-434d-bd61-657c518bf2a9","type":"GlyphRenderer"},{"attributes":{},"id":"bc2288a6-d8f1-4e1d-a3d0-25d54bde67b0","type":"UnionRenderers"},{"attributes":{"line_alpha":0.2,"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"c5169114-294e-4cf8-ba6b-9f5365cb2392","type":"Line"},{"attributes":{},"id":"b9821c57-63fa-4ca9-a449-b6b5b3cdd9cc","type":"PanTool"},{"attributes":{},"id":"b9cd490f-afa1-407a-9819-be3adcddf79a","type":"WheelZoomTool"},{"attributes":{"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"a3498fd4-73f3-427b-af7e-ce9ccd2a68d9","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"crimson","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"b1e81fc3-3296-422e-bcac-bd4746fe363b","type":"Line"},{"attributes":{},"id":"1f856200-bc3d-4041-9a2b-6be4ac859c0f","type":"UnionRenderers"},{"attributes":{"data_source":{"id":"1918bb78-f6ac-4b7b-ab70-d1c59662c698","type":"ColumnDataSource"},"glyph":{"id":"a3498fd4-73f3-427b-af7e-ce9ccd2a68d9","type":"Line"},"hover_glyph":null,"muted_glyph":{"id":"bfc19d6f-3053-4ce0-aec8-946d2f2c0fae","type":"Line"},"nonselection_glyph":{"id":"56d74e2e-6ccb-4b01-84c8-2787aa8a4981","type":"Line"},"selection_glyph":null,"view":{"id":"31a3fcc9-4061-4e5e-8499-dffb69363597","type":"CDSView"}},"id":"c67ceb69-c5c3-4e22-8264-1f6aca773f71","type":"GlyphRenderer"},{"attributes":{"callback":null,"data":{"age":[12,13,14,15,16,17,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50],"predicted_logs":{"__ndarray__":"X96l0TZlCUBD0nagouEJQKinh2d3zwtA7Ac8vv6eDkCB1SMfcsMQQE3+eFNdGhJALqooCQGVEUBicAsmj34RQIEQ3Zmr8hBAOHGOoW+FEUCzM/ARFasRQKvkqlBFmxFAd6QZ+mSWEUDfIokM56oRQAeV+xifthFABOwsiMbVEUBfP1gAy9sRQN544eOxCxJAhnaCr/lSEkAW6jiamD0SQG+4S0jfIRJAeoWwKCLwEUANLbZT+sQRQHu1gWgboBFAr9tLgCBfEUDsZR6nVyIRQNN/JCUk/hBAmulbX69iEUBWNgq7giQRQDyqZGieMhFA+RslJCUuEUDZ6R/GwCIRQOkbY4bjaBFAIIONvWBREUCR0riLrCgRQIxVbsmuMRFAsGRiPxRtEUBPROFuQrcRQA==","dtype":"float64","shape":[38]}},"selected":{"id":"5d351f43-2457-46bf-8c7d-2e4eb6768edd","type":"Selection"},"selection_policy":{"id":"d9ce285c-ce40-49dd-b185-dd71084cf366","type":"UnionRenderers"}},"id":"5d85998d-c7a5-43c2-91aa-2d981bb6dc44","type":"ColumnDataSource"},{"attributes":{"label":{"value":"900.0"},"renderers":[{"id":"c67ceb69-c5c3-4e22-8264-1f6aca773f71","type":"GlyphRenderer"}]},"id":"263b94ec-aa06-4394-a331-f55026f58e40","type":"LegendItem"},{"attributes":{"source":{"id":"1918bb78-f6ac-4b7b-ab70-d1c59662c698","type":"ColumnDataSource"}},"id":"31a3fcc9-4061-4e5e-8499-dffb69363597","type":"CDSView"},{"attributes":{"line_alpha":0.1,"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"56d74e2e-6ccb-4b01-84c8-2787aa8a4981","type":"Line"},{"attributes":{"line_alpha":0.2,"line_color":"darkviolet","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"bfc19d6f-3053-4ce0-aec8-946d2f2c0fae","type":"Line"},{"attributes":{"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"a4699252-2426-4fee-94ea-018a78ea826b","type":"Line"},{"attributes":{"tools":[{"id":"12694510-c916-4069-b6da-b4cce7aa3c87","type":"SaveTool"},{"id":"b9821c57-63fa-4ca9-a449-b6b5b3cdd9cc","type":"PanTool"},{"id":"b9cd490f-afa1-407a-9819-be3adcddf79a","type":"WheelZoomTool"},{"id":"e44e40f4-a1b0-404f-8039-c3747f0dde79","type":"BoxZoomTool"},{"id":"6d072511-4d5e-47df-a5fc-1439a6af4e49","type":"ResetTool"},{"id":"f684398e-82b1-4ebb-9ee5-43c413d47baf","type":"SaveTool"},{"id":"543828f5-5ea0-4b19-9e25-21e08271780e","type":"PanTool"},{"id":"312317b5-3e28-43b4-b93e-c000cf655e11","type":"WheelZoomTool"},{"id":"822461f7-44ec-4832-97f0-6bbf78a80c5f","type":"BoxZoomTool"},{"id":"4880b054-a52b-4f13-9b37-2fc9aa2bb6f7","type":"ResetTool"}]},"id":"38dc1079-d47a-479e-bc61-36c8db384554","type":"ProxyToolbar"},{"attributes":{},"id":"12dc3c2b-ce73-418c-9ad3-0938be42364a","type":"Selection"},{"attributes":{"toolbar":{"id":"38dc1079-d47a-479e-bc61-36c8db384554","type":"ProxyToolbar"},"toolbar_location":"above"},"id":"a02c3308-31b3-4c65-948f-34112802b526","type":"ToolbarBox"},{"attributes":{},"id":"f92b3972-f285-4902-9ab0-6acd360929a6","type":"Selection"},{"attributes":{},"id":"fb6b4d03-c26b-4f4f-a9fc-eefa7fc90dc1","type":"Selection"},{"attributes":{},"id":"4c0740a8-b631-4fff-b6b2-5864bc8fa7f0","type":"UnionRenderers"},{"attributes":{"children":[{"id":"a02c3308-31b3-4c65-948f-34112802b526","type":"ToolbarBox"},{"id":"e102cf2b-2f75-4b05-9c65-1705819bbbe9","type":"Column"}]},"id":"5f4d2d9c-d991-41d6-a88a-c8408d2140f6","type":"Column"},{"attributes":{},"id":"e2c9a25b-de06-463f-a989-45f48b07ef9a","type":"UnionRenderers"},{"attributes":{"line_alpha":0.1,"line_color":"mediumpurple","line_width":2,"x":{"field":"age"},"y":{"field":"predicted_logs"}},"id":"58cd86f6-a836-404a-9826-fa3400aad53a","type":"Line"}],"root_ids":["5f4d2d9c-d991-41d6-a88a-c8408d2140f6"]},"title":"Bokeh Application","version":"0.13.0"}};
+  var render_items = [{"docid":"3c19cc58-b092-4cb1-9fdd-391d41c2d058","roots":{"5f4d2d9c-d991-41d6-a88a-c8408d2140f6":"9e91c0c3-79e4-454c-a9ce-6e51d90545a3"}}];
+  root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
+
+  }
+  if (root.Bokeh !== undefined) {
+    embed_document(root);
+  } else {
+    var attempts = 0;
+    var timer = setInterval(function(root) {
+      if (root.Bokeh !== undefined) {
+        embed_document(root);
+        clearInterval(timer);
+      }
+      attempts++;
+      if (attempts > 100) {
+        console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing")
+        clearInterval(timer);
+      }
+    }, 10, root)
+  }
+})(window);
+</script>
+</div>

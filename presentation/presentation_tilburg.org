@@ -1,0 +1,197 @@
+#+TITLE: Health Care Expenditures
+#+AUTHOR: Jan Boone, Minke Remmerswaal, and Bram Wouterse
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1 timestamp:nil
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 1
+#+LANGUAGE:  en
+
+
+
+* Introduction
+
+** Introduction
+
++ objective:
+  + calculate effects of different cost-sharing schemes on healthcare spending
++ difficulties: 
+  + after the reform, the Netherlands has only featured deductible (like) cost sharing
+  + empirical literature too specific 
+  + theoretical models hard to estimate
++ our aim is to develop a model which solves both points
+
+** Why Bayesian?
+
++ distributions of healthcare spending are important for cost-sharing schemes
+  + simulation should also cover e.g. a "donut"
++ "standard" econometrics works with sampling variation
+  + but we have data on the whole population
++ we want policy recommendations like:
+  + there is 60% probability that a deductible of 500 euro reduces expenditures by at least 10% (compared to 350 euro)
++ Bayesian approach can easily work with distributions
+#+attr_latex: :width 500px
+[[./ExpenditureOverAge.png]]
+
+* Model
+
+** Total healthcare expenditure in a year
++ $H(z)$: distribution of healthcare expenditure in a year
+  + where $z=x+y$
+  + $x$: exogenous, not affected by cost-sharing, high-value care
+     + if you break your leg, you get "plastered up"
+  + $y$: endogenous, affected by cost-sharing
+     + if you have a running injury, perhaps you skip the physiotherapy
+ 
+** Idea of the model
++ "at the start of the year", person $i$ is offered one $y$ treatment with value $v_y$ and expected out-of-pocket cost $OOP$
++ $i$ accepts if $v_y$ exceeds expected $OOP$
+
++ $OOP$ depends on:
+  + $f(x)$ ex-ante distribution of exogenous healthcare expenditure
+  + $g(y)$ cost distribution of offered treatment $y$
+  + cost-sharing scheme
++ for a deductible $D$, $OOP$ equals $\int_0^{+\infty} \int_0^{+\infty} (\min\{x+y,D\}-\min\{x,D\})f(x)g(y)dxdy$
+ 
+* Estimation
+
+** Parametric specification
++ "everybody knows" that healthcare expenditures are log-normally distributed:
+  + log transformation of positive healthcare costs are normally distributed
+  + we model the propability on zero healthcare costs
+  + benefits of log-normal distribution:
+    + analytical expression for $OOP$ with deductible (estimation)
+    + analytical expression for distribution of $x+y$
+
+** Example
+
+#+name: fig:TwoDistributions
+#+caption: Illustrative distributions for /positive/ healthcare costs (left in levels, right in logs)
+[[./DistributionExpenditure.png]]
+
+
+** Four components
++ define categories age by gender (current model: $38*2$) 
+  + each category has a /distribution/ of (log) healthcare costs $z$
++ distribution is mixture of 4 components:
+  + $x \sim N(\mu_x,\sigma_x)$, with age and year FE by gender 
+  + same for $y$
+  + $\psi$ is probability treatment is offered ($x > 0$), with age FE by gender (and year FE women 21+) 
+  + $\phi$ is same for $y > 0$
+  + people in each category know their $\psi,\phi$ and their distributions of $x,y$
++ calculate $OOP_y$ per age, gender, year with $x,y,\psi,D$
++ compute probability $F$ that $y$ is rejected ($v_y < OOP$)
+  + $v_y \sim N(\mu,\sigma)$ by age and gender
+
+** Probabilities
+
++ calculate probability for each mixture component
+
+| component | probability                 |
+| $x=y=0$   | $(1-\psi)(1-\phi + \phi F)$ |
+| $x>0=y$   | $\psi*(1-\phi + \phi F)$    |
+| $y>0=x$   | $(1-\psi)\phi(1-F)$         |
+| $x,y>0$   | $\psi \phi (1-F)$           |
+
+** Technique
+
++ specify priors for parameters:
+  + 5,000,000 observations per year
+  + on average 65,000 observations per category per year
++ estimation with variational inference (ADVI, Auto-diff Variational Inference) and minibatches
+  + standard Markov Chain Monte Carlo methods (Metropolis, NUTS etc.) do not scale well with data size
++ python and pymc3 fun to work with
+  + parameter $\phi$ has age and gender fixed effects:
+   ~ϕ = pm.Deterministic('ϕ', phi[age,sex])~
++ for each age-gender category, we draw 10,000 samples of the model parameters
++ for each sample we draw one $x,y$ and $z$
+
+
+* Fit
+
+** How to measure fit
+
++ not obvious how to measure the fit of the model
++ we can compare: 
+  + average expenditure per age-gender category (fit vs observed) 
+  + distributions via QQ plots
+  + predicted vs realized zero-expenditures per category (but what is "zero"?)
+
+** Fit on average costs by age, year and sex
+
+#+REVEAL_HTML: <iframe width="840" height="400" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
+
+** QQ plot for 30 year old woman in 2013
+
+#+attr_latex: :width 500px
+[[./qq_female_age30_2013.png]]
+
+
+* Simulations
+
+** Deductible (women)
+
+#+attr_latex: :width 250px
+[[./simulation_deductibles_log_female.png]]
+
+** Deductible (men)
+
+#+attr_latex: :width 250px
+[[./simulation_deductibles_log_male.png]]
+
+** Deductible (women)
+
+Average expenditure and OOP 
+#+attr_latex: :width 500px
+[[./mean_expenditure_oop_deductible_women.png]]
+
+** Deductible (men)
+
+#+attr_latex: :width 500pxh
+[[./mean_expenditure_oop_deductible_men.png]]
+
+
+** 25% co-insurance rate with cap (women)
+
+#+attr_latex: :width 250px
+[[./simulation_25p_deductibles_log_female.png]]
+
+** 25% co-insurance rate with cap (men)
+
+#+attr_latex: :width 250px
+[[./simulation_25p_deductibles_log_male.png]]
+
+
+** 25% co-insurance rate with cap (women)
+
+Average expenditure and OOP 
+#+attr_latex: :width 500px
+[[./mean_expenditure_oop_25p_women.png]]
+
+** 25% co-insurance rate with cap (men)
+ 
+#+attr_latex: :width 500px
+[[./mean_expenditure_oop_25p_men.png]]
+
+
+* Where do we stand
+
++ estimation "works" and goes quite fast
++ model needs to be fine-tuned
+  + e.g. distribution parameters for $x$ vary around 18
++ simulations work as well
++ simulations slow down when working with 10,000 samples and simulated OOP
+
+
+* Appendix
+
+** Comparison deductible and 25% co-insurance rate
+
+#+REVEAL_HTML: <iframe width="840" height="300" src="./sim_logdeductible_25p_averaged_age_logs.html" frameborder="0" allowfullscreen></iframe>
+
+

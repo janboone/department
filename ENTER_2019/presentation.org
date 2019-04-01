@@ -18,14 +18,15 @@
 ** Introduction
 
 + project together with Dutch policy institute CPB
-  + politicians suggest different demand cost sharing schemes in health insurance
-  + what are the effects on health care expenditures, out-of-pocket payments (OOP)
+  + politicians suggest different demand cost sharing /schemes/ in health insurance
+  + what are the effects on health care expenditures, out-of-pocket payments (OOP)?
 + objective:
   + calculate effects of different cost-sharing schemes on healthcare spending
   + deductible, coinsurance, "donut"
 + difficulties: 
   + after the reform in 2006, the Netherlands has only featured deductible (and rebate)
   + how can we generalize to other schemes?
+  + estimating an equation like $z_{it} = .... + \alpha D_{it}$ does not help
 
 ** Background
 
@@ -80,7 +81,7 @@
 * Estimation
 
 ** Parametric specification
-+ "everybody knows" that healthcare expenditures are log-normally distributed:
++ we assume healthcare expenditures are log-normally distributed (Einav et al., 2013):
   + log transformation of positive healthcare costs are normally distributed
   + we model explicitly the propability of zero healthcare costs
 + benefits of log-normal distribution:
@@ -98,12 +99,12 @@
 + define categories by age and gender (current model: $91*2$) 
   + each category has a /distribution/ of (log) healthcare costs $z$
 + distribution $z$ is mixture of 4 components:
-  + $x \sim N(\mu_x,\sigma_x)$, with age and year FE by gender (Gaussian Process with squared exponential covariance function)
+  + $x \sim N(\mu_x,\sigma_x)$, with age and year FE by gender (Gaussian Process in age with squared exponential covariance function)
   + similarly for $y$
   + $\psi$ is probability $x$ treatment is offered ($x > 0$), with age FE by gender (and year FE women 21+) 
   + $\phi$ similarly for $y > 0$
   + people in each category know their $\psi,\phi$ and their distributions of $x,y$
-+ calculate $OOP_y$ per age, gender, year with $x,y,\psi,D$
++ we calculate $OOP$ per age, gender, year with $x,y,\psi,D$
 + compute probability $F$ that $y$ is rejected ($v_y < OOP$)
   + where $v_y$ is normally distributed (by age and gender)
 
@@ -126,9 +127,9 @@
 + estimation with variational inference (ADVI, Auto-diff Variational Inference) and minibatches
   + standard Markov Chain Monte Carlo methods (Metropolis, NUTS etc.) do not scale well with data size
 + python and pymc3 fun to work with
-+ python allows for readable syntax and code
++ python allows for readable syntax and code: e.g. $\mu[age,year]$
 + for each age-gender category, we draw 10,000 samples of the model parameters (posterior)
-+ for each sample we draw one $x,y$ and $z$
++ for each posterior sample we draw one $x,y$ and $z$
 
 
 * Fit
@@ -186,7 +187,9 @@ X-axis: age, Y-axis: log expenditure
 
 * Policy implications
 
-+ with the fitted model, we generate distributions for $x,y$ and $z$
++ with the fitted model, we generate distributions for $x,y$ and $z$ which capture
+  + individual uncertainty (for given parameters)
+  + parameter uncertainty
 + therefore, we can simulate the effect of different cost sharing schemes
 + not only different deductible levels
 + because we draw posterior samples, we can see the uncertainty at any stage in the process

@@ -1,0 +1,105 @@
+#+TITLE: Economics in EBE
+#+AUTHOR: Jan Boone
+#+OPTIONS: toc:nil num:nil timestamp:nil
+
+
+* Why choose the Economics track?
+
++ if you are interested in:
+  + analysing the broader implications of things that happen
+  + what are the effects of policy changes for aggregate groups:
+    + society as a whole
+    + municipality
+    + consumers as a group
+    + firms
+
+** questions like
+
+  + is taxation a good thing?
+  + should we give tax breaks to attract companies to the Netherlands?
+  + how should taxes be designed?
+  + how should the stock market be regulated?
+  + what are the effects of Brexit on trade?
+  + what is the effect of a merger on consumers?
+  + how should health care be organized?
+
+* Economics vs Business
+
+** merger
+
++ When Google and Facebook merge:
+  + how can this be leveraged to raise profits?
+    + marketing
+    + finance
+    + management
+    + accounting
+  + is this beneficial for society as a whole?
+    + privacy
+    + competition in hi-tech markets
+    + stimulates or reduces innovation?
+    + can a government still govern (say, tax) such a company?
+
+** Brexit
+
++ When the UK leaves the EU:
+  + what are the conequences for our firm?
+    + can we still export at competitive prices to the UK?
+    + should we source our inputs from UK or from Ireland?
+    + is there an increased currency risk?
+  + how should the Netherlands --as a country-- adapt:
+    + should we try to attract firms/banks from London to Amsterdam?
+    + will unemployment increase?
+    + effects on inflation, interest rates, stock prices?
+
+
+* two examples in health care
+
+** hospitals that go bankrupt
+
+[[./nrc_zorg_3.png]]
+
+
+
+** health care /markets/
+   
+*** contradiction between market and money?
+
+[[./nrc_zorg_1.png]]
+
+
+*** primary physicians need to solve market problems?
+
+[[./nrc_zorg_2.png]]
+
+* Questions you need to ask yourself
+
+** on bankruptcy of a hospital
+
++ if a hospital is so popular with people, how can it go bankrupt?
++ what is the danger of keeping bad performing hospitals alive with subsidies from the ministry?
++ why is it a problem if a hospital in Amsterdam goes bankrupt?
++ how many patients needed to be moved from Slotervaart ziekenhuis after it went bankrupt?
++ why did it "suddenly" collapse?
+
+** on design of a health care market
+
++ macro economic aspects of health care: in 20 years time, healthcare spending can be 30% of GDP
++ this is not necessarily bad; but it is a lot of money...
++ have you heard people talk about Albert Heijn needing "more money and less market"?
++ should healthcare be financed via taxation (only) like the NHS or via a health insurance premium as in the Netherlands?
+
+** design (contnd)
+
++ one may have some sympathy for GP's: they save society a lot of money but do not get a percentage of these savings as "bonus"
++ in one of the interviews, someone remarks: "Het vraagt om een verschuiving van concurrentie- naar samenwerkingsmarkt"
++ they want agreements with other providers to "improve healthcare"; but this is called a cartel
++ cartels are illegal...
++ but cooperation between firms is actually possible and legal in "normal" markets as well
++ one needs to take into account the (European) rules of competition policy
+
+* Courses that will help you answer these questions
+
++ competition policy: articles 101 and 102 on contracts between firms
++ industrial economics
++ micro economics
++ public economics 

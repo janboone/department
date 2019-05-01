@@ -42,7 +42,7 @@
 ** Brexit
 
 + When the UK leaves the EU:
-  + what are the conequences for our firm?
+  + what are the consequences for our firm?
     + can we still export at competitive prices to the UK?
     + should we source our inputs from UK or from Ireland?
     + is there an increased currency risk?
@@ -97,9 +97,19 @@
 + but cooperation between firms is actually possible and legal in "normal" markets as well
 + one needs to take into account the (European) rules of competition policy
 
+* Other topics with similar questions
+
++ central banks policy (cooperation within Europe)
++ is it a good idea to help a country financially, like Greece
++ how to regulate new (crypto) currencies?
++ public goods, like polution
++ organ donors (how to trade if people cannot pay cash for organs)
++ allocating children to schools
+
 * Courses that will help you answer these questions
 
 + competition policy: articles 101 and 102 on contracts between firms
 + industrial economics
 + micro economics
-+ public economics 
++ public economics
++ macro economics

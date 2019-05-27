@@ -1,0 +1,90 @@
+#+TITLE: Smart Lending: discussion
+#+AUTHOR: Jan Boone
+#+OPTIONS: num:nil timestamp:nil toc:1
+
+* Overview paper
+
++ paper models a credit rationing situation
++ initially lender can only get more information about borrower by investing effort in gathering soft information
++ in a second period, lender can also use hard information: prediction from machine learning exercise
++ message: introduction of hard information and machine learning can increase costs:
+  + costs increase for traditional lenders
+  + more credit rationing for some types of borrowers
+
+** step by step
+
+*** set up
+
++ good and bad borrowers in equal proportion
++ borrower has a number of properties determing probability of default
+  + property $\gamma_k$ determines to which extent soft information is necessary to screen $k$
++ precision of signal on $k$: $0.5+\gamma_k e_k$
++ it is hard to learn something about low $\gamma_k$ type
++ borrower has wealth that can be used as collateral
++ lender receives signal about borrower's type
+
+*** results
+
++ optimal contract (without hard information) is derived
++ borrowers with high $\gamma_k$ and assets $A_k$ get financed
++ then (in second period) screening based on hard data is introduced
++ technological lenders are specialized in screening with learning algorithms
++ market splits:
+  + low $\gamma_k$ types screened with hard information
+  + high $\gamma_k$ types screened with soft information
++ traditional lender is left with high $\gamma_k$ types that are costly to screen
+
+* General questions
+
+** welfare
+
++ paper shows convincingly that introduction of hard data and machine learning has distributional effects
++ not clear that it is bad for welfare?
+  + some borrowers are easy/cheap to screen: they get more credit at lower cost
+  + some are harder/more expensive to screen, they get less credit and at higher cost
++ should solidarity play a role in welfare in this case?
++ before the hard information, low $\gamma_k$ were "poor types"
++ or is it an efficient way to resolve asymmetric information problems:
+  + for some this can be done cheaply via hard information
+  + for others more expensive soft information is needed
++ no need to cross subsidize?
+
+** discrimination
+
++ general warning: hard information and machine learning can introduce a bias in credit availability
+  + but this effect will be present with soft information as well
+  + do we know whether one effect is stronger than another?
+
+* Modelling set-up
+
+** information
+
++ symmetry of information: why only focus on moral hazard? Is adverse selection not important for financial intermediation?
++ assumption 2: screening is necessary for financing: why is collateral not "good enough"?
+  + is it because borrower would not invest in his own project if he had the money?
+  + because he does not know his own type?
++ can you report how many borrowers default in the first period? Such defaults are necessary for the (supervised) learning algorithms in the second period
++ would first period Bellman equation be relevant?
+  + give borrower money in first period /because/ in the second period you can learn from his default 
+
+** learning
+
++ technological lenders:
+  + where do they get their data from?
+  + traditional lenders can sell data at a profit?
++ why are the technological lenders better at machine learning?
+  + the software is freely available?
+  + traditional lenders presumably understand the data better
+  + traditional lenders can create subsidiary specializing in hard information?
+
+** technology
+
++ find it hard to interpret cost of effort in equation (9)
++ $c(e_k) = \alpha \left( \frac{e_k^2}{2} + \eta D e_k  \right)$
++ consider someone for whom hard information does not work (high $\gamma_k$)
++ all information is gathered via soft information effort $e_k$
++ yet, costs $c$ increase with $\eta D e_k$ term while hard information does not add precision for this type
++ consider someone with "intermediate" $e_k$; because of hard information reduce $e_k$, yet costs $c$ go up?
++ How can costs increase because a new opportunity (hard information) is introduced?
++ does the $\eta D e_k$ term explain the increased costs for "soft information types"?
+

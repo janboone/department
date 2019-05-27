@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Smart Lending: discussion</title>
+<meta name="author" content="(Jan Boone)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Smart Lending: discussion</h1><h2 class="author">Jan Boone</h2>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgb36c327">Overview paper</a></li>
+<li><a href="#/slide-org5533f9d">General questions</a></li>
+<li><a href="#/slide-org0ecae2c">Modelling set-up</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+<section>
+<section id="slide-orgb36c327">
+<h2 id="orgb36c327">Overview paper</h2>
+<ul>
+<li>paper models a credit rationing situation</li>
+<li>initially lender can only get more information about borrower by investing effort in gathering soft information</li>
+<li>in a second period, lender can also use hard information: prediction from machine learning exercise</li>
+<li>message: introduction of hard information and machine learning can increase costs:
+<ul>
+<li>costs increase for traditional lenders</li>
+<li>more credit rationing for some types of borrowers</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org2fb1acc">
+<h3 id="org2fb1acc">step by step</h3>
+<div class="outline-text-3" id="text-org2fb1acc">
+</div>
+</section>
+<section id="slide-org15b806f">
+<h4 id="org15b806f">set up</h4>
+<ul>
+<li>good and bad borrowers in equal proportion</li>
+<li>borrower has a number of properties determing probability of default
+<ul>
+<li>property \(\gamma_k\) determines to which extent soft information is necessary to screen \(k\)</li>
+
+</ul></li>
+<li>precision of signal on \(k\): \(0.5+\gamma_k e_k\)</li>
+<li>it is hard to learn something about low \(\gamma_k\) type</li>
+<li>borrower has wealth that can be used as collateral</li>
+<li>lender receives signal about borrower's type</li>
+
+</ul>
+
+</section>
+<section id="slide-org12e7beb">
+<h4 id="org12e7beb">results</h4>
+<ul>
+<li>optimal contract (without hard information) is derived</li>
+<li>borrowers with high \(\gamma_k\) and assets \(A_k\) get financed</li>
+<li>then (in second period) screening based on hard data is introduced</li>
+<li>technological lenders are specialized in screening with learning algorithms</li>
+<li>market splits:
+<ul>
+<li>low \(\gamma_k\) types screened with hard information</li>
+<li>high \(\gamma_k\) types screened with soft information</li>
+
+</ul></li>
+<li>traditional lender is left with high \(\gamma_k\) types that are costly to screen</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org5533f9d">
+<h2 id="org5533f9d">General questions</h2>
+<div class="outline-text-2" id="text-org5533f9d">
+</div>
+</section>
+<section id="slide-orgce0de37">
+<h3 id="orgce0de37">welfare</h3>
+<ul>
+<li>paper shows convincingly that introduction of hard data and machine learning has distributional effects</li>
+<li>not clear that it is bad for welfare?
+<ul>
+<li>some borrowers are easy/cheap to screen: they get more credit at lower cost</li>
+<li>some are harder/more expensive to screen, they get less credit and at higher cost</li>
+
+</ul></li>
+<li>should solidarity play a role in welfare in this case?</li>
+<li>before the hard information, low \(\gamma_k\) were "poor types"</li>
+<li>or is it an efficient way to resolve asymmetric information problems:
+<ul>
+<li>for some this can be done cheaply via hard information</li>
+<li>for others more expensive soft information is needed</li>
+
+</ul></li>
+<li>no need to cross subsidize?</li>
+
+</ul>
+
+</section>
+<section id="slide-orgf404fd4">
+<h3 id="orgf404fd4">discrimination</h3>
+<ul>
+<li>general warning: hard information and machine learning can introduce a bias in credit availability
+<ul>
+<li>but this effect will be present with soft information as well</li>
+<li>do we know whether one effect is stronger than another?</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org0ecae2c">
+<h2 id="org0ecae2c">Modelling set-up</h2>
+<div class="outline-text-2" id="text-org0ecae2c">
+</div>
+</section>
+<section id="slide-orga2ce369">
+<h3 id="orga2ce369">information</h3>
+<ul>
+<li>symmetry of information: why only focus on moral hazard? Is adverse selection not important for financial intermediation?</li>
+<li>assumption 2: screening is necessary for financing: why is collateral not "good enough"?
+<ul>
+<li>is it because borrower would not invest in his own project if he had the money?</li>
+<li>because he does not know his own type?</li>
+
+</ul></li>
+<li>can you report how many borrowers default in the first period? Such defaults are necessary for the (supervised) learning algorithms in the second period</li>
+<li>would first period Bellman equation be relevant?
+<ul>
+<li>give borrower money in first period <i>because</i> in the second period you can learn from his default</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org4b1924e">
+<h3 id="org4b1924e">learning</h3>
+<ul>
+<li>technological lenders:
+<ul>
+<li>where do they get their data from?</li>
+<li>traditional lenders can sell data at a profit?</li>
+
+</ul></li>
+<li>why are the technological lenders better at machine learning?
+<ul>
+<li>the software is freely available?</li>
+<li>traditional lenders presumably understand the data better</li>
+<li>traditional lenders can create subsidiary specializing in hard information?</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgc518802">
+<h3 id="orgc518802">technology</h3>
+<ul>
+<li>find it hard to interpret cost of effort in equation (9)</li>
+<li>\(c(e_k) = \alpha \left( \frac{e_k^2}{2} + \eta D e_k  \right)\)</li>
+<li>consider someone for whom hard information does not work (high \(\gamma_k\))</li>
+<li>all information is gathered via soft information effort \(e_k\)</li>
+<li>yet, costs \(c\) increase with \(\eta D e_k\) term while hard information does not add precision for this type</li>
+<li>consider someone with "intermediate" \(e_k\); because of hard information reduce \(e_k\), yet costs \(c\) go up?</li>
+<li>How can costs increase because a new opportunity (hard information) is introduced?</li>
+<li>does the \(\eta D e_k\) term explain the increased costs for "soft information types"?</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+overview: true,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

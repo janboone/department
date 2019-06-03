@@ -1,0 +1,46 @@
+#+Title: Agenda meeting June 26, 2019
+#+Author: Reyer and Jan
+#+OPTIONS: num:nil email:nil
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_mathjax:t reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: toc:1 timestamp:nil
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: sky
+#+REVEAL_HLEVEL: 2
+#+REVEAL_POSTAMBLE: <p> created by jan. </p>
+
+* 13:00-13:30 TiSEM's MT visits us
+
+
+* Announcements
+
++ survey secretariat:
+  + research assistance: pool of TA's
+  + dept. trip; sports event?
++ rennovation K building
+
+* micro sequence committee report
+
++ committee report
++ reflections Eric
++ more behavioural economics to strengthen link with practice
++ Explicitly deal with Folk Economics and why it is wrong
++ students do not understand models
+  + more emphasis on how to create a model (motivation for assumptions etc.)
+  + and how to evaluate it (not only its implications, but is it any good/useful?)
+  + a separate course where students learn to model themselves
+  + role for programming
+
+
+* free for all
+
++ points?
+
+
+
+
+

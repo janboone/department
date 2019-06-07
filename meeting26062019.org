@@ -25,15 +25,20 @@
 
 * micro sequence committee report
 
+** Summary
+
 + committee report
 + reflections Eric
 + more behavioural economics to strengthen link with practice
-+ Explicitly deal with Folk Economics and why it is wrong
-+ students do not understand models
+
+** Discussion points
+
++ Explicitly deal with "Folk Economics" and why it is wrong
++ to address that students do not understand models
   + more emphasis on how to create a model (motivation for assumptions etc.)
   + and how to evaluate it (not only its implications, but is it any good/useful?)
-  + a separate course where students learn to model themselves
-  + role for programming
+  + students learn to model themselves (separate course?)
+  + write R/python program to solve a model
 
 
 * free for all

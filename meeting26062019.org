@@ -27,8 +27,8 @@
 
 ** Summary
 
-+ committee report
-+ reflections Eric
++ [[https://economics-department.netlify.com/index.html#meetings][committee report]]
++ [[https://economics-department.netlify.com/index.html#meetings][reflections Eric]]
 + more behavioural economics to strengthen link with practice
 
 ** Discussion points

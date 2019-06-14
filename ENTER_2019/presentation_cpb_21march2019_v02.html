@@ -35,13 +35,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-orgf806fd8">Introduction</a></li>
-<li><a href="#/slide-orgb20bf37">Model</a></li>
-<li><a href="#/slide-org9f2cebe">Estimation</a></li>
-<li><a href="#/slide-org5a5befb">Fit</a></li>
-<li><a href="#/slide-org1f7b0ce">Simulations</a></li>
-<li><a href="#/slide-orge6d583d">Zorgkeuzes in Kaart #2</a></li>
-<li><a href="#/slide-org4a0ca7e">Where do we stand</a></li>
+<li><a href="#/slide-org074177a">Introduction</a></li>
+<li><a href="#/slide-org003d98d">Model</a></li>
+<li><a href="#/slide-org4dd6b40">Estimation</a></li>
+<li><a href="#/slide-org6bbfa2e">Fit</a></li>
+<li><a href="#/slide-org38f002b">Simulations</a></li>
+<li><a href="#/slide-org44db2aa">Zorgkeuzes in Kaart #2</a></li>
+<li><a href="#/slide-org3cf1025">Where do we stand</a></li>
 </ul>
 </div>
 </div>
@@ -49,13 +49,13 @@
 
 
 <section>
-<section id="slide-orgf806fd8">
-<h2 id="orgf806fd8">Introduction</h2>
-<div class="outline-text-2" id="text-orgf806fd8">
+<section id="slide-org074177a">
+<h2 id="org074177a">Introduction</h2>
+<div class="outline-text-2" id="text-org074177a">
 </div>
 </section>
-<section id="slide-orgbc4cc27">
-<h3 id="orgbc4cc27">Introduction</h3>
+<section id="slide-org4293d98">
+<h3 id="org4293d98">Introduction</h3>
 <ul>
 <li>objective:
 <ul>
@@ -74,8 +74,8 @@
 </ul>
 
 </section>
-<section id="slide-org57c3d9f">
-<h3 id="org57c3d9f">Why Bayesian?</h3>
+<section id="slide-orgb1b9da9">
+<h3 id="orgb1b9da9">Why Bayesian?</h3>
 <ul>
 <li>distributions of healthcare spending are important for cost-sharing schemes
 <ul>
@@ -95,13 +95,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgb20bf37">
-<h2 id="orgb20bf37">Model</h2>
-<div class="outline-text-2" id="text-orgb20bf37">
+<section id="slide-org003d98d">
+<h2 id="org003d98d">Model</h2>
+<div class="outline-text-2" id="text-org003d98d">
 </div>
 </section>
-<section id="slide-org6fa13e0">
-<h3 id="org6fa13e0">Total healthcare expenditure in a year</h3>
+<section id="slide-orgaa83254">
+<h3 id="orgaa83254">Total healthcare expenditure in a year</h3>
 <ul>
 <li>\(H(z)\): distribution of healthcare expenditure in a year
 <ul>
@@ -122,8 +122,8 @@
 </ul>
 
 </section>
-<section id="slide-org440848f">
-<h3 id="org440848f">Idea of the model</h3>
+<section id="slide-org926ebda">
+<h3 id="org926ebda">Idea of the model</h3>
 <ul>
 <li>"at the start of the year", person \(i\) is offered one \(y\) treatment with value \(v_y\) and expected out-of-pocket cost \(OOP\)</li>
 <li>\(i\) accepts if \(v_y\) exceeds expected \(OOP\)</li>
@@ -142,13 +142,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org9f2cebe">
-<h2 id="org9f2cebe">Estimation</h2>
-<div class="outline-text-2" id="text-org9f2cebe">
+<section id="slide-org4dd6b40">
+<h2 id="org4dd6b40">Estimation</h2>
+<div class="outline-text-2" id="text-org4dd6b40">
 </div>
 </section>
-<section id="slide-org92966a6">
-<h3 id="org92966a6">Parametric specification</h3>
+<section id="slide-org53225cd">
+<h3 id="org53225cd">Parametric specification</h3>
 <ul>
 <li>"everybody knows" that healthcare expenditures are log-normally distributed:
 <ul>
@@ -166,10 +166,10 @@
 </ul>
 
 </section>
-<section id="slide-org31e371b">
-<h3 id="org31e371b">Example</h3>
+<section id="slide-org64e3202">
+<h3 id="org64e3202">Example</h3>
 
-<div id="org8643067" class="figure">
+<div id="org5bc7666" class="figure">
 <p><img src="./DistributionExpenditure.png" alt="DistributionExpenditure.png" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Illustrative distributions for <i>positive</i> healthcare costs (left in levels, right in logs)</p>
@@ -177,8 +177,8 @@
 
 
 </section>
-<section id="slide-orge13e69a">
-<h3 id="orge13e69a">Four components</h3>
+<section id="slide-org5977430">
+<h3 id="org5977430">Four components</h3>
 <ul>
 <li>define categories by age and gender (current model: \(92*2\)) 
 <ul>
@@ -204,8 +204,8 @@
 </ul>
 
 </section>
-<section id="slide-org36a6991">
-<h3 id="org36a6991">Probabilities</h3>
+<section id="slide-org5bdd004">
+<h3 id="org5bdd004">Probabilities</h3>
 <ul>
 <li>calculate probability for each mixture component</li>
 
@@ -251,8 +251,8 @@
 
 
 </section>
-<section id="slide-org8fefff5">
-<h3 id="org8fefff5">Technique</h3>
+<section id="slide-org8376e6b">
+<h3 id="org8376e6b">Technique</h3>
 <ul>
 <li>specify priors for parameters:
 <ul>
@@ -280,36 +280,21 @@
 </section>
 </section>
 <section>
-<section id="slide-org5a5befb">
-<h2 id="org5a5befb">Fit</h2>
-<div class="outline-text-2" id="text-org5a5befb">
+<section id="slide-org6bbfa2e">
+<h2 id="org6bbfa2e">Fit</h2>
+<div class="outline-text-2" id="text-org6bbfa2e">
 </div>
 </section>
-<section id="slide-orgd4d4967">
-<h3 id="orgd4d4967">How to measure fit</h3>
-<ul>
-<li>not obvious how to measure the fit of the model</li>
-<li>we can compare: 
-<ul>
-<li>average expenditure per age-gender category (fit vs observed)</li>
-<li>distributions via QQ plots</li>
-<li>predicted vs realized zero-expenditures per category (but what is "zero"?)</li>
-
-</ul></li>
-
-</ul>
-
-</section>
-<section id="slide-orgd532092">
-<h3 id="orgd532092">Fit on average costs by age, year and sex</h3>
+<section id="slide-org2d81820">
+<h3 id="org2d81820">Fit on average costs by age, year and sex</h3>
 <iframe width="840" height="400" src="./fit_across_ages_logs_all_ages_total_exp_deduc.html" frameborder="0" allowfullscreen></iframe>
 <p>
 Left panel: women, right panel: men
 </p>
 
 </section>
-<section id="slide-org2bd558a">
-<h3 id="org2bd558a">QQ plot for 30 year old woman in 2013</h3>
+<section id="slide-org6749c88">
+<h3 id="org6749c88">QQ plot for 30 year old woman in 2013</h3>
 
 <div class="figure">
 <p><img src="./qq_female_age30_2013.png" alt="qq_female_age30_2013.png" />
@@ -320,13 +305,13 @@ Left panel: women, right panel: men
 </section>
 </section>
 <section>
-<section id="slide-org1f7b0ce">
-<h2 id="org1f7b0ce">Simulations</h2>
-<div class="outline-text-2" id="text-org1f7b0ce">
+<section id="slide-org38f002b">
+<h2 id="org38f002b">Simulations</h2>
+<div class="outline-text-2" id="text-org38f002b">
 </div>
 </section>
-<section id="slide-org53866ee">
-<h3 id="org53866ee">Deductible (men)</h3>
+<section id="slide-org95513ea">
+<h3 id="org95513ea">Deductible (men)</h3>
 
 <div class="figure">
 <p><img src="./simulation_deductibles_log_male.png" alt="simulation_deductibles_log_male.png" />
@@ -338,8 +323,8 @@ X-axis: age, Y-axis: log expenditure
 </p>
 
 </section>
-<section id="slide-orgd0ce69b">
-<h3 id="orgd0ce69b">Deductible (women)</h3>
+<section id="slide-orgd92297a">
+<h3 id="orgd92297a">Deductible (women)</h3>
 
 <div class="figure">
 <p><img src="./simulation_deductibles_log_female.png" alt="simulation_deductibles_log_female.png" />
@@ -353,13 +338,13 @@ X-axis: age, Y-axis: log expenditure
 </section>
 </section>
 <section>
-<section id="slide-orge6d583d">
-<h2 id="orge6d583d">Zorgkeuzes in Kaart #2</h2>
-<div class="outline-text-2" id="text-orge6d583d">
+<section id="slide-org44db2aa">
+<h2 id="org44db2aa">Zorgkeuzes in Kaart #2</h2>
+<div class="outline-text-2" id="text-org44db2aa">
 </div>
 </section>
-<section id="slide-org6aed167">
-<h3 id="org6aed167">Reestimating ZiK#1</h3>
+<section id="slide-orgdbdfabe">
+<h3 id="orgdbdfabe">Reestimating ZiK#1</h3>
 <ul>
 <li>policy options:
 <ul>
@@ -380,8 +365,8 @@ X-axis: age, Y-axis: log expenditure
 </ul>
 
 </section>
-<section id="slide-orgae0840d">
-<h3 id="orgae0840d">Graph of reestimated policy options in ZiK#1</h3>
+<section id="slide-org25de67d">
+<h3 id="org25de67d">Graph of reestimated policy options in ZiK#1</h3>
 
 <div class="figure">
 <p><img src="./zik_outcomes_allages_total_exp_deduc2.png" alt="zik_outcomes_allages_total_exp_deduc2.png" />
@@ -392,13 +377,13 @@ X-axis: age, Y-axis: log expenditure
 </section>
 </section>
 <section>
-<section id="slide-org4a0ca7e">
-<h2 id="org4a0ca7e">Where do we stand</h2>
-<div class="outline-text-2" id="text-org4a0ca7e">
+<section id="slide-org3cf1025">
+<h2 id="org3cf1025">Where do we stand</h2>
+<div class="outline-text-2" id="text-org3cf1025">
 </div>
 </section>
-<section id="slide-orgc21141a">
-<h3 id="orgc21141a">Where do we stand?</h3>
+<section id="slide-orgf63db8f">
+<h3 id="orgf63db8f">Where do we stand?</h3>
 <ul>
 <li>estimation "works" and goes quite fast</li>
 <li>simulations work as well
@@ -412,8 +397,8 @@ X-axis: age, Y-axis: log expenditure
 </ul>
 
 </section>
-<section id="slide-org142af1f">
-<h3 id="org142af1f">What's next?</h3>
+<section id="slide-org8535585">
+<h3 id="org8535585">What's next?</h3>
 <ul>
 <li>what needs to be ready before or during ZiK#2?</li>
 <li>should we stick to the Vektis data for now, or switch to CBS?</li>

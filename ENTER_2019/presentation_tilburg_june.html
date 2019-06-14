@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Health Care Expenditures</title>
+<meta name="author" content="(Jan Boone, Minke Remmerswaal, and Bram Wouterse)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/sky.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Health Care Expenditures</h1><h2 class="author">Jan Boone, Minke Remmerswaal, and Bram Wouterse</h2>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-org31b29a9">Introduction</a></li>
+<li><a href="#/slide-org8bf5040">Literature</a></li>
+<li><a href="#/slide-org2587f27">Model</a></li>
+<li><a href="#/slide-orgf2c7941">Data</a></li>
+<li><a href="#/slide-org43fac52">Estimation</a></li>
+<li><a href="#/slide-org1d2d5f4">Fit</a></li>
+<li><a href="#/slide-org7b75547">Simulations</a></li>
+<li><a href="#/slide-org8ec9072">Conclusion</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-org31b29a9">
+<h2 id="org31b29a9">Introduction</h2>
+<div class="outline-text-2" id="text-org31b29a9">
+</div>
+</section>
+<section id="slide-orga43a964">
+<h3 id="orga43a964">Motivation</h3>
+<ul>
+<li>Dutch ministry of health worries about the level and growth of healthcare expenditures in basic insurance</li>
+<li>one instrument to contain expenditures is demand side cost sharing</li>
+<li>currently we have a mandatory deductible in the Netherlands (385 euroes)</li>
+<li>trade off demand side cost-sharing:
+<ul>
+<li>lower expenditures</li>
+<li>higher out-of-pocket for people with low health status</li>
+
+</ul></li>
+<li>can we find a <i>form</i> of demand side cost sharing which alleviates this trade off?</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd082230">
+<h3 id="orgd082230">forms of cost sharing</h3>
+<ul>
+<li>popular with Dutch policy makers:
+<ul>
+<li>deductible</li>
+<li>co-payment (say 25%)</li>
+<li>"donut"</li>
+
+</ul></li>
+<li>CPB is supposed to "predict" healthcare expenditures under different schemes</li>
+
+</ul>
+
+</section>
+<section id="slide-org33cb4f9">
+<h3 id="org33cb4f9">Research question</h3>
+<ul>
+<li>what are the effects of different cost-sharing <i>schemes</i> on healthcare spending?</li>
+<li>difficulty: after the reform, the Netherlands has only featured deductible (like) cost sharing</li>
+<li>so we can estimate an equation like \(y_{it} = ... + \alpha D_t + \varepsilon_{it}\)</li>
+<li>but this equation cannot determine the effect of a 25% co-payment</li>
+
+</ul>
+
+</section>
+<section id="slide-orgab964ae">
+<h3 id="orgab964ae">Method</h3>
+<ul>
+<li>use Bayesian estimation techniques to determine distributions of healtcare costs (per age-gender category)</li>
+<li>determine (expected) out-of-pocket payment (OOP) for each category</li>
+<li>determine the effect of the OOP on healthcare expenditures</li>
+<li>then for each <i>scheme</i> we determine the OOP and then expenditures</li>
+
+</ul>
+
+</section>
+<section id="slide-org495155b">
+<h3 id="org495155b">Why Bayesian?</h3>
+<ul>
+<li>distributions of healthcare spending are important for cost-sharing schemes</li>
+<li>"standard" econometrics is based on sampling variation
+<ul>
+<li>but we have data on the whole population</li>
+
+</ul></li>
+<li>we want policy recommendations like:
+<ul>
+<li>there is 60% probability that a deductible of 500 euro reduces expenditures by at least 10% (compared to 350 euro)</li>
+
+</ul></li>
+<li>Bayesian approach can easily work with distributions</li>
+<li>it is fun!</li>
+
+</ul>
+
+</section>
+<section id="slide-org60ed3ef">
+<h3 id="org60ed3ef">Distributions</h3>
+
+<div class="figure">
+<p><img src="./ExpenditureOverAge.png" alt="ExpenditureOverAge.png" />
+</p>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8bf5040">
+<h2 id="org8bf5040">Literature</h2>
+<div class="outline-text-2" id="text-org8bf5040">
+</div>
+</section>
+<section id="slide-org0c63a02">
+<h3 id="org0c63a02">Modeling healthcare expenditures</h3>
+<ul>
+<li>Einav et al. (2013)</li>
+<li>Hayen et al. (2019)</li>
+<li>Remmerswaal et al. (2019)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org2587f27">
+<h2 id="org2587f27">Model</h2>
+<div class="outline-text-2" id="text-org2587f27">
+</div>
+</section>
+<section id="slide-org0c48fc2">
+<h3 id="org0c48fc2">Total healthcare expenditure in a year</h3>
+<ul>
+<li>\(H(z)\): distribution of healthcare expenditure in a year
+<ul>
+<li>where \(z=x+y\)</li>
+<li>\(x\): exogenous, not affected by cost-sharing, high-value care
+<ul>
+<li>if you break your leg, you get "plastered up"</li>
+
+</ul></li>
+<li>\(y\): endogenous, affected by cost-sharing
+<ul>
+<li>if you have a running injury, perhaps you skip the physiotherapy</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgf138ce4">
+<h3 id="orgf138ce4">Idea of the model</h3>
+<ul>
+<li>"at the start of the year", person \(i\) is offered one \(y\) treatment with value \(v_y\) and expected out-of-pocket \(OOP\)</li>
+<li>\(i\) accepts if \(v_y\) exceeds expected \(OOP\)</li>
+
+<li>\(OOP\) depends on:
+<ul>
+<li>\(f(x)\) ex-ante distribution of exogenous healthcare expenditure</li>
+<li>\(g(y)\) cost distribution of offered treatment \(y\)</li>
+<li>cost-sharing scheme</li>
+
+</ul></li>
+<li>for a deductible \(D\), \(OOP\) equals \(\int_0^{+\infty} \int_0^{+\infty} (\min\{x+y,D\}-\min\{x,D\})f(x)g(y)dxdy\)</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgf2c7941">
+<h2 id="orgf2c7941">Data</h2>
+<div class="outline-text-2" id="text-orgf2c7941">
+</div>
+</section>
+<section id="slide-org84c45f2">
+<h3 id="org84c45f2">Dutch healthcare expenditure</h3>
+<ul>
+<li>expenditures per individual for six years: 2008-2013</li>
+<li>currently we use indiv.'s age and gender</li>
+<li>later we will add income, indicators for health status</li>
+<li>expenditures are for basic insurance under the deductible (e.g. not GP)</li>
+<li>basic insurance is mandatory in the Netherlands</li>
+<li>coverage is set by the government</li>
+<li>we ignore people with voluntary deductible (for the moment)</li>
+<li>we focus on ages 12-50</li>
+<li>deductible "kicks in" at 18</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org43fac52">
+<h2 id="org43fac52">Estimation</h2>
+<div class="outline-text-2" id="text-org43fac52">
+</div>
+</section>
+<section id="slide-org5e867a3">
+<h3 id="org5e867a3">Parametric specification</h3>
+<ul>
+<li>"everybody knows" that healthcare expenditures are log-normally distributed:
+<ul>
+<li>log transformation of positive healthcare costs are normally distributed</li>
+<li>we model the propability of zero healthcare costs</li>
+<li>benefits of log-normal distribution:
+<ul>
+<li>analytical expression for \(OOP\) with deductible (estimation)</li>
+<li>analytical expression for distribution of \(x+y\)</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgb5aec4c">
+<h3 id="orgb5aec4c">Two distributions</h3>
+
+<div id="org102d6f1" class="figure">
+<p><img src="./DistributionExpenditure.png" alt="DistributionExpenditure.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>Illustrative distributions for <i>positive</i> healthcare costs (left in levels, right in logs)</p>
+</div>
+
+
+</section>
+<section id="slide-org604093c">
+<h3 id="org604093c">Four components</h3>
+<ul>
+<li>define categories age by gender (current model: \(38*2\)) 
+<ul>
+<li>each category has a <i>distribution</i> of (log) healthcare costs \(z\)</li>
+
+</ul></li>
+<li>distribution is mixture of 4 components:
+<ul>
+<li>\(x \sim N(\mu_x,\Sigma_x)\), given gender a Gaussian Process with age; year fixed effects</li>
+<li>same for \(y\)</li>
+<li>\(\psi\) is probability treatment is offered (\(x > 0\)), GP with age</li>
+<li>\(\phi\) is same for \(y > 0\)</li>
+<li>people in each category know their \(\psi,\phi\) and their distributions of \(x,y\)</li>
+
+</ul></li>
+<li>calculate \(OOP\) per age, gender, year with \(x,y,\psi,D\)</li>
+<li>compute probability \(F\) that \(y\) is rejected (\(v_y < OOP\))
+<ul>
+<li>we experiment with different functional forms for \(F(OOP)\)</li>
+<li>here we report outcomes with \(F(OOP) = 1-\zeta_y e^{\nu_y*OOP}\)</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgef95de7">
+<h3 id="orgef95de7">Probabilities</h3>
+<ul>
+<li>calculate probability for each mixture component</li>
+
+</ul>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-left">component</td>
+<td class="org-left">probability</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x=y=0\)</td>
+<td class="org-left">\((1-\psi)(1-\phi + \phi F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x>0=y\)</td>
+<td class="org-left">\(\psi*(1-\phi + \phi F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(y>0=x\)</td>
+<td class="org-left">\((1-\psi)\phi(1-F)\)</td>
+</tr>
+
+<tr>
+<td class="org-left">\(x,y>0\)</td>
+<td class="org-left">\(\psi \phi (1-F)\)</td>
+</tr>
+</tbody>
+</table>
+
+</section>
+<section id="slide-org1ba4aaa">
+<h3 id="org1ba4aaa">Technique</h3>
+<ul>
+<li>specify priors for parameters:
+<ul>
+<li>5,000,000 observations per year</li>
+<li>on average 65,000 observations per category per year</li>
+
+</ul></li>
+<li>estimation with variational inference (ADVI, Auto-diff Variational Inference) and minibatches
+<ul>
+<li>standard Markov Chain Monte Carlo methods (Metropolis, NUTS etc.) do not scale well with data size</li>
+
+</ul></li>
+<li>python and pymc3 fun to work with
+<ul>
+<li>parameter \(\phi\) has age fixed effects: <code>ϕ[age]</code></li>
+
+</ul></li>
+<li>for each age-gender category, we draw 10,000 samples of the model parameters</li>
+<li>for each sample we draw one \(x,y\) and \(z\)</li>
+<li>that is, we draw outcomes (not averages or expectations)</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org1d2d5f4">
+<h2 id="org1d2d5f4">Fit</h2>
+<div class="outline-text-2" id="text-org1d2d5f4">
+</div>
+</section>
+<section id="slide-org3629f91">
+<h3 id="org3629f91">How to measure fit</h3>
+<ul>
+<li>not obvious how to measure the fit of the model</li>
+<li>we can compare: 
+<ul>
+<li>average expenditure per age-gender category (fit vs observed)</li>
+<li>expenditure distributions per age-gender categories</li>
+<li>predicted vs realized zero-expenditures per category</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgf4e765b">
+<h3 id="orgf4e765b">Fit on average costs by age, year and sex</h3>
+<iframe width="840" height="400" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
+<p>
+Left panel: women, right panel: men
+</p>
+
+</section>
+<section id="slide-orgba1033a">
+<h3 id="orgba1033a">Expenditure distributions</h3>
+
+<div class="figure">
+<p><img src="./PosExp30F2008.png" alt="PosExp30F2008.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org19e2e8b">
+<h3 id="org19e2e8b">Probability positive expenditures</h3>
+
+<div class="figure">
+<p><img src="./probpos.png" alt="probpos.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7b75547">
+<h2 id="org7b75547">Simulations</h2>
+<div class="outline-text-2" id="text-org7b75547">
+</div>
+</section>
+<section id="slide-org0fd5a14">
+<h3 id="org0fd5a14">Samples</h3>
+<ul>
+<li>we use \(F(OOP) = 1-\zeta_y e^{\nu_y OOP}\)</li>
+
+</ul>
+
+
+<div class="figure">
+<p><img src="./HistogramNuy.png" alt="HistogramNuy.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org6917764">
+<h3 id="org6917764">Probability of rejecting</h3>
+
+<div class="figure">
+<p><img src="./ProbReject.png" alt="ProbReject.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org0a9f3fe">
+<h3 id="org0a9f3fe">Deductible (women)</h3>
+
+<div class="figure">
+<p><img src="./deductibles.png" alt="deductibles.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-org4b1e5a3">
+<h3 id="org4b1e5a3">Comparing different schemes</h3>
+
+<div class="figure">
+<p><img src="./example.png" alt="example.png" />
+</p>
+</div>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org8ec9072">
+<h2 id="org8ec9072">Conclusion</h2>
+<div class="outline-text-2" id="text-org8ec9072">
+</div>
+</section>
+<section id="slide-org2968195">
+<h3 id="org2968195">Summary</h3>
+<ul>
+<li>in order to determine healthcare expenditures under different cost sharing schemes:
+<ul>
+<li>we estimated the distributions of healthcare expenditures</li>
+<li>split expenditures up in exogenous and endogenous expenditures</li>
+<li>determined expected OOP for endogenous expenditures under different schemes</li>
+<li>estimate the value distribution of these endog. expenditures</li>
+<li>the higher OOP, the more likely an (endogenous) treatment is rejected</li>
+<li>allows us to simulate effects of different <i>schemes</i></li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/head.min.js"></script>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: true,
+keyboard: true,
+overview: true,
+width: 1200,
+height: 800,
+margin: 0.10,
+minScale: 0.50,
+maxScale: 2.50,
+
+theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+transition: Reveal.getQueryHash().transition || 'cube', // default/cube/page/concave/zoom/linear/fade/none
+transitionSpeed: 'default',
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

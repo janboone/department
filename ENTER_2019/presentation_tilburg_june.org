@@ -71,6 +71,14 @@
 
 * Model
 
+** The model
+
++ one treatment per period; combination of cost and value
++ two different deductibles
+
+#+attr_latex: :width 500px
+[[./deduct.png]]
+
 ** Total healthcare expenditure in a year
 + $H(z)$: distribution of healthcare expenditure in a year
   + where $z=x+y$
@@ -133,7 +141,7 @@
 + calculate $OOP$ per age, gender, year with $x,y,\psi,D$
 + compute probability $F$ that $y$ is rejected ($v_y < OOP$)
   + we experiment with different functional forms for $F(OOP)$
-  + here we report outcomes with $F(OOP) = 1-\zeta_y e^{\nu_y*OOP}$
+  + here we report outcomes with $F(OOP) = 1-\zeta_y e^{-\nu_y*OOP}$
 
 ** Probabilities
 
@@ -157,6 +165,21 @@
 + for each age-gender category, we draw 10,000 samples of the model parameters
 + for each sample we draw one $x,y$ and $z$
 + that is, we draw outcomes (not averages or expectations)
+
+** Outcome
+
++ the model yields a posterior distribution
++ parameters $\theta$
++ data $y$
++ posterior:
+
+\begin{equation}
+Pr(\theta|y) = \frac{Pr(y|\theta)Pr(\theta)}{Pr(y)} = \frac{Pr(y|\theta)Pr(\theta)}{\int Pr(y|\theta)Pr(\theta)d\theta }
+\end{equation}
+
++ we simulate this posterior ("samples")
++ for each sample, we generate an outcome (i.e. expenditure level)
+
 
 * Fit
 
@@ -188,7 +211,7 @@ Left panel: women, right panel: men
 
 ** Samples
 
-+ we use $F(OOP) = 1-\zeta_y e^{\nu_y OOP}$
++ we use $F(OOP) = 1-\zeta_y e^{-\nu_y OOP}$
 
 #+attr_latex: :width 500px
 [[./HistogramNuy.png]]

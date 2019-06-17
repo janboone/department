@@ -34,14 +34,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#/slide-org31b29a9">Introduction</a></li>
-<li><a href="#/slide-org8bf5040">Literature</a></li>
-<li><a href="#/slide-org2587f27">Model</a></li>
-<li><a href="#/slide-orgf2c7941">Data</a></li>
-<li><a href="#/slide-org43fac52">Estimation</a></li>
-<li><a href="#/slide-org1d2d5f4">Fit</a></li>
-<li><a href="#/slide-org7b75547">Simulations</a></li>
-<li><a href="#/slide-org8ec9072">Conclusion</a></li>
+<li><a href="#/slide-orgb3079db">Introduction</a></li>
+<li><a href="#/slide-org4d0bbc2">Literature</a></li>
+<li><a href="#/slide-org563d43c">Model</a></li>
+<li><a href="#/slide-org05f41b5">Data</a></li>
+<li><a href="#/slide-org8648244">Estimation</a></li>
+<li><a href="#/slide-org8e48581">Fit</a></li>
+<li><a href="#/slide-orge5111fd">Simulations</a></li>
+<li><a href="#/slide-orge4f56e6">Conclusion</a></li>
 </ul>
 </div>
 </div>
@@ -49,13 +49,13 @@
 
 
 <section>
-<section id="slide-org31b29a9">
-<h2 id="org31b29a9">Introduction</h2>
-<div class="outline-text-2" id="text-org31b29a9">
+<section id="slide-orgb3079db">
+<h2 id="orgb3079db">Introduction</h2>
+<div class="outline-text-2" id="text-orgb3079db">
 </div>
 </section>
-<section id="slide-orga43a964">
-<h3 id="orga43a964">Motivation</h3>
+<section id="slide-org83b9e40">
+<h3 id="org83b9e40">Motivation</h3>
 <ul>
 <li>Dutch ministry of health worries about the level and growth of healthcare expenditures in basic insurance</li>
 <li>one instrument to contain expenditures is demand side cost sharing</li>
@@ -71,8 +71,8 @@
 </ul>
 
 </section>
-<section id="slide-orgd082230">
-<h3 id="orgd082230">forms of cost sharing</h3>
+<section id="slide-orgf8b9f0a">
+<h3 id="orgf8b9f0a">forms of cost sharing</h3>
 <ul>
 <li>popular with Dutch policy makers:
 <ul>
@@ -86,8 +86,8 @@
 </ul>
 
 </section>
-<section id="slide-org33cb4f9">
-<h3 id="org33cb4f9">Research question</h3>
+<section id="slide-orgb1f988c">
+<h3 id="orgb1f988c">Research question</h3>
 <ul>
 <li>what are the effects of different cost-sharing <i>schemes</i> on healthcare spending?</li>
 <li>difficulty: after the reform, the Netherlands has only featured deductible (like) cost sharing</li>
@@ -97,8 +97,8 @@
 </ul>
 
 </section>
-<section id="slide-orgab964ae">
-<h3 id="orgab964ae">Method</h3>
+<section id="slide-org46e7f5b">
+<h3 id="org46e7f5b">Method</h3>
 <ul>
 <li>use Bayesian estimation techniques to determine distributions of healtcare costs (per age-gender category)</li>
 <li>determine (expected) out-of-pocket payment (OOP) for each category</li>
@@ -108,8 +108,8 @@
 </ul>
 
 </section>
-<section id="slide-org495155b">
-<h3 id="org495155b">Why Bayesian?</h3>
+<section id="slide-orgcbd58a7">
+<h3 id="orgcbd58a7">Why Bayesian?</h3>
 <ul>
 <li>distributions of healthcare spending are important for cost-sharing schemes</li>
 <li>"standard" econometrics is based on sampling variation
@@ -128,8 +128,8 @@
 </ul>
 
 </section>
-<section id="slide-org60ed3ef">
-<h3 id="org60ed3ef">Distributions</h3>
+<section id="slide-orgd8dbbcc">
+<h3 id="orgd8dbbcc">Distributions</h3>
 
 <div class="figure">
 <p><img src="./ExpenditureOverAge.png" alt="ExpenditureOverAge.png" />
@@ -139,13 +139,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org8bf5040">
-<h2 id="org8bf5040">Literature</h2>
-<div class="outline-text-2" id="text-org8bf5040">
+<section id="slide-org4d0bbc2">
+<h2 id="org4d0bbc2">Literature</h2>
+<div class="outline-text-2" id="text-org4d0bbc2">
 </div>
 </section>
-<section id="slide-org0c63a02">
-<h3 id="org0c63a02">Modeling healthcare expenditures</h3>
+<section id="slide-org9aef3df">
+<h3 id="org9aef3df">Modeling healthcare expenditures</h3>
 <ul>
 <li>Einav et al. (2013)</li>
 <li>Hayen et al. (2019)</li>
@@ -156,13 +156,28 @@
 </section>
 </section>
 <section>
-<section id="slide-org2587f27">
-<h2 id="org2587f27">Model</h2>
-<div class="outline-text-2" id="text-org2587f27">
+<section id="slide-org563d43c">
+<h2 id="org563d43c">Model</h2>
+<div class="outline-text-2" id="text-org563d43c">
 </div>
 </section>
-<section id="slide-org0c48fc2">
-<h3 id="org0c48fc2">Total healthcare expenditure in a year</h3>
+<section id="slide-orgcfde36e">
+<h3 id="orgcfde36e">The model</h3>
+<ul>
+<li>one treatment per period; combination of cost and value</li>
+<li>two different deductibles</li>
+
+</ul>
+
+
+<div class="figure">
+<p><img src="./deduct.png" alt="deduct.png" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgb7762f4">
+<h3 id="orgb7762f4">Total healthcare expenditure in a year</h3>
 <ul>
 <li>\(H(z)\): distribution of healthcare expenditure in a year
 <ul>
@@ -183,8 +198,8 @@
 </ul>
 
 </section>
-<section id="slide-orgf138ce4">
-<h3 id="orgf138ce4">Idea of the model</h3>
+<section id="slide-org1584e01">
+<h3 id="org1584e01">Idea of the model</h3>
 <ul>
 <li>"at the start of the year", person \(i\) is offered one \(y\) treatment with value \(v_y\) and expected out-of-pocket \(OOP\)</li>
 <li>\(i\) accepts if \(v_y\) exceeds expected \(OOP\)</li>
@@ -204,13 +219,13 @@
 </section>
 </section>
 <section>
-<section id="slide-orgf2c7941">
-<h2 id="orgf2c7941">Data</h2>
-<div class="outline-text-2" id="text-orgf2c7941">
+<section id="slide-org05f41b5">
+<h2 id="org05f41b5">Data</h2>
+<div class="outline-text-2" id="text-org05f41b5">
 </div>
 </section>
-<section id="slide-org84c45f2">
-<h3 id="org84c45f2">Dutch healthcare expenditure</h3>
+<section id="slide-org84d6049">
+<h3 id="org84d6049">Dutch healthcare expenditure</h3>
 <ul>
 <li>expenditures per individual for six years: 2008-2013</li>
 <li>currently we use indiv.'s age and gender</li>
@@ -227,13 +242,13 @@
 </section>
 </section>
 <section>
-<section id="slide-org43fac52">
-<h2 id="org43fac52">Estimation</h2>
-<div class="outline-text-2" id="text-org43fac52">
+<section id="slide-org8648244">
+<h2 id="org8648244">Estimation</h2>
+<div class="outline-text-2" id="text-org8648244">
 </div>
 </section>
-<section id="slide-org5e867a3">
-<h3 id="org5e867a3">Parametric specification</h3>
+<section id="slide-orgb7165a8">
+<h3 id="orgb7165a8">Parametric specification</h3>
 <ul>
 <li>"everybody knows" that healthcare expenditures are log-normally distributed:
 <ul>
@@ -251,19 +266,19 @@
 </ul>
 
 </section>
-<section id="slide-orgb5aec4c">
-<h3 id="orgb5aec4c">Two distributions</h3>
+<section id="slide-org1543d1b">
+<h3 id="org1543d1b">Two distributions</h3>
 
-<div id="org102d6f1" class="figure">
+<div id="orga6b1a9a" class="figure">
 <p><img src="./DistributionExpenditure.png" alt="DistributionExpenditure.png" />
 </p>
-<p><span class="figure-number">Figure 2: </span>Illustrative distributions for <i>positive</i> healthcare costs (left in levels, right in logs)</p>
+<p><span class="figure-number">Figure 3: </span>Illustrative distributions for <i>positive</i> healthcare costs (left in levels, right in logs)</p>
 </div>
 
 
 </section>
-<section id="slide-org604093c">
-<h3 id="org604093c">Four components</h3>
+<section id="slide-orge86254e">
+<h3 id="orge86254e">Four components</h3>
 <ul>
 <li>define categories age by gender (current model: \(38*2\)) 
 <ul>
@@ -283,15 +298,15 @@
 <li>compute probability \(F\) that \(y\) is rejected (\(v_y < OOP\))
 <ul>
 <li>we experiment with different functional forms for \(F(OOP)\)</li>
-<li>here we report outcomes with \(F(OOP) = 1-\zeta_y e^{\nu_y*OOP}\)</li>
+<li>here we report outcomes with \(F(OOP) = 1-\zeta_y e^{-\nu_y*OOP}\)</li>
 
 </ul></li>
 
 </ul>
 
 </section>
-<section id="slide-orgef95de7">
-<h3 id="orgef95de7">Probabilities</h3>
+<section id="slide-org44808e4">
+<h3 id="org44808e4">Probabilities</h3>
 <ul>
 <li>calculate probability for each mixture component</li>
 
@@ -334,8 +349,8 @@
 </table>
 
 </section>
-<section id="slide-org1ba4aaa">
-<h3 id="org1ba4aaa">Technique</h3>
+<section id="slide-orgb991c92">
+<h3 id="orgb991c92">Technique</h3>
 <ul>
 <li>specify priors for parameters:
 <ul>
@@ -360,15 +375,40 @@
 </ul>
 
 </section>
+<section id="slide-org42f4414">
+<h3 id="org42f4414">Outcome</h3>
+<ul>
+<li>the model yields a posterior distribution</li>
+<li>parameters \(\theta\)</li>
+<li>data \(y\)</li>
+<li>posterior:</li>
+
+</ul>
+
+<div>
+\begin{equation}
+Pr(\theta|y) = \frac{Pr(y|\theta)Pr(\theta)}{Pr(y)} = \frac{Pr(y|\theta)Pr(\theta)}{\int Pr(y|\theta)Pr(\theta)d\theta }
+\end{equation}
+
+</div>
+
+<ul>
+<li>we simulate this posterior ("samples")</li>
+<li>for each sample, we generate an outcome (i.e. expenditure level)</li>
+
+</ul>
+
+
+</section>
 </section>
 <section>
-<section id="slide-org1d2d5f4">
-<h2 id="org1d2d5f4">Fit</h2>
-<div class="outline-text-2" id="text-org1d2d5f4">
+<section id="slide-org8e48581">
+<h2 id="org8e48581">Fit</h2>
+<div class="outline-text-2" id="text-org8e48581">
 </div>
 </section>
-<section id="slide-org3629f91">
-<h3 id="org3629f91">How to measure fit</h3>
+<section id="slide-org56b5456">
+<h3 id="org56b5456">How to measure fit</h3>
 <ul>
 <li>not obvious how to measure the fit of the model</li>
 <li>we can compare: 
@@ -382,16 +422,16 @@
 </ul>
 
 </section>
-<section id="slide-orgf4e765b">
-<h3 id="orgf4e765b">Fit on average costs by age, year and sex</h3>
+<section id="slide-org82bb33f">
+<h3 id="org82bb33f">Fit on average costs by age, year and sex</h3>
 <iframe width="840" height="400" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
 <p>
 Left panel: women, right panel: men
 </p>
 
 </section>
-<section id="slide-orgba1033a">
-<h3 id="orgba1033a">Expenditure distributions</h3>
+<section id="slide-org774d90e">
+<h3 id="org774d90e">Expenditure distributions</h3>
 
 <div class="figure">
 <p><img src="./PosExp30F2008.png" alt="PosExp30F2008.png" />
@@ -399,8 +439,8 @@ Left panel: women, right panel: men
 </div>
 
 </section>
-<section id="slide-org19e2e8b">
-<h3 id="org19e2e8b">Probability positive expenditures</h3>
+<section id="slide-orga6057ee">
+<h3 id="orga6057ee">Probability positive expenditures</h3>
 
 <div class="figure">
 <p><img src="./probpos.png" alt="probpos.png" />
@@ -411,15 +451,15 @@ Left panel: women, right panel: men
 </section>
 </section>
 <section>
-<section id="slide-org7b75547">
-<h2 id="org7b75547">Simulations</h2>
-<div class="outline-text-2" id="text-org7b75547">
+<section id="slide-orge5111fd">
+<h2 id="orge5111fd">Simulations</h2>
+<div class="outline-text-2" id="text-orge5111fd">
 </div>
 </section>
-<section id="slide-org0fd5a14">
-<h3 id="org0fd5a14">Samples</h3>
+<section id="slide-org0fdb725">
+<h3 id="org0fdb725">Samples</h3>
 <ul>
-<li>we use \(F(OOP) = 1-\zeta_y e^{\nu_y OOP}\)</li>
+<li>we use \(F(OOP) = 1-\zeta_y e^{-\nu_y OOP}\)</li>
 
 </ul>
 
@@ -430,8 +470,8 @@ Left panel: women, right panel: men
 </div>
 
 </section>
-<section id="slide-org6917764">
-<h3 id="org6917764">Probability of rejecting</h3>
+<section id="slide-org4faf902">
+<h3 id="org4faf902">Probability of rejecting</h3>
 
 <div class="figure">
 <p><img src="./ProbReject.png" alt="ProbReject.png" />
@@ -439,8 +479,8 @@ Left panel: women, right panel: men
 </div>
 
 </section>
-<section id="slide-org0a9f3fe">
-<h3 id="org0a9f3fe">Deductible (women)</h3>
+<section id="slide-org8629ee3">
+<h3 id="org8629ee3">Deductible (women)</h3>
 
 <div class="figure">
 <p><img src="./deductibles.png" alt="deductibles.png" />
@@ -448,8 +488,8 @@ Left panel: women, right panel: men
 </div>
 
 </section>
-<section id="slide-org4b1e5a3">
-<h3 id="org4b1e5a3">Comparing different schemes</h3>
+<section id="slide-org878ab88">
+<h3 id="org878ab88">Comparing different schemes</h3>
 
 <div class="figure">
 <p><img src="./example.png" alt="example.png" />
@@ -460,13 +500,13 @@ Left panel: women, right panel: men
 </section>
 </section>
 <section>
-<section id="slide-org8ec9072">
-<h2 id="org8ec9072">Conclusion</h2>
-<div class="outline-text-2" id="text-org8ec9072">
+<section id="slide-orge4f56e6">
+<h2 id="orge4f56e6">Conclusion</h2>
+<div class="outline-text-2" id="text-orge4f56e6">
 </div>
 </section>
-<section id="slide-org2968195">
-<h3 id="org2968195">Summary</h3>
+<section id="slide-orgd16f900">
+<h3 id="orgd16f900">Summary</h3>
 <ul>
 <li>in order to determine healthcare expenditures under different cost sharing schemes:
 <ul>

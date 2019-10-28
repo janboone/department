@@ -1,0 +1,29 @@
+#+Title: Agenda Meeting
+#+Author: Sjak and Jan
+#+Options: num:nil toc:nil
+
+
+* Department meeting Oct. 29, 2019
+
+** New PPP program by Anne-Francoise
+
+** Announcements
+
++ Koopmans rennovation
+  + some issues are still open
+  + finished by December
++ secretaries' office is closed: Monday December 23rd - Friday January 3rd
+
+** BSc thesis projects
+
++ reasons why we want projects
++ how should we organize this?
+
+** RM2 reform by (other) Jan
+
+** Micro sequence in ECO program: what do economists do in practice?
+
+** Other points
+
++ any other points?
++ next dept. meeting: Dec 11

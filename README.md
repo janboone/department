@@ -1,4 +1,3 @@
 # department
 
-[meeting October 29, 2019](http://janboone.github.io/department/meeting_29102019.html)
-
+[Brussel 2019](http://janboone.github.io/department/Brussel2019/presentation.html)

@@ -8,8 +8,6 @@
 #+REVEAL_HLEVEL: 1
 #+LANGUAGE:  en
 
-
-
 * Introduction
 
 ** Motivation
@@ -70,7 +68,7 @@
 
 ** Distributions 
 #+attr_latex: :width 500px
-#+caption: Expected (conditional) expenditures and prob. of expenditures
+#+caption: Expenditure distributions
 [[./ExpenditureOverAge.png]]
 
 * Literature
@@ -86,7 +84,6 @@
 ** Simple model
 
 + one treatment per period: cost and value
-+ two different deductibles
 #+attr_latex: :width 250px
 [[./deduct.png]]
 
@@ -141,7 +138,7 @@
 ** Four components
 + define categories age by gender
   + each category /distribution/ (log) healthcare costs $z$
-+ distribution is mixture of 4 components:
++ distribution is mixture:
   + $x \sim N(\mu_x,\Sigma_x)$, given gender a Gaussian Process with age; year fixed effects
   + same for $y$
   + $\psi$ is probability treatment is offered ($x > 0$), GP with age
@@ -204,15 +201,18 @@ Pr(\theta|y) = \frac{Pr(y|\theta)Pr(\theta)}{Pr(y)} = \frac{Pr(y|\theta)Pr(\thet
   + expenditure distributions per age-gender categories
   + predicted vs realized (validation) zero-expenditures per category
 
-** Fit on average costs by age, year and sex
+** Fit on average (log) costs by age and year: Men
 
-#+REVEAL_HTML: <iframe width="840" height="400" src="./fit_across_ages_logs.html" frameborder="0" allowfullscreen></iframe>
-Left panel: women, right panel: men
+#+REVEAL_HTML: <iframe width="840" height="400" src="./Predicted_Observed_Mean_Expenditures_Agehealthy_Male.html" frameborder="0" allowfullscreen></iframe>
+
+** Fit on average (log) costs by age and year: Women
+
+#+REVEAL_HTML: <iframe width="840" height="400" src="./Predicted_Observed_Mean_Expenditures_Agehealthy_Female.html" frameborder="0" allowfullscreen></iframe>
 
 ** Expenditure distributions
 
 #+name: fig:predictedvsValidationDistributions
-#+caption: Average predicted vs average validation male log healthcare expenditures
+#+caption: Predicted vs validation
 #+attr_latex: :width 500px 
 [[./PredictedvsValidationDistributions_healthy_Male.png]]
 
@@ -235,21 +235,33 @@ Left panel: women, right panel: men
 #+caption: Posterior distribution of $\nu$ for women
 #+attr_latex: :width 250px 
 [[./Posterior_nu_y_healthy_Female.png]]
++ we have these distributions for each parameter
 
-** Probability of rejecting
-???continue here???
-#+attr_latex: :width 500px
-[[./ProbReject.png]]
 
-** Deductible (women)
 
-#+attr_latex: :width 500px
-[[./deductibles.png]]
 
-** Comparing different schemes
 
-#+attr_latex: :width 500px
-[[./example.png]]
+** Deductible: average effect
+
+#+name: fig:exp_deduc
+#+caption: Average healthcare expenditures per capita for different deductibles.
+#+attr_latex: :width 250px 
+[[./Population_weighted_average_exp_simulation_deductibles_healthy_Male.png]]
+
+
+** Deductible: uncertainty average effect
+
+#+name: fig:exp_deduc
+#+caption: Distribution average healthcare expenditures per capita for different deductibles.
+#+attr_latex: :width 250px 
+[[./Density_plots_simulation_deductibles_healthy_Male.png]]
+
+
+** Deductible: distribution effects
+
+#+attr_latex: :width 900px
+#+caption: Trade offs increasing deductible
+[[./deciles_deductible_male_female_Healthy.png]]
 
 
 * Conclusion
@@ -259,8 +271,29 @@ Left panel: women, right panel: men
 + in order to determine healthcare expenditures under different cost sharing schemes:
   + we estimated the distributions of healthcare expenditures
   + split expenditures up in exogenous and endogenous expenditures
+
+** Summary (cont)
+
   + determined expected OOP for endogenous expenditures under different schemes
   + estimate the value distribution of these endog. expenditures
   + the higher OOP, the more likely an (endogenous) treatment is rejected
   + allows us to simulate effects of different /schemes/
 
+** Policy recommendations
+
++ Bayesian analysis allows us to:
+  + work with posterior /distribution/ of parameters
+    + instead of just the mode (or mean)
+  + present uncertainty about each "object"
+    + parameter estimate
+    + average effect
+  + distribution effects include:
+    + uncertainty of expenditures for given parameter values
+    + uncertainty about parameter values
+
+** Robust recommendation
+
++ having a small but strictly positive deductible makes /everyone/ better off compared to zero deductible
++ because the deductible reduces expenditures, it reduces the insurance premium
++ to such an extent that even people with the highest expenditures are better off than with no deductible
++ higher deductibles reduce expenditures further, but "sick" people than have higher out-of-pocket payments

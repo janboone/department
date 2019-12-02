@@ -1,0 +1,47 @@
+#+TITLE: Health Care Expenditures
+#+AUTHOR: Jan Boone, Minke Remmerswaal, and Bram Wouterse
+
+
+* Introduction
+
+** Motivation
+
++ Dutch ministry of health worries about the level and growth of healthcare expenditures in basic insurance
++ one instrument to contain expenditures is demand side cost sharing
++ currently we have a mandatory deductible in the Netherlands (385 euroes)
++ trade off demand side cost-sharing:
+  + lower expenditures
+  + higher out-of-pocket for people with low health status
++ can we find a /form/ of demand side cost sharing which alleviates this trade off?
+
+* forms of cost sharing
+
++ popular with Dutch policy makers:
+  + deductible
+  + co-payment (say 25%)
+  + "donut"
++ CPB is supposed to "predict" healthcare expenditures under different schemes
+
+** Research question
+
++ what are the effects of different cost-sharing /schemes/ on healthcare spending?
++ difficulty: after the reform, the Netherlands has only featured deductible (like) cost sharing
++ so we can estimate an equation like $y_{it} = ... + \alpha D_t + \varepsilon_{it}$
++ but this equation cannot determine the effect of a 25% co-payment
+
+** Method
+
++ use Bayesian estimation techniques to determine distributions of healtcare costs (per age-gender category)
++ determine (expected) out-of-pocket payment (OOP) for each category
++ determine the effect of the OOP on healthcare expenditures
++ then for each /scheme/ we determine the OOP and then expenditures
+
+** Why Bayesian?
+
++ distributions of healthcare spending are important for cost-sharing schemes
++ "standard" econometrics is based on sampling variation
+  + but we have data on the whole population
++ we want policy recommendations like:
+  + there is 60% probability that a deductible of 500 euro reduces expenditures by at least 10% (compared to 350 euro)
++ Bayesian approach can easily work with distributions
++ it is fun!

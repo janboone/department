@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Health Care Expenditures</title>
+<meta name="author" content="(Jan Boone, Minke Remmerswaal, and Bram Wouterse)"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/3.0.0/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/3.0.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Health Care Expenditures</h1><h2 class="author">Jan Boone, Minke Remmerswaal, and Bram Wouterse</h2><p class="date">Created: 2019-11-16 Sat 16:06</p>
+</section>
+<section id="table-of-contents">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#/slide-orgf25c3ef">1. Introduction</a>
+<ul>
+<li><a href="#/slide-org856e874">1.1. Motivation</a></li>
+</ul>
+</li>
+<li><a href="#/slide-org373d8f5">2. forms of cost sharing</a>
+<ul>
+<li><a href="#/slide-org7554f0d">2.1. Research question</a></li>
+<li><a href="#/slide-orgd7d564b">2.2. Method</a></li>
+<li><a href="#/slide-orge64e2f4">2.3. Why Bayesian?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-orgf25c3ef">
+<h2 id="orgf25c3ef"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+</section>
+<section id="slide-org856e874">
+<h3 id="org856e874"><span class="section-number-3">1.1</span> Motivation</h3>
+<ul>
+<li>Dutch ministry of health worries about the level and growth of healthcare expenditures in basic insurance</li>
+<li>one instrument to contain expenditures is demand side cost sharing</li>
+<li>currently we have a mandatory deductible in the Netherlands (385 euroes)</li>
+<li>trade off demand side cost-sharing:
+<ul>
+<li>lower expenditures</li>
+<li>higher out-of-pocket for people with low health status</li>
+
+</ul></li>
+<li>can we find a <i>form</i> of demand side cost sharing which alleviates this trade off?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org373d8f5">
+<h2 id="org373d8f5"><span class="section-number-2">2</span> forms of cost sharing</h2>
+<ul>
+<li>popular with Dutch policy makers:
+<ul>
+<li>deductible</li>
+<li>co-payment (say 25%)</li>
+<li>"donut"</li>
+
+</ul></li>
+<li>CPB is supposed to "predict" healthcare expenditures under different schemes</li>
+
+</ul>
+
+</section>
+<section id="slide-org7554f0d">
+<h3 id="org7554f0d"><span class="section-number-3">2.1</span> Research question</h3>
+<ul>
+<li>what are the effects of different cost-sharing <i>schemes</i> on healthcare spending?</li>
+<li>difficulty: after the reform, the Netherlands has only featured deductible (like) cost sharing</li>
+<li>so we can estimate an equation like \(y_{it} = ... + \alpha D_t + \varepsilon_{it}\)</li>
+<li>but this equation cannot determine the effect of a 25% co-payment</li>
+
+</ul>
+
+</section>
+<section id="slide-orgd7d564b">
+<h3 id="orgd7d564b"><span class="section-number-3">2.2</span> Method</h3>
+<ul>
+<li>use Bayesian estimation techniques to determine distributions of healtcare costs (per age-gender category)</li>
+<li>determine (expected) out-of-pocket payment (OOP) for each category</li>
+<li>determine the effect of the OOP on healthcare expenditures</li>
+<li>then for each <i>scheme</i> we determine the OOP and then expenditures</li>
+
+</ul>
+
+</section>
+<section id="slide-orge64e2f4">
+<h3 id="orge64e2f4"><span class="section-number-3">2.3</span> Why Bayesian?</h3>
+<ul>
+<li>distributions of healthcare spending are important for cost-sharing schemes</li>
+<li>"standard" econometrics is based on sampling variation
+<ul>
+<li>but we have data on the whole population</li>
+
+</ul></li>
+<li>we want policy recommendations like:
+<ul>
+<li>there is 60% probability that a deductible of 500 euro reduces expenditures by at least 10% (compared to 350 euro)</li>
+
+</ul></li>
+<li>Bayesian approach can easily work with distributions</li>
+<li>it is fun!</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/3.0.0/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+multiplex: {
+    secret: '', // null if client
+    id: '', // id, obtained from socket.io server
+    url: '' // Location of socket.io server
+},
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/3.0.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+});
+</script>
+</body>
+</html>

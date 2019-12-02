@@ -1,0 +1,31 @@
+#+Title: Agenda Meeting
+#+Author: Sjak and Jan
+#+Options: num:nil toc:nil
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+REVEAL_TRANS: cube
+#+REVEAL_THEME: solarized
+#+OPTIONS: timestamp:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+REVEAL_HLEVEL: 1
+#+LANGUAGE:  en
+
+
+
+* Department meeting Dec. 11, 2019
+
+** PPP Program
+
++ Anne-Francoise Rutkowski
+
+** Announcements
+
++ AD (two times)
++ Korine
++ update JM committee
++ update thesis projects
++ task allocation email
+   
+** Other points
+
++ any other points?
++ next dept. meeting: March 4, at 13:00

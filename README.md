@@ -1,3 +1,3 @@
 # department
 
-[Brussel 2019](http://janboone.github.io/department/Brussel2019/presentation.html)
+[dept. meeting Dec. 2019](http://janboone.github.io/department/meeting11122019.html)

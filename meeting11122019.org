@@ -22,8 +22,16 @@
 + AD (two times)
 + Korine
 + update JM committee
-+ update thesis projects
 + task allocation email
+
+** Thesis procedure
+
++ update thesis projects
++ 2nd readers on BSc and MSc theses:
+  + now people choose these themselves
+  + alternative: allocated together with the thesis allocation
+  + PhD students supervising BSc theses: 2nd reader one of their supervisors or ask someone else
+
    
 ** Other points
 

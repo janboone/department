@@ -1,6 +1,7 @@
 #+TITLE: Teaching economics students programming?
 #+Author: Jan Boone
 #+Date: Econ HalfDay
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+Reveal_theme: solarized
 #+options: toc:nil num:nil timestamp:nil
 

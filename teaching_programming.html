@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Teaching economics students programming?</title>
+<meta name="author" content="Jan Boone"/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/dist/reveal.css"/>
+
+<link rel="stylesheet" href="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/dist/theme/solarized.css" id="theme"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide">
+<h1 class="title">Teaching economics students programming?</h1><h2 class="author">Jan Boone</h2><h2 class="date">Econ HalfDay</h2>
+</section>
+
+<section>
+<section id="slide-org06b92eb">
+<h2 id="org06b92eb">Why should economists be able to program?</h2>
+<ul>
+<li>the more skills the better&#x2026;</li>
+<li>but we only have limited time to teach (BSc) students</li>
+<li>trade off: teaching less math</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org5a7a6d3">
+<h2 id="org5a7a6d3">math vs programming</h2>
+<ul>
+<li>both teach abstract thinking</li>
+<li>more &ldquo;realistic&rdquo; models</li>
+<li>generating your own data</li>
+<li>useful skills after graduation</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org66a4b56">
+<h2 id="org66a4b56">abstract thinking</h2>
+<ul>
+<li>one of the advantages of math is that it teaches students to think in a formal and abstract way</li>
+<li>but this is also true for programming:
+<ul>
+<li>program consumers with different utility functions</li>
+<li>derive their demand for a product with different income and price levels</li>
+<li>changing the price, moves along the demand curve</li>
+<li>changing income shifts the demand curve</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgace5ca2">
+<h2 id="orgace5ca2">although I am a theorist&#x2026;</h2>
+<ul>
+<li>after teaching BSc and MSc students economic theory courses for 20 years</li>
+<li>I am not sure they &ldquo;get it&rdquo;</li>
+<li>many view a model as a complicated way to state a simple intuition</li>
+<li>why not do the intuition rightaway?</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgc4e1ea5">
+<h2 id="orgc4e1ea5">more realistic models</h2>
+<ul>
+<li>Rethinking Economics NL: Neoclassical models are &ldquo;too simplistic&rdquo;</li>
+<li>models are meant to be simple</li>
+<li>but in our BSc programs, models are also simple because otherwise students cannot solve them
+<ul>
+<li>if students&rsquo; math skills only allow for solving symmetric models, you cannot model inequality</li>
+
+</ul></li>
+<li>complicated models can be solved using programming</li>
+<li>to understand robustness/sensitivity w.r.t. assumptions: solve the model 1000 times</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org7b9ae5d">
+<h2 id="org7b9ae5d">generating your own data</h2>
+<ul>
+<li>students tend to see a dichotomy:
+<ul>
+<li>you either do theory</li>
+<li>or estimate a model</li>
+
+</ul></li>
+<li>to teach them that this is a &ldquo;continuum&rdquo;:
+<ul>
+<li>program a (theory) model</li>
+<li>generate data from this model</li>
+<li>estimate the equation you are interested in, on this data</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org87e8a02">
+<h2 id="org87e8a02">also works for econometrics</h2>
+<ul>
+<li>specify a data generating process</li>
+<li>generate a sample</li>
+<li>estimate a slope parameter</li>
+<li>repeat this 1000 times:
+<ul>
+<li>a slope has a distribution&#x2026;</li>
+
+</ul></li>
+<li>see how instrumental variables work; causality etc.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgacf4120">
+<h2 id="orgacf4120">useful skills after graduation</h2>
+<ul>
+<li>many students, years after graduation, have confided that they had not maximized a function in the past 10 years</li>
+<li>math skills seem useful during the years of BSc and MSc economics, but not afterwards</li>
+<li>this could be different for programming:
+<ul>
+<li>scraping websites for data</li>
+<li>interactive graphs for presentations</li>
+<li>neural networks and datascience</li>
+<li>general computer skills: e.g. folders</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/dist/reveal.js"></script>
+<script src="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/plugin/markdown/markdown.js"></script>
+<script src="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/plugin/notes/notes.js"></script>
+<script src="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/plugin/search/search.js"></script>
+<script src="/home/janboone/.emacs.d/.local/straight/build-27.2/revealjs/plugin/zoom/zoom.js"></script>
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+controls: true,
+progress: true,
+history: false,
+center: true,
+slideNumber: 'c',
+rollingLinks: false,
+keyboard: true,
+mouseWheel: false,
+fragmentInURL: false,
+hashOneBasedIndex: false,
+pdfSeparateFragments: true,
+overview: true,
+
+transition: 'convex',
+transitionSpeed: 'default',
+
+// Plugins with reveal.js 4.x
+plugins: [ RevealMarkdown, RevealNotes, RevealSearch, RevealZoom ],
+
+// Optional libraries used to extend reveal.js
+dependencies: [
+]
+
+});
+</script>
+</body>
+</html>

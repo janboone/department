@@ -1,0 +1,126 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usetheme{default}
+\author{Jan Boone}
+\date{Econ HalfDay}
+\title{Teaching economics students programming?}
+\hypersetup{
+ pdfauthor={Jan Boone},
+ pdftitle={Teaching economics students programming?},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 27.2 (Org mode 9.6)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+\begin{frame}[label={sec:org31c42bf}]{Why should economists be able to program?}
+\begin{itemize}
+\item the more skills the better\ldots{}
+\item but we only have limited time to teach (BSc) students
+\item trade off: teaching less math
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgbf4996a}]{math vs programming}
+\begin{itemize}
+\item both teach abstract thinking
+\item more ``realistic'' models
+\item generating your own data
+\item useful skills after graduation
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org31bd102}]{abstract thinking}
+\begin{itemize}
+\item one of the advantages of math is that it teaches students to think in a formal and abstract way
+\item but this is also true for programming:
+\begin{itemize}
+\item program consumers with different utility functions
+\item derive their demand for a product with different income and price levels
+\item changing the price, moves along the demand curve
+\item changing income shifts the demand curve
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org26611aa}]{although I am a theorist\ldots{}}
+\begin{itemize}
+\item after teaching BSc and MSc students economic theory courses for 20 years
+\item I am not sure they ``get it''
+\item many view a model as a complicated way to state a simple intuition
+\item why not do the intuition rightaway?
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org60afc0e}]{more realistic models}
+\begin{itemize}
+\item Rethinking Economics NL: Neoclassical models are ``too simplistic''
+\item models are meant to be simple
+\item but in our BSc programs, models are also simple because otherwise students cannot solve them
+\begin{itemize}
+\item if students' math skills only allow for solving symmetric models, you cannot model inequality
+\end{itemize}
+\item complicated models can be solved using programming
+\item to understand robustness/sensitivity w.r.t. assumptions: solve the model 1000 times
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org72f2f30}]{generating your own data}
+\begin{itemize}
+\item students tend to see a dichotomy:
+\begin{itemize}
+\item you either do theory
+\item or estimate a model
+\end{itemize}
+\item to teach them that this is a ``continuum'':
+\begin{itemize}
+\item program a (theory) model
+\item generate data from this model
+\item estimate the equation you are interested in, on this data
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org0fc1bd5}]{also works for econometrics}
+\begin{itemize}
+\item specify a data generating process
+\item generate a sample
+\item estimate a slope parameter
+\item repeat this 1000 times:
+\begin{itemize}
+\item a slope has a distribution\ldots{}
+\end{itemize}
+\item see how instrumental variables work; causality etc.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org52e97e5}]{useful skills after graduation}
+\begin{itemize}
+\item many students, years after graduation, have confided that they had not maximized a function in the past 10 years
+\item math skills seem useful during the years of BSc and MSc economics, but not afterwards
+\item this could be different for programming:
+\begin{itemize}
+\item scraping websites for data
+\item interactive graphs for presentations
+\item neural networks and datascience
+\item general computer skills: e.g. folders
+\end{itemize}
+\end{itemize}
+\end{frame}
+\end{document}

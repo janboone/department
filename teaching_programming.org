@@ -1,0 +1,75 @@
+#+TITLE: Teaching economics students programming?
+#+Author: Jan Boone
+#+Date: Econ HalfDay
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+* Why should economists be able to program?
+
+- the more skills the better...
+- but we only have limited time to teach (BSc) students
+- trade off: teaching less math
+
+
+* math vs programming
+
+- both teach abstract thinking
+- more "realistic" models
+- generating your own data
+- useful skills after graduation
+
+
+* abstract thinking
+
+- one of the advantages of math is that it teaches students to think in a formal and abstract way
+- but this is also true for programming:
+  - program consumers with different utility functions
+  - derive their demand for a product with different income and price levels
+  - changing the price, moves along the demand curve
+  - changing income shifts the demand curve
+
+* although I am a theorist...
+
+- after teaching BSc and MSc students economic theory courses for 20 years
+- I am not sure they "get it"
+- many view a model as a complicated way to state a simple intuition
+- why not do the intuition rightaway?
+
+* more realistic models
+
+- Rethinking Economics NL: Neoclassical models are "too simplistic"
+- models are meant to be simple
+- but in our BSc programs, models are also simple because otherwise students cannot solve them
+  - if students' math skills only allow for solving symmetric models, you cannot model inequality
+- complicated models can be solved using programming
+- to understand robustness/sensitivity w.r.t. assumptions: solve the model 1000 times
+
+
+* generating your own data
+
+- students tend to see a dichotomy:
+  - you either do theory
+  - or estimate a model
+- to teach them that this is a "continuum":
+  - program a (theory) model
+  - generate data from this model
+  - estimate the equation you are interested in, on this data
+
+* also works for econometrics
+
+- specify a data generating process
+- generate a sample
+- estimate a slope parameter
+- repeat this 1000 times:
+  - a slope has a distribution...
+- see how instrumental variables work; causality etc.
+
+* useful skills after graduation
+
+- many students, years after graduation, have confided that they had not maximized a function in the past 10 years
+- math skills seem useful during the years of BSc and MSc economics, but not afterwards
+- this could be different for programming:
+  - scraping websites for data
+  - interactive graphs for presentations
+  - neural networks and datascience
+  - general computer skills: e.g. folders

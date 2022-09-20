@@ -1,0 +1,54 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: Sept. 21, 2022
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+* Agenda
+
+- timing of this meeting
+- starter grants ("bestuursakkoord")
+- sector grants ("sektor gelden")
+- criteria for decision after 1.5 years
+- impact vs. research criteria
+- Job Market in January
+- TSB vacancy sector grants in our dept.
+
+* Timing
+
+- developments go quickly now
+- still some things we do not know yet
+- but we need to start preparing for the JM
+
+* starter grants
+
+- 5 year positions as assistant prof.
+- tenure decision after 1.5 years
+- our TT criteria apply for promotion after 5 years
+- these positions have their own research money
+- will be needed to reduce teaching load to current TT teaching load levels
+- for new people in 2023
+- /probably/ for some TT colleagues in 2022
+
+* sector grants
+
+- do not yet exist for economics
+- are focused on inter-disciplinary research and impact
+- TSB wants to collaborate with our dept. on one position (digital health)
+
+* what do we need to do now?
+
+- committee to develop criteria for tenure after 1.5 years
+  - JM candidates need to know this when they apply for the position
+  - unlikely to be based on research output
+  - suggestion: citizenship and outreach/impact
+- if we front-load some criteria to 1.5 years, perhaps reduce some criteria for promotion after 5 years
+
+* TSB position
+
+- initial interviews are done now
+- if there are successful candidates, virtual flyout with a week or two
+
+* Other things?
+  

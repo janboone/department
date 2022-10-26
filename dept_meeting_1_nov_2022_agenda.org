@@ -1,0 +1,24 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: Nov. 1, 2022
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+* announcements
+
+- new appointment secretariat
+- TSB position
+- new appointment prof. of practice
+- virtial seminars and teams
+
+
+
+* JM and starter grants
+
+- update starter grants
+- tenure criteria committee
+- JM committee
+
+
+* Other questions and topics?

@@ -5,14 +5,14 @@
 #+Reveal_theme: solarized
 #+options: toc:nil num:nil timestamp:nil
 
-* announcements
+* Announcements
 
 - new appointment secretariat
 - TSB position
 - new appointment prof. of practice
-- virtial seminars and teams
+- virtual seminars and teams
 
-
+* Diploma's for our PhD students
 
 * JM and starter grants
 
@@ -22,3 +22,5 @@
 
 
 * Other questions and topics?
+
+- topics for December meeting

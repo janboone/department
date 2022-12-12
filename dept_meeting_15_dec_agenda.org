@@ -1,0 +1,71 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: Dec 15, 2022
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+* Announcements
+
+- merger BE and EBE programs
+- TSB position
+
+
+** Student assistants
+
+- New coordinator: Danique
+- TA allocation: see internal website (under the heading "allocation")
+  - If changes/additions are needed, let us know asap.
+- RA tasks: Submit your requests through the google form (links in December Newsletter)
+- We will probably hire two or three more SAs in January
+  - If you know good candidates, let us know. 
+
+* JM update
+
+- JM committee
+
+* Recognition and reward
+
+** general idea
+
+- The School committee is thinking along the following lines:
+  - next to research track (as we have currently) a /complete/ teaching track will be introduced
+  - tenure and promotion on teaching track will be at least as hard as on the research track
+
+
+** major/minor
+
+- criteria for tenure/promotion on both tracks are split into a "major" and a "minor":
+  - major: research and teaching (at least one is "excellent", the other is "very good")
+  - minor: outreach/impact and leadership (excellence in at least one of these)
+- the School committee is still working on the details of the criteria to evaluate excellence in teaching, outreach and leadership
+- as the committee is still working on this, your feedback is welcome!
+
+
+
+* Department committee report on impact
+
+** considerations
+
+- outreach as public good/externality/internality
+- opportunity cost of outreach and potential reputation loss if done badly
+- outreach should be clearly linked to domain knowledge based on research
+- take into account that outreach is easier for Dutch colleagues in the Netherlands
+- evaluate outreach on a case-by-case basis
+
+** implementation
+
+- tie outreach to AIS score to emphasize link between outreach and research
+- earn half a star with excellent outreach (independent from AIS)
+
+
+* Other things
+
+- anything you want to add?
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: April 18, 2023
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+* Announcements
+
+- renovation K building (concrete degradation)
+- sharing offices with other dept.'s
+- increasing social interaction in our dept.:
+  - turning an office into a common room
+  - open door policy
+  - Thursday lunches
+- vice-dean research
+
+* Stimulus grants
+
+- outreach officer
+- Academic Collaboratice centers
+
+* Harassment in Economics discipline
+
+- information on UvT procedures: https://www.tilburguniversity.edu/students/studying/regulations/complaint-appeal/behavior
+
+
+* Other points
+
+- let us know if there are other points you would like to discuss.
+
+
+
+
+
+
+

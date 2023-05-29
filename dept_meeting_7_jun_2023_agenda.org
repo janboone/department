@@ -1,0 +1,44 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: June 7, 2023
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+
+* senior JM
+
+
+* RM program
+
+- how to continue with the RM?
+- there are a lot of issues/questions
+  - how best to aggregate views/opinions?
+  - google form?
+
+** Questions
+
+- aim of RM and PhD
+- relation PhD candidate, research topic, supervisor
+- what RM/PhD students are we looking for?
+- what RM courses?
+  - also for students with external funding?
+- suggestions for a DGS?
+  - what (qualities) should we be looking for?
+  - whom should we be looking for?
+
+
+* next year's JM
+
+- feedback on this year
+- suggestions for next year
+  - hiring female/minority colleagues
+
+
+
+
+
+
+
+

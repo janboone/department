@@ -6,6 +6,10 @@
 #+options: toc:nil num:nil timestamp:nil
 
 
+* announcements
+
+- meet and greet with our students
+
 
 * senior JM
 

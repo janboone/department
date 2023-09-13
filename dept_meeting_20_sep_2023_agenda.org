@@ -12,6 +12,7 @@
 - new colleagues
 - new DGS
 - students contacting you about BSc/MSc thesis
+- update JM
 
 
 * stimulus/incentive grants
@@ -22,6 +23,10 @@
 - we are talking to our current candidate
 - suggestions are welcome for incentive grant projects
 
+* Recognition and Rewards
+
+- new version faculty document
+- comments/suggestions?
 
 * any other points
 

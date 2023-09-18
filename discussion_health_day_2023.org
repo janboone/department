@@ -1,0 +1,60 @@
+#+TITLE: Discussion of  "Patient cost-sharing and risk solidarity in health insurance"
+#+Author: Jan Boone
+#+Date: Sept. 29, 2023
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+* Summary
+
+- paper analyzes whether higher levels of cost sharing increase risk solidarity and welfare for people with high health risks
+- risk classes defined on the basis of last year's expenditure
+- model follows each insured per month over a year
+- state variable: remaining deductible
+- with some probability patient needs care (conditional on last month's care)
+- there is a "true" need $\lambda$ and optional need $\omega$ if care is free
+- insured take into account that spending now makes care "cheaper" in the future
+- 
+
+
+* disclaimer
+
+- I am biased: we tend to find smaller effects
+- read the paper with the view: what explains the different outcomes in the approaches
+
+
+* what I like about the paper
+- focus on risk solidarity
+- explicitly distinguish different risk classes
+- dynamic optimization problem taking remaining deductible into account
+  - solution by backward induction
+- model choices based on 2 principles
+- intuitive figures to illustrate model fit
+
+
+* things I do not quite get
+** analysis
+- paper suggests 0-1 decision on $\omega$, but there is a margin here as well:
+  - e.g. $\omega=80$ remaining deductible equals 79 vs 1 euro remaining
+- expenditure is defined as "aggregate payments for claims in each month, based on the date claims were initiated."
+  - does this over-estimate $p^1$ if I get, drugs, in one month and physiotherapy in the next as part of the same treatment for tennis elbow?
+- moral hazard is modeled as additive
+  - seems counterintuitive: the more you (really) need, the more you can add
+  - multiplicative seems sensible?
+
+| risk             |  Q1 |  Q2 |  Q3 |  Q4 |
+|------------------+-----+-----+-----+-----|
+| exp $c$ if $c>0$ | 177 | 164 | 184 | 259 |
+| $\omega$              |  87 |  71 |  73 |  17 |
+
+- model does not allow for $c < \lambda$
+- $\delta$ is higher for higher risk scores
+  - but higher probability of dying?
+- 
+
+** more broadly
+- paper basically argues that everybody gains if we increase the deductible level; even high risks:
+  - so why do we have this discussion in the Netherlands?
+  - which part of the analysis do people overlook?
+- paper argues that risk aversion or liquidity constraints cannot overturn these results
+  - but these arguments come back in the policy debate?

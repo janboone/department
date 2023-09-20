@@ -14,7 +14,7 @@
 - with some probability patient needs care (conditional on last month's care)
 - there is a "true" need $\lambda$ and optional need $\omega$ if care is free
 - insured take into account that spending now makes care "cheaper" in the future
-- 
+- estimated model is used to simulate/predict outcomes for different cost sharing schemes
 
 
 * disclaimer
@@ -30,6 +30,7 @@
   - solution by backward induction
 - model choices based on 2 principles
 - intuitive figures to illustrate model fit
+- model can be used to simulate outcomes for cost sharing schemes that were never implemented before
 
 
 * things I do not quite get
@@ -42,15 +43,19 @@
   - seems counterintuitive: the more you (really) need, the more you can add
   - multiplicative seems sensible?
 
-| risk             |  Q1 |  Q2 |  Q3 |  Q4 |
-|------------------+-----+-----+-----+-----|
-| exp $c$ if $c>0$ | 177 | 164 | 184 | 259 |
-| $\omega$              |  87 |  71 |  73 |  17 |
+| risk            |  Q1 |  Q2 |  Q3 |  Q4 |
+|-----------------+-----+-----+-----+-----|
+| $E(c \mid c>0$) | 177 | 164 | 184 | 259 |
+| $\omega$             |  87 |  71 |  73 |  17 |
 
 - model does not allow for $c < \lambda$
+  - hard to interpret arguments about unmet needs
+    - model only captures not visiting a doctor when one has needs
+    - not the fact that visit was made but under-spending $c < \lambda$.
 - $\delta$ is higher for higher risk scores
   - but higher probability of dying?
-- 
+- once I filled my deductible, every month (with probability $p^{0,1}$)  I will spend $\omega$
+- small increase in $D$ that prevents healthy people from outspending $D$ has very big effect
 
 ** more broadly
 - paper basically argues that everybody gains if we increase the deductible level; even high risks:
@@ -58,3 +63,13 @@
   - which part of the analysis do people overlook?
 - paper argues that risk aversion or liquidity constraints cannot overturn these results
   - but these arguments come back in the policy debate?
+
+
+???how is it possible in the model that oop expenditure decrease as D increases from 350 to 500??? table 4???
+
+75% coinsurance with 350 max. leads to higher oop than $D=350$??? in each state of the world you pay less; behavioral effect is enormous; is this all based on response from healthy quartile???
+
+table 5: Q1 halves expenditure from D=0 to D =350; almost halves it again to D=500; for higher quartiles effects are smaller
+- we believe: Q1 hardly goes to the doctor and if they go it is something serious
+
+  page 36: increase deductible by 150 (350 => 500) reduces premium by 322 euros per head: liquidity constraint relaxed

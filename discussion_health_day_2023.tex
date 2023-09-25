@@ -1,0 +1,171 @@
+% Intended LaTeX compiler: pdflatex
+\documentclass[presentation]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{minted}
+\usetheme[height=20pt]{Montpellier}
+\author{Jan Boone}
+\date{Sept. 29, 2023}
+\title{Discussion of  "Patient cost-sharing and risk solidarity in health insurance"}
+\title[Patient cost-sharing]{Discussion of "Patient cost-sharing and risk solidarity in health insurance"}
+\hypersetup{
+ pdfauthor={Jan Boone},
+ pdftitle={Discussion of  "Patient cost-sharing and risk solidarity in health insurance"},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.1 (Org mode 9.7-pre)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+
+\begin{frame}[label={sec:orgd47a23a}]{Summary: approach}
+\begin{itemize}
+\item paper analyzes whether higher levels of cost sharing increase risk solidarity and welfare for people with high health risks
+\item risk classes defined on the basis of last year's expenditure
+\item model follows each insured per month over a year
+\item state variable: remaining deductible
+\item with some probability patient needs care (conditional on last month's care)
+\item there is a "true" need \(\lambda\) and optional need \(\omega\) if care is free
+\item insured take into account that spending now makes care "cheaper" in the future
+\item estimated model is used to simulate/predict outcomes for different cost sharing schemes
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orgd0a4c32}]{Summary: findings}
+\begin{itemize}
+\item higher cost sharing than we currently have in the Netherlands reduces expenditure, premium and increases welfare, also for the high risks
+\item main effect is consumption reduction among low risk types
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:org6f33641}]{Summary: disclaimer}
+\begin{itemize}
+\item I am biased: we tend to find smaller effects
+\item read the paper with the view: what explains the different outcomes in the approaches
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org62da66d}]{what I like about the paper}
+\begin{itemize}
+\item focus on risk solidarity
+\item explicitly distinguish different risk classes
+\item dynamic optimization problem taking remaining deductible into account
+\begin{itemize}
+\item solution by backward induction
+\end{itemize}
+\item model choices based on 2 principles
+\item intuitive figures to illustrate model fit
+\item model can be used to simulate outcomes for cost sharing schemes that were never implemented before
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org02b6434}]{things I do not quite get: analysis}
+\begin{itemize}
+\item paper suggests 0-1 decision on \(\omega\), but there is a margin here as well:
+\begin{itemize}
+\item e.g. \(\omega=80\) remaining deductible equals 79 vs 1 euro remaining
+\end{itemize}
+\item expenditure is defined as "aggregate payments for claims in each month, based on the date claims were initiated."
+\begin{itemize}
+\item does this over-estimate \(p^1\)?
+\item if I get, drugs, in one month and physiotherapy in the next as part of the same treatment for tennis elbow?
+\end{itemize}
+\item moral hazard is modeled as additive
+\begin{itemize}
+\item seems counterintuitive: the more you (really) need, the more you can add
+\item multiplicative seems sensible?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org8bb453d}]{things I do not quite get: effect size}
+\begin{itemize}
+\item table 5: Q1 halves expenditure from D=0 to D =350
+\begin{itemize}
+\item halves it again to D=500
+\item for higher quartiles effects are smaller
+\item our findings suggest: Q1 hardly goes to the doctor and if they go it is something serious
+\end{itemize}
+\begin{itemize}
+\item oop expenditure falls as \(D\) increases from 350 to 500 euro:
+\begin{itemize}
+\item huge behavioral effect
+\item for many people necessary expenditure is already above 500 euro?
+\end{itemize}
+\end{itemize}
+\item 75\% coinsurance with 350 max. leads to higher oop than \(D=350\)?
+\begin{itemize}
+\item in each state of the world you pay less
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:orgf893629}]{things I do not quite get: interpretation}
+\begin{center}
+\begin{tabular}{lrrrr}
+risk class & Q1 & Q2 & Q3 & Q4\\[0pt]
+\hline
+\(E(c \mid c>0\)) & 177 & 164 & 184 & 259\\[0pt]
+\(\omega\) & 87 & 71 & 73 & 17\\[0pt]
+\end{tabular}
+\end{center}
+
+\begin{itemize}
+\item once I fill my deductible, every following month (with probability \(p^{0,1}\))  I will spend \(\omega\)
+\item small increase in \(D\) that prevents healthy people from outspending \(D\) early in the year has very big effect
+\item \(\delta\) is higher for higher risk scores
+\begin{itemize}
+\item but higher probability of dying?
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[label={sec:org062682c}]{things I do not quite get: robustness}
+\begin{itemize}
+\item risk solidarity is more important than risk aversion
+\begin{itemize}
+\item absurd level of risk aversion is needed to overturn results
+\item but the Dutch\ldots{}
+\end{itemize}
+\item liquidity constraints/behavioral hazard
+\begin{itemize}
+\item model does not allow for \(c < \lambda\)
+\begin{itemize}
+\item hard to interpret arguments about unmet needs
+\item model only captures not visiting a doctor when one has needs
+\item not the fact that visit was made but under-spending \(c < \lambda\).
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[label={sec:orge11f7b3}]{things I do not quite get: more broadly}
+\begin{itemize}
+\item paper basically argues that everybody gains if we increase the deductible level; even high risks:
+\begin{itemize}
+\item so why do we have this discussion in the Netherlands?
+\item which part of the analysis do people overlook?
+\end{itemize}
+\item paper argues that risk aversion or liquidity constraints cannot overturn these results
+\begin{itemize}
+\item but these arguments come back in the policy debate?
+\end{itemize}
+\end{itemize}
+\end{frame}
+\end{document}

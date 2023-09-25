@@ -1,11 +1,15 @@
 #+TITLE: Discussion of  "Patient cost-sharing and risk solidarity in health insurance"
+#+BEAMER_HEADER: \title[Patient cost-sharing]{Discussion of "Patient cost-sharing and risk solidarity in health insurance"}
 #+Author: Jan Boone
 #+Date: Sept. 29, 2023
+#+BEAMER_THEME: Montpellier [height=20pt]
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+LATEX_CLASS: beamer
+#+LATEX_CLASS_OPTIONS: [presentation]
 #+Reveal_theme: solarized
-#+options: toc:nil num:nil timestamp:nil
+#+options: H:1 toc:nil num:nil timestamp:nil
 
-* Summary
+* Summary: approach
 
 - paper analyzes whether higher levels of cost sharing increase risk solidarity and welfare for people with high health risks
 - risk classes defined on the basis of last year's expenditure
@@ -16,8 +20,11 @@
 - insured take into account that spending now makes care "cheaper" in the future
 - estimated model is used to simulate/predict outcomes for different cost sharing schemes
 
+* Summary: findings
+- higher cost sharing than we currently have in the Netherlands reduces expenditure, premium and increases welfare, also for the high risks
+- main effect is consumption reduction among low risk types
 
-* disclaimer
+* Summary: disclaimer
 
 - I am biased: we tend to find smaller effects
 - read the paper with the view: what explains the different outcomes in the approaches
@@ -33,31 +40,52 @@
 - model can be used to simulate outcomes for cost sharing schemes that were never implemented before
 
 
-* things I do not quite get
-** analysis
+* things I do not quite get: analysis
 - paper suggests 0-1 decision on $\omega$, but there is a margin here as well:
   - e.g. $\omega=80$ remaining deductible equals 79 vs 1 euro remaining
 - expenditure is defined as "aggregate payments for claims in each month, based on the date claims were initiated."
-  - does this over-estimate $p^1$ if I get, drugs, in one month and physiotherapy in the next as part of the same treatment for tennis elbow?
+  - does this over-estimate $p^1$?
+  - if I get, drugs, in one month and physiotherapy in the next as part of the same treatment for tennis elbow?
 - moral hazard is modeled as additive
   - seems counterintuitive: the more you (really) need, the more you can add
   - multiplicative seems sensible?
 
-| risk            |  Q1 |  Q2 |  Q3 |  Q4 |
+
+*  things I do not quite get: effect size
+- table 5: Q1 halves expenditure from D=0 to D =350
+  - halves it again to D=500
+  - for higher quartiles effects are smaller
+  - our findings suggest: Q1 hardly goes to the doctor and if they go it is something serious
+ - oop expenditure falls as $D$ increases from 350 to 500 euro:
+  - huge behavioral effect
+  - for many people necessary expenditure is already above 500 euro?
+- 75% coinsurance with 350 max. leads to higher oop than $D=350$?
+  - in each state of the world you pay less
+
+
+*  things I do not quite get: interpretation
+| risk class      |  Q1 |  Q2 |  Q3 |  Q4 |
 |-----------------+-----+-----+-----+-----|
 | $E(c \mid c>0$) | 177 | 164 | 184 | 259 |
 | $\omega$             |  87 |  71 |  73 |  17 |
 
-- model does not allow for $c < \lambda$
-  - hard to interpret arguments about unmet needs
-    - model only captures not visiting a doctor when one has needs
-    - not the fact that visit was made but under-spending $c < \lambda$.
+- once I fill my deductible, every following month (with probability $p^{0,1}$)  I will spend $\omega$
+- small increase in $D$ that prevents healthy people from outspending $D$ early in the year has very big effect
 - $\delta$ is higher for higher risk scores
   - but higher probability of dying?
-- once I filled my deductible, every month (with probability $p^{0,1}$)  I will spend $\omega$
-- small increase in $D$ that prevents healthy people from outspending $D$ has very big effect
 
-** more broadly
+
+*  things I do not quite get: robustness
+- risk solidarity is more important than risk aversion
+  - absurd level of risk aversion is needed to overturn results
+  - but the Dutch...
+- liquidity constraints/behavioral hazard
+  - model does not allow for $c < \lambda$
+    - hard to interpret arguments about unmet needs
+    - model only captures not visiting a doctor when one has needs
+    - not the fact that visit was made but under-spending $c < \lambda$.
+
+*  things I do not quite get: more broadly
 - paper basically argues that everybody gains if we increase the deductible level; even high risks:
   - so why do we have this discussion in the Netherlands?
   - which part of the analysis do people overlook?
@@ -65,11 +93,5 @@
   - but these arguments come back in the policy debate?
 
 
-???how is it possible in the model that oop expenditure decrease as D increases from 350 to 500??? table 4???
 
-75% coinsurance with 350 max. leads to higher oop than $D=350$??? in each state of the world you pay less; behavioral effect is enormous; is this all based on response from healthy quartile???
 
-table 5: Q1 halves expenditure from D=0 to D =350; almost halves it again to D=500; for higher quartiles effects are smaller
-- we believe: Q1 hardly goes to the doctor and if they go it is something serious
-
-  page 36: increase deductible by 150 (350 => 500) reduces premium by 322 euros per head: liquidity constraint relaxed

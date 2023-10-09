@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>What about the demand side?</title>
+<meta name="author" content="Jan Boone"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">What about the demand side?</h1><p class="subtitle"></p>
+<h2 class="author">Jan Boone</h2><h2 class="date">November 2, 2023</h2>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-orgbc11fdd">Summary story</a></li>
+<li><a href="#/slide-org75c65d6">What problem do we worry about?</a></li>
+<li><a href="#/slide-org920c59f">What about demand side differences?</a></li>
+<li><a href="#/slide-orgffac5f6">What is the effect on optimal risk adjustment?</a></li>
+<li><a href="#/slide-org92e8f02">Summary</a></li>
+<li><a href="#/slide-orgd83f358">References</a></li>
+</ul>
+</div>
+</div>
+</section>
+
+
+<section>
+<section id="slide-orgbc11fdd">
+<h2 id="orgbc11fdd">Summary story</h2>
+<div class="outline-text-2" id="text-orgbc11fdd">
+</div>
+</section>
+<section id="slide-orgacc700c">
+<h3 id="orgacc700c">standard story</h3>
+<ul>
+<li>simple R&amp;S model:
+<ul>
+<li>two risk types</li>
+<li>\(c_h > c_l\)</li>
+<li>perfect competition among insurers</li>
+<li>community rating</li>
+<li>distortions on low risk type contract</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgb3ac640">
+<h3 id="orgb3ac640">Incentive Compatibility</h3>
+<ul>
+<li>IC for high type is binding:
+<ul>
+<li>indifferent between own contract and cheaper low risk contract</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org639bac3">
+<h3 id="org639bac3">risk adjustment</h3>
+<ul>
+<li>distortions reduced if expected costs are equalized
+<ul>
+<li>(ex ante) risk adjustment \(\rho_i\)</li>
+<li>\(c_h - \rho_h = c_l - \rho_l\)</li>
+
+</ul></li>
+<li>equity/risk-solidarity increases as distortions are reduced</li>
+<li>high risk type is better off as distortion falls</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgfe77a07">
+<h3 id="orgfe77a07">perfect risk adjustment</h3>
+<ul>
+<li>with perfect risk adjustment: pooling outcome
+<ul>
+<li>no further gains from
+<ul>
+<li>community rating</li>
+<li>mandatory pooling</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-orgcb01a55">
+<h3 id="orgcb01a55">imperfect competition</h3>
+<ul>
+<li>AND demand elasticities differ between risk types</li>
+<li>still distorted outcomes when cost differences disappear through risk adjustment</li>
+<li>to remove distortions:
+<ul>
+<li>maximize total welfare</li>
+<li>overcompensate high risk types</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org7b8aa8c">
+<h3 id="org7b8aa8c">consumer welfare</h3>
+<ul>
+<li>consumer (instead of total) welfare:
+<ul>
+<li>overcompensate low type</li>
+<li>use competition leverage via IC constraint</li>
+<li>limit insurers' instruments to differentiate contracts</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org75c65d6">
+<h2 id="org75c65d6">What problem do we worry about?</h2>
+<div class="outline-text-2" id="text-org75c65d6">
+</div>
+</section>
+<section id="slide-org7a50a88">
+<h3 id="org7a50a88">R&amp;S: perfect competition</h3>
+
+<div id="orge838f9b" class="figure">
+<p><img src="./figures/riskadjustment.png" alt="riskadjustment.png" width="400px" />
+</p>
+</div>
+
+
+</section>
+<section id="slide-orgbcc6a37">
+<h3 id="orgbcc6a37">After risk adjustment</h3>
+
+<div id="orgc016e30" class="figure">
+<p><img src="./figures/riskadjustment2.png" alt="riskadjustment2.png" width="400px" />
+</p>
+</div>
+
+</section>
+<section id="slide-orgfa33524">
+<h3 id="orgfa33524">Ingredients of the model</h3>
+<ul>
+<li>perfect competition: premium equals costs
+<ul>
+<li>\(p_i = (c_i - \rho_i)q_i\) for \(i=l,h\).</li>
+
+</ul></li>
+<li>high types value coverage more (at the margin) than low types</li>
+<li>by reducing coverage, a contract becomes relatively more attractive to low risk type</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org277c5fc">
+<h3 id="org277c5fc">Incentive Compatibility</h3>
+<ul>
+<li>IC constraint high type is binding
+<ul>
+<li>intra-brand competition</li>
+<li>high type is indifferent between buying her own contract and low type contract</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orga46de9a">
+<h3 id="orga46de9a">Effect risk adjustment</h3>
+<ul>
+<li>zero profit lines \(p_i = (c_i - \rho_i)q_i\) rotate toward each other</li>
+<li>\(q_l\) increases: higher efficiency and welfare</li>
+<li>premium for high type is reduced: risk solidarity</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgf4dbf87">
+<h3 id="orgf4dbf87">perfect risk adjustment</h3>
+<ul>
+<li>in the limit with equal expected costs:
+<ul>
+<li>zero profit lines coincide</li>
+<li>both risk types get efficient contract</li>
+<li>both pay the same premium</li>
+<li>\(p = c_h - \rho_h = c_l - \rho_l\)</li>
+<li>insurers ignore IC constraints: independent markets</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org920c59f">
+<h2 id="org920c59f">What about demand side differences?</h2>
+<div class="outline-text-2" id="text-org920c59f">
+</div>
+</section>
+<section id="slide-orgc9f8364">
+<h3 id="orgc9f8364">Do demand differences exist?</h3>
+<ul>
+<li>yes, but in which direction?</li>
+<li>some papers: higher health risks are less elastic:
+<ul>
+<li>people worry they will not be accepted by new insurer</li>
+<li>fear of regret: "devil you know&#x2026;"</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org8bfe1a1">
+<h3 id="org8bfe1a1">high risk is more elastic</h3>
+<ul>
+<li>other papers: higher health risks are more elastic:
+<ul>
+<li>have more experience with healthcare system</li>
+<li>better able to compare different insurance contracts</li>
+<li>usually lower income: more willing to search for low premium</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgb4de545">
+<h3 id="orgb4de545">Empirical research</h3>
+<ul>
+<li>more research is needed:
+<ul>
+<li>predict elasticities of risk groups</li>
+<li>not only expected costs</li>
+
+</ul></li>
+<li>to illustrate: high risks are less elastic w.r.t. new information
+<ul>
+<li>because they already know it?</li>
+
+</ul></li>
+<li>for concreteness: here we assume that high risk type is less elastic</li>
+
+</ul>
+
+
+
+</section>
+<section id="slide-orgf51c938">
+<h3 id="orgf51c938">Insurer market power</h3>
+<ul>
+<li>differences in elasticity have only an effect in case of insurer market power</li>
+<li>mark-up is higher on high risk market segment</li>
+<li>even if expected costs are equalized (perfect risk adjustment) elasticity differences cause distortions
+<ul>
+<li>think of mobile telephony</li>
+
+</ul></li>
+<li>firms distort contracts to separate the types</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgaa8866a">
+<h3 id="orgaa8866a">Leverage</h3>
+<ul>
+<li>competition leverage:
+<ul>
+<li>as risk adjustment towards high types increases</li>
+<li>lower contribution to low types (balanced budget)</li>
+<li>distortion is reduced</li>
+<li>but less competition for low types</li>
+<li>and \(p_l\) increases and thereby (IC) increases \(p_{h}\)</li>
+
+</ul></li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-orgffac5f6">
+<h2 id="orgffac5f6">What is the effect on optimal risk adjustment?</h2>
+<div class="outline-text-2" id="text-orgffac5f6">
+</div>
+</section>
+<section id="slide-orge6f9e05">
+<h3 id="orge6f9e05">What is the objective</h3>
+<ul>
+<li>no longer the case that
+<ul>
+<li>efficiency and</li>
+<li>risk solidarity</li>
+<li>go hand-in-hand</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgf10fc5f">
+<h3 id="orgf10fc5f">Efficiency</h3>
+<ul>
+<li>to avoid selection, insurers must be indifferent between attracting a low or high risk type</li>
+<li>over-compensate the high types to correct for differences in mark-ups</li>
+<li>if there are no selection effects, IC is not binding</li>
+<li>insurers offer both types the efficient contract at the same premium \(p\)</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org680ce8d">
+<h3 id="org680ce8d">Optimal mark-up</h3>
+<div>
+\begin{equation}
+\label{eq:1}
+\frac{p - (c_i-\rho_i)}{p} = \frac{1}{\varepsilon_{i}}
+\end{equation}
+
+</div>
+<ul>
+<li>where \(\varepsilon_l > \varepsilon_h\)</li>
+<li>if \(c_l - \rho_l = c_h - \rho_h\), this equation does not hold!</li>
+<li>can only be true if \(\rho_h - \rho_l > c_h - c_l\).</li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgbac723f">
+<h3 id="orgbac723f">More weight on consumers</h3>
+<ul>
+<li>new effect: let high types benefit from intense competition for low types via IC constraint</li>
+<li>starting from first best:
+<ul>
+<li>loss in efficiency is second order</li>
+<li>price effect (leveraging competition) is first order</li>
+
+</ul></li>
+<li>under-compensate the high types</li>
+<li>subsidize the elastic low risk types</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org145753f">
+<h3 id="org145753f">Leverage</h3>
+<ul>
+<li>fierce competition among insurers to capture profitable low types</li>
+<li>also benefits the high types via IC</li>
+<li>high types benefit even more if there is mandatory pooling
+<ul>
+<li>each insurer can only offer one contract</li>
+<li>may reduce welfare if consumers differ on other dimensions (e.g. risk aversion)</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org92e8f02">
+<h2 id="org92e8f02">Summary</h2>
+<div class="outline-text-2" id="text-org92e8f02">
+</div>
+</section>
+<section id="slide-orgecdd7d1">
+<h3 id="orgecdd7d1">Selection incentives</h3>
+<ul>
+<li>to remove selection incentives in health insurance:
+<ul>
+<li>do not (just) focus on supply side (cost) differences</li>
+<li>risk adjustment should take demand side differences into account as well</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org2310569">
+<h3 id="org2310569">Objective of risk adjustment</h3>
+<ul>
+<li>what does planner want to achieve?
+<ul>
+<li>efficiency (total welfare)</li>
+<li>redistribution from insurers to insured (consumer welfare)</li>
+
+</ul></li>
+<li>to get to an efficient outcome:  risk adjustment must overshoot cost differences</li>
+
+</ul>
+
+
+</section>
+<section id="slide-org77624c2">
+<h3 id="org77624c2">Consumer welfare</h3>
+<ul>
+<li>if government is biased towards consumers</li>
+<li>beneficial to stimulate price competition on the l-market:
+<ul>
+<li>increase \(\rho_l\) and reduce \(\rho_h\):</li>
+<li>more intense l-competition reduces \(p_l\) and via IC also \(p_h\)</li>
+<li>high types benefit as well</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-orgc9eb4d5">
+<h3 id="orgc9eb4d5">Market regulation</h3>
+<ul>
+<li>competition leverage works better if insurers cannot escape competition by reducing \(q_l\):
+<ul>
+<li>government sets coverage of basic package</li>
+<li>puts limits on voluntary deductible</li>
+
+</ul></li>
+
+</ul>
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgd83f358">
+<h2 id="orgd83f358">References</h2>
+<ul>
+<li>Michiel Bijlsma, Jan Boone and Gijsbert Zwart, 2014, '<a href="https://onlinelibrary-wiley-com.tilburguniversity.idm.oclc.org/doi/full/10.1111/1756-2171.12071">Competition leverage: how the demand side affects optimal risk adjustment</a>', <b>RAND Journal of Economics</b>, Vol. 45 (No. 4), pp. 792&#x2013;815.</li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

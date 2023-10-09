@@ -1,0 +1,124 @@
+#+PROPERTY: header-args  :session lectures :kernel python3 :async yes
+
+#+begin_src jupyter-python
+import numpy as np
+import scipy as sp
+import altair as alt
+import pandas as pd
+import matplotlib.pyplot as plt
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+q = np.linspace(0,1,20)
+θ_h = 1
+θ_l = 0.5
+r = 1.0
+ra = 0.1
+θ_h_a = 1-ra
+θ_l_a = 0.5+ra
+
+def equil_l(θ_h,θ_l):
+   sol = sp.optimize.fsolve(lambda q: θ_h-(1-q)*θ_h-θ_l*q-0.5*r*(1-q)**2,0.5)
+   return [sol,θ_l+0.5*r*(1-sol)**2]
+
+def equil_u_l(q,θ_h,θ_l):
+    intercept = equil_l(θ_h,θ_l)[1]
+    return intercept-(1-q)*θ_l-0.5*r*(1-q)**2
+
+df = pd.DataFrame({
+    'q': q,
+    'σ_l': θ_l*q,
+    'σ_h': θ_h*q,
+    'u_h': 1-(1-q)*θ_h-0.5*r*(1-q)**2,
+    'u_l': equil_u_l(q,θ_h,θ_l),
+    'σ_l_a': θ_l_a*q,
+    'σ_h_a': θ_h_a*q,
+    'u_h_a': θ_h_a-(1-q)*θ_h_a-0.5*r*(1-q)**2,
+    'u_l_a': equil_u_l(q,θ_h_a,θ_l_a)
+})
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+sol = sp.optimize.fsolve(lambda q: 1-(1-q)*θ_h-θ_l*q-0.5*r*(1-q)**2,0.5)
+#+end_src
+
+#+RESULTS:
+#+begin_src jupyter-python
+#+end_src
+
+#+RESULTS:
+
+
+
+
+#+begin_src jupyter-python
+equil_l(1,0.5)[0][0]
+#+end_src
+
+#+RESULTS:
+: 0.38196601125010526
+
+
+
+
+#+begin_src jupyter-python :file ./figures/riskadjustment.png
+fig = plt.figure(figsize = (6,6), dpi=260)
+ax=plt.subplot(1,1,1)
+ax.plot(df.q,df.σ_h,'--',c='b',label='zero profit high type')
+ax.plot(df.q,df.σ_l,'--',c='r',label='zero profit low type')
+ax.plot(df.q,df.u_h,c='b',label='indifference curve high type')
+ax.plot(df.q,df.u_l,c='r',label='indifference curve low type')
+ax.plot(1,1,'bo')
+ax.plot(equil_l(θ_h,θ_l)[0],equil_l(θ_h,θ_l)[0]*θ_l,'ro')
+ax.vlines(1,0,1,linestyles='dashed',colors='k')
+ax.vlines(equil_l(θ_h,θ_l)[0],0,equil_l(θ_h,θ_l)[0]*θ_l,linestyles='dashed',colors='k')
+
+plt.ylabel('premium')
+plt.xlabel('coverage')
+plt.yticks([])
+plt.xticks([0,equil_l(θ_h,θ_l)[0][0],1],[0,'$q_l$','$q^*$'])
+plt.legend()
+plt.ylim(0,1.05);
+#+end_src
+
+#+RESULTS:
+[[file:./figures/riskadjustment.png]]
+
+
+
+
+
+#+begin_src jupyter-python :file ./figures/riskadjustment2.png
+fig = plt.figure(figsize = (6,6), dpi=260)
+ax=plt.subplot(1,1,1)
+alpha = 0.1
+ax.plot(df.q,df.σ_h,'--',c='b',alpha=alpha)
+ax.plot(df.q,df.σ_l,'--',c='r',alpha=alpha)
+ax.plot(df.q,df.u_h,c='b',alpha=alpha)
+ax.plot(df.q,df.u_l,c='r',alpha=alpha)
+ax.plot(df.q,df.σ_h_a,'--',c='b',label='zero profit high type')
+ax.plot(df.q,df.σ_l_a,'--',c='r',label='zero profit low type')
+ax.plot(df.q,df.u_h_a,c='b',label='indifference curve high type')
+ax.plot(df.q,df.u_l_a,c='r',label='indifference curve low type')
+ax.plot(1,θ_h_a,'bo')
+ax.plot(equil_l(θ_h_a,θ_l_a)[0],equil_l(θ_h_a,θ_l_a)[0]*θ_l_a,'ro')
+ax.vlines(equil_l(θ_h,θ_l)[0],0,equil_l(θ_h,θ_l)[0]*θ_l,linestyles='dashed',colors='k',alpha=alpha)
+ax.vlines(equil_l(θ_h_a,θ_l_a)[0],0,equil_l(θ_h_a,θ_l_a)[0]*θ_l_a,linestyles='dashed',colors='k')
+
+ax.plot(1,1,'bo',alpha=alpha)
+ax.plot(equil_l(θ_h,θ_l)[0],equil_l(θ_h,θ_l)[0]*θ_l,'ro',alpha=alpha)
+ax.vlines(1,0,1,linestyles='dashed',colors='k')
+plt.ylabel('premium')
+plt.xlabel('coverage')
+plt.yticks([])
+plt.xticks([0,equil_l(θ_h,θ_l)[0][0],equil_l(θ_h,θ_l)[0][0]+0.04,equil_l(θ_h_a,θ_l_a)[0][0] ,1],[0,'$q_l$','$\longrightarrow$','$q_l$','$q^*$'])
+plt.legend()
+plt.ylim(0,1.05);
+#+end_src
+
+#+RESULTS:
+[[file:./figures/riskadjustment2.png]]

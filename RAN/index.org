@@ -1,0 +1,209 @@
+#+TITLE: What about the demand side?
+#+Author: Jan Boone
+#+Date: November 2, 2023
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:1 num:nil timestamp:nil
+
+
+* Summary story
+** standard story
+- simple R&S model:
+  - two risk types
+  - $c_h > c_l$
+  - perfect competition among insurers
+  - community rating
+  - distortions on low risk type contract
+
+
+** Incentive Compatibility
+- IC for high type is binding:
+  - indifferent between own contract and cheaper low risk contract
+
+** risk adjustment
+- distortions reduced if expected costs are equalized
+  - (ex ante) risk adjustment $\rho_i$
+  - $c_h - \rho_h = c_l - \rho_l$
+- equity/risk-solidarity increases as distortions are reduced
+- high risk type is better off as distortion falls
+
+
+** perfect risk adjustment
+- with perfect risk adjustment: pooling outcome
+  - no further gains from
+    - community rating
+    - mandatory pooling
+
+** imperfect competition
+- AND demand elasticities differ between risk types
+- still distorted outcomes when cost differences disappear through risk adjustment
+- to remove distortions:
+  - maximize total welfare
+  - overcompensate high risk types
+
+
+** consumer welfare
+- consumer (instead of total) welfare:
+  - overcompensate low type
+  - use competition leverage via IC constraint
+  - limit insurers' instruments to differentiate contracts
+
+* What problem do we worry about?
+
+** R&S: perfect competition
+
+#+attr_latex: scale=0.3
+#+attr_html: :width 400px
+[[./figures/riskadjustment.png]]
+
+
+** After risk adjustment
+
+#+attr_latex: scale=0.3
+#+attr_html: :width 400px
+[[./figures/riskadjustment2.png]]
+
+** Ingredients of the model
+- perfect competition: premium equals costs
+  - $p_i = (c_i - \rho_i)q_i$ for $i=l,h$.
+- high types value coverage more (at the margin) than low types
+- by reducing coverage, a contract becomes relatively more attractive to low risk type
+
+
+** Incentive Compatibility
+- IC constraint high type is binding
+  - intra-brand competition
+  - high type is indifferent between buying her own contract and low type contract
+
+
+** Effect risk adjustment
+- zero profit lines $p_i = (c_i - \rho_i)q_i$ rotate toward each other
+- $q_l$ increases: higher efficiency and welfare
+- premium for high type is reduced: risk solidarity
+
+
+** perfect risk adjustment
+- in the limit with equal expected costs:
+  - zero profit lines coincide
+  - both risk types get efficient contract
+  - both pay the same premium
+  - $p = c_h - \rho_h = c_l - \rho_l$
+  - insurers ignore IC constraints: independent markets
+
+
+* What about demand side differences?
+
+** Do demand differences exist?
+- yes, but in which direction?
+- some papers: higher health risks are less elastic:
+  - people worry they will not be accepted by new insurer
+  - fear of regret: "devil you know..."
+
+
+** high risk is more elastic
+- other papers: higher health risks are more elastic:
+  - have more experience with healthcare system
+  - better able to compare different insurance contracts
+  - usually lower income: more willing to search for low premium
+
+
+** Empirical research
+- more research is needed:
+  - predict elasticities of risk groups
+  - not only expected costs
+- to illustrate: high risks are less elastic w.r.t. new information
+  - because they already know it?
+- for concreteness: here we assume that high risk type is less elastic
+
+
+
+** Insurer market power
+- differences in elasticity have only an effect in case of insurer market power
+- mark-up is higher on high risk market segment
+- even if expected costs are equalized (perfect risk adjustment) elasticity differences cause distortions
+  - think of mobile telephony
+- firms distort contracts to separate the types
+
+
+** Leverage
+- competition leverage:
+  - as risk adjustment towards high types increases
+  - lower contribution to low types (balanced budget)
+  - distortion is reduced
+  - but less competition for low types
+  - and $p_l$ increases and thereby (IC) increases $p_{h}$
+
+* What is the effect on optimal risk adjustment?
+
+** What is the objective
+- no longer the case that
+  - efficiency and
+  - risk solidarity
+  - go hand-in-hand
+
+
+** Efficiency
+- to avoid selection, insurers must be indifferent between attracting a low or high risk type
+- over-compensate the high types to correct for differences in mark-ups
+- if there are no selection effects, IC is not binding
+- insurers offer both types the efficient contract at the same premium $p$
+
+
+** Optimal mark-up
+\begin{equation}
+\label{eq:1}
+\frac{p - (c_i-\rho_i)}{p} = \frac{1}{\varepsilon_{i}}
+\end{equation}
+- where $\varepsilon_l > \varepsilon_h$
+- if $c_l - \rho_l = c_h - \rho_h$, this equation does not hold!
+- can only be true if $\rho_h - \rho_l > c_h - c_l$.
+
+
+** More weight on consumers
+- new effect: let high types benefit from intense competition for low types via IC constraint
+- starting from first best:
+  - loss in efficiency is second order
+  - price effect (leveraging competition) is first order
+- under-compensate the high types
+- subsidize the elastic low risk types
+
+
+** Leverage
+- fierce competition among insurers to capture profitable low types
+- also benefits the high types via IC
+- high types benefit even more if there is mandatory pooling
+  - each insurer can only offer one contract
+  - may reduce welfare if consumers differ on other dimensions (e.g. risk aversion)
+
+
+* Summary
+** Selection incentives
+- to remove selection incentives in health insurance:
+  - do not (just) focus on supply side (cost) differences
+  - risk adjustment should take demand side differences into account as well
+
+
+** Objective of risk adjustment
+- what does planner want to achieve?
+  - efficiency (total welfare)
+  - redistribution from insurers to insured (consumer welfare)
+- to get to an efficient outcome:  risk adjustment must overshoot cost differences
+
+
+** Consumer welfare
+- if government is biased towards consumers
+- beneficial to stimulate price competition on the l-market:
+  - increase $\rho_l$ and reduce $\rho_h$:
+  - more intense l-competition reduces $p_l$ and via IC also $p_h$
+  - high types benefit as well
+
+
+** Market regulation
+- competition leverage works better if insurers cannot escape competition by reducing $q_l$:
+  - government sets coverage of basic package
+  - puts limits on voluntary deductible
+
+
+
+* References
+- Michiel Bijlsma, Jan Boone and Gijsbert Zwart, 2014, '[[https://onlinelibrary-wiley-com.tilburguniversity.idm.oclc.org/doi/full/10.1111/1756-2171.12071][Competition leverage: how the demand side affects optimal risk adjustment]]', *RAND Journal of Economics*, Vol. 45 (No. 4), pp. 792--815.

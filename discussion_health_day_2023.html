@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>Discussion of  "Patient cost-sharing and risk solidarity in health insurance"</title>
+<meta name="author" content="Jan Boone"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/solarized.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'https://cdn.jsdelivr.net/npm/reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">Discussion of  "Patient cost-sharing and risk solidarity in health insurance"</h1><p class="subtitle"></p>
+<h2 class="author">Jan Boone</h2><h2 class="date">Sept. 29, 2023</h2>
+</section>
+
+<section>
+<section id="slide-orgc7ba7e0">
+<h2 id="orgc7ba7e0">Summary</h2>
+<div class="outline-text-2" id="text-orgc7ba7e0">
+</div>
+</section>
+<section id="slide-orgafe40e4">
+<h3 id="orgafe40e4">approach</h3>
+<ul>
+<li>paper analyzes whether higher levels of cost sharing increase risk solidarity and welfare for people with high health risks</li>
+<li>risk classes defined on the basis of last year's expenditure</li>
+<li>model follows each insured per month over a year</li>
+<li>state variable: remaining deductible</li>
+<li>with some probability patient needs care (conditional on last month's care)</li>
+<li>there is a "true" need \(\lambda\) and optional need \(\omega\) if care is free</li>
+<li>insured take into account that spending now makes care "cheaper" in the future</li>
+<li>estimated model is used to simulate/predict outcomes for different cost sharing schemes</li>
+
+</ul>
+
+</section>
+<section id="slide-org1c2991e">
+<h3 id="org1c2991e">findings</h3>
+<ul>
+<li>higher cost sharing than we currently have in the Netherlands reduces expenditure, premium and increases welfare, also for the high risks</li>
+<li>main effect is consumption reduction among low risk types</li>
+
+</ul>
+
+</section>
+<section id="slide-org03ca8b0">
+<h3 id="org03ca8b0">disclaimer</h3>
+<ul>
+<li>I am biased: we tend to find smaller effects</li>
+<li>read the paper with the view: what explains the different outcomes in the approaches</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2d46481">
+<h2 id="org2d46481">what I like about the paper</h2>
+<ul>
+<li>focus on risk solidarity</li>
+<li>explicitly distinguish different risk classes</li>
+<li>dynamic optimization problem taking remaining deductible into account
+<ul>
+<li>solution by backward induction</li>
+
+</ul></li>
+<li>model choices based on 2 principles</li>
+<li>intuitive figures to illustrate model fit</li>
+<li>model can be used to simulate outcomes for cost sharing schemes that were never implemented before</li>
+
+</ul>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgcd4a95b">
+<h2 id="orgcd4a95b">things I do not quite get</h2>
+<div class="outline-text-2" id="text-orgcd4a95b">
+</div>
+</section>
+<section id="slide-org5571857">
+<h3 id="org5571857">analysis</h3>
+<ul>
+<li>paper suggests 0-1 decision on \(\omega\), but there is a margin here as well:
+<ul>
+<li>e.g. \(\omega=80\) remaining deductible equals 79 vs 1 euro remaining</li>
+
+</ul></li>
+<li>expenditure is defined as "aggregate payments for claims in each month, based on the date claims were initiated."
+<ul>
+<li>does this over-estimate \(p^1\)?</li>
+<li>if I get, drugs, in one month and physiotherapy in the next as part of the same treatment for tennis elbow?</li>
+
+</ul></li>
+<li>moral hazard is modeled as additive
+<ul>
+<li>seems counterintuitive: the more you (really) need, the more you can add</li>
+<li>multiplicative seems sensible?</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org2d5a682">
+<h3 id="org2d5a682">effect size</h3>
+<ul>
+<li><p>
+table 5: Q1 halves expenditure from D=0 to D =350
+</p>
+<ul>
+<li>halves it again to D=500</li>
+<li>for higher quartiles effects are smaller</li>
+<li>our findings suggest: Q1 hardly goes to the doctor and if they go it is something serious</li>
+
+</ul>
+<ul>
+<li>oop expenditure falls as \(D\) increases from 350 to 500 euro:
+<ul>
+<li>huge behavioral effect</li>
+<li>for many people necessary expenditure is already above 500 euro?</li>
+
+</ul></li>
+
+</ul></li>
+<li>75% coinsurance with 350 max. leads to higher oop than \(D=350\)?
+<ul>
+<li>in each state of the world you pay less</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org6b6ec87">
+<h3 id="org6b6ec87">interpretation</h3>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">risk class</th>
+<th scope="col" class="org-right">Q1</th>
+<th scope="col" class="org-right">Q2</th>
+<th scope="col" class="org-right">Q3</th>
+<th scope="col" class="org-right">Q4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">\(E(c \mid c>0\))</td>
+<td class="org-right">177</td>
+<td class="org-right">164</td>
+<td class="org-right">184</td>
+<td class="org-right">259</td>
+</tr>
+
+<tr>
+<td class="org-left">\(\omega\)</td>
+<td class="org-right">87</td>
+<td class="org-right">71</td>
+<td class="org-right">73</td>
+<td class="org-right">17</td>
+</tr>
+</tbody>
+</table>
+
+<ul>
+<li>once I fill my deductible, every following month (with probability \(p^{0,1}\))  I will spend \(\omega\)</li>
+<li>small increase in \(D\) that prevents healthy people from outspending \(D\) early in the year has very big effect</li>
+<li>\(\delta\) is higher for higher risk scores
+<ul>
+<li>but higher probability of dying?</li>
+
+</ul></li>
+
+</ul>
+
+
+</section>
+<section id="slide-org2459274">
+<h3 id="org2459274">robustness</h3>
+<ul>
+<li>risk solidarity is more important than risk aversion
+<ul>
+<li>absurd level of risk aversion is needed to overturn results</li>
+<li>but the Dutch&#x2026;</li>
+
+</ul></li>
+<li>liquidity constraints/behavioral hazard
+<ul>
+<li>model does not allow for \(c < \lambda\)
+<ul>
+<li>hard to interpret arguments about unmet needs</li>
+<li>model only captures not visiting a doctor when one has needs</li>
+<li>not the fact that visit was made but under-spending \(c < \lambda\).</li>
+
+</ul></li>
+
+</ul></li>
+
+</ul>
+
+</section>
+<section id="slide-org84e3438">
+<h3 id="org84e3438">more broadly</h3>
+<ul>
+<li>paper basically argues that everybody gains if we increase the deductible level; even high risks:
+<ul>
+<li>so why do we have this discussion in the Netherlands?</li>
+<li>which part of the analysis do people overlook?</li>
+
+</ul></li>
+<li>paper argues that risk aversion or liquidity constraints cannot overturn these results
+<ul>
+<li>but these arguments come back in the policy debate?</li>
+
+</ul></li>
+
+</ul>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

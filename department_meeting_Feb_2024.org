@@ -1,0 +1,39 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: February 28, 2024
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+* announcements
+
+- new colleagues
+- update JM
+- make sure Pure is up-to-date: process by which money flows to department is automated
+- Recognition and Rewards implementation process
+- computer servers to work on
+- organizers zomer uitje: especially PhD students are encouraged to join
+
+
+* Grant support
+
+- Gijs
+
+* pre-doc proposal
+
+- any comments/suggestions?
+
+* any other points
+
+- other suggestions?
+
+
+
+
+
+
+
+
+
+

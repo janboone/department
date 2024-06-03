@@ -1,0 +1,28 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sjak and Jan
+#+Date: June 19th, 2024
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+* announcements
+
+
+* presentation Paul
+
+- working on powerful (GPU) servers
+- with privacy sensitive data
+
+
+* presentation data stewards
+- how can TiSEM's data stewards help you?
+
+* financial situation
+- new government plans imply budget cuts
+- no need to panic
+
+* moving offices
+- probably summer 2025
+
+

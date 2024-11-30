@@ -1,0 +1,105 @@
+
+#+Title: Christmas Speech
+#+Author: HoD
+#+Date: December 2024
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+#+REVEAL_POSTAMBLE: <p> created by jan. </p>
+
+
+* Introduction
+
+
+
+* Picture yourself in a boat on a river
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./lucy.webp">
+#+REVEAL_HTML: </section>
+
+
+
+* I read the news today, of boy
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./minister.webp">
+#+REVEAL_HTML: </section>
+
+
+* With a little help of our friends
+
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./secret.webp">
+#+REVEAL_HTML: </section>
+
+
+* They hate you if you're clever and they despise a fool
+
+
+
+* Sjak
+
+
+#+REVEAL_HTML: <audio controls>
+#+REVEAL_HTML: <source src="music.mp3" type="audio/mpeg">
+#+REVEAL_HTML: Your browser does not support the audio element.
+#+REVEAL_HTML: </audio> 
+
+* as HoD
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./sjak.webp">
+#+REVEAL_HTML: </section>
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./sjakendaan.webp">
+#+REVEAL_HTML: </section>
+
+* Speeches
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./goirle.webp">
+#+REVEAL_HTML: </section>
+
+* Working together
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./jan.webp">
+#+REVEAL_HTML: </section>
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="300" src="./sjak.webp">
+#+REVEAL_HTML:    <img width="300" src="./jan.webp">
+#+REVEAL_HTML: </section>
+
+
+
+* A face at first just ghostly turns
+
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./noah.webp">
+#+REVEAL_HTML: </section>
+
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./babel.jpg">
+#+REVEAL_HTML: </section>
+
+* Classic
+
+#+REVEAL_HTML: <audio controls>
+#+REVEAL_HTML: <source src="bach.mp3" type="audio/mpeg">
+#+REVEAL_HTML: Your browser does not support the audio element.
+#+REVEAL_HTML: </audio> 

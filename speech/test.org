@@ -1,0 +1,16 @@
+
+#+Title: Christmas Speech
+#+Author: HoD
+#+Date: December 2024
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+#+REVEAL_POSTAMBLE: <p> created by jan. </p>
+
+
+* Introduction
+
+#+REVEAL_HTML: <audio controls>
+#+REVEAL_HTML: <source src="bach.mp3" type="audio/mpeg">
+#+REVEAL_HTML: Your browser does not support the audio element.
+#+REVEAL_HTML: </audio> 

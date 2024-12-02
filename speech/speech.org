@@ -19,9 +19,13 @@
 #+REVEAL_HTML:    <img width="600" src="./lucy.webp">
 #+REVEAL_HTML: </section>
 
+#+REVEAL: split
+#+REVEAL_HTML: <section>
+#+REVEAL_HTML:    <img width="600" src="./bach.webp">
+#+REVEAL_HTML: </section>
 
 
-* I read the news today, of boy
+* I read the news today, oh boy
 
 #+REVEAL: split
 #+REVEAL_HTML: <section>

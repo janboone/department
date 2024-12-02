@@ -1,0 +1,42 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sigrid, Sjak and Jan
+#+Date: December 10th, 2024
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+* Announcements
+- anniversary Johan
+- GS is looking for a new DGS
+- and a new director of the PPP program
+- we are looking for a new Research Coordinator Micro
+
+
+* financial situation
+- we are getting more information about the budget cuts
+- talking to our startergrant holders to find a solution
+- general budget cuts affect number of PhD places in GS
+- meeting at the end of January: how many PhD positions does the department want to finance?
+
+
+** contacts with world outside
+- TiSEM is trying to get an idea of our external contacts:
+  - let us know if you have contacts at outside organizations (firms, consultancies, banks, ministries, regulators etc.)
+  - in the future such contacts could be used if we want to offer LLD courses
+
+
+** suggestions for budget cuts?
+- what can the department do to save some money?
+- lunches, limits on how research budgets can be spent (books, subscriptions, software licenses etc.)?
+
+
+* language BSc Economics program
+- one option to keep our program in English is a dual degree with another university (outside NL)
+- let us know if you have experience with or ideas about dual degrees
+
+
+
+
+* Other topics
+- suggestions are welcome!

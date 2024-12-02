@@ -1,7 +1,10 @@
+#+options: num:nil toc:nil
+#+LaTeX_CLASS: article-12
 * Introduction
 - rather late I realized that Sjak cannot do the Christmas speech this year
 - hence as any of our students would do, I used chatgpt
 - but we cannot have many bullet points
+- I finished my BKO
 - hence I used Dall-E
 - for those of you who do not know how that works, I will illustrate this
 - and the presentation is interactive: from which song is the opening line?
@@ -11,6 +14,8 @@
 
 * I read the news today oh boy
 - looking back in the Christmas speech
+- ghost of Christmas past
+- we had a wonderful and busy year
 - R&R
 - celebrated great publications at lunch seminars
 - taught our students
@@ -19,7 +24,7 @@
 - starter grants
 - very disappointing for our junior staff
 - they were promised startergrants and now these disappeared
-- we are trying to find a solution for this
+- general budget cuts
 
 * with a little help from our friends
 - organizing lots of events during the year (conferences, seminars) helping us with the admin of teaching and thesis defenses
@@ -50,7 +55,7 @@
 - who is the composer? Surname starts with a B (Gary Booker, Mathew Fisher; lyrics: Keith Reid)
 
 - I tried to explain Sjak to Dall-E
-  - economics professor who plays harpsichord
+  - economics HoD who plays harpsichord
 
 - Sjak has been HoD for almost 6 years
 - took over from Reyer
@@ -70,6 +75,7 @@
 
   
 Each Christmas speech also looks into future:
+- Ghost of Christmas yet to come
 
 * A face at first just ghostly turns a ...
 - whiter shade of pale
@@ -80,6 +86,7 @@ Each Christmas speech also looks into future:
 
 * Classic
 - passage uit Suite No. 3 in D-majeur, ook wel bekend als Air
+- present for Sjak
 
 
 

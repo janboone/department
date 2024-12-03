@@ -6,6 +6,11 @@
 #+options: toc:nil num:nil timestamp:nil
 
 
+* Career Services
+
+- Joyce
+
+
 * Announcements
 - anniversary Johan
 - GS is looking for a new DGS
@@ -17,8 +22,13 @@
 - we are getting more information about the budget cuts
 - talking to our startergrant holders to find a solution
 - general budget cuts affect number of PhD places in GS
-- meeting at the end of January: how many PhD positions does the department want to finance?
+- meeting in the new year: how many PhD positions does the department want to finance?
 
+
+** teaching
+- in order to limit work pressure, MT is planning to impose:
+  - fewer assignments and exams
+  - shorter exams
 
 ** contacts with world outside
 - TiSEM is trying to get an idea of our external contacts:

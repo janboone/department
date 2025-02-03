@@ -1,4 +1,4 @@
 # department
 
-[dept. meeting](http://janboone.github.io/department/department_meeting_December_2024.html)
+[dept. meeting](https://janboone.github.io/department/department_meeting_February_2025.html)
 

@@ -22,13 +22,9 @@
 
 * financial situation
 - we are getting more information about the budget cuts
-- general budget cuts affect number of PhD places in GS
-
-** suggestions for budget cuts?
 - what can the department do to save some money?
 - limits on how research budgets are spent:
-  - subscriptions (e.g. ChatGPT)
-  - licenses (e.g. Overleaf)
+  - organize subscriptions more efficiently (e.g. ChatGPT, Overleaf, CBS projects)
   - organize CBS projects better
 
 

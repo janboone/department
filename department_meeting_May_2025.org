@@ -1,0 +1,32 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sigrid and Jan
+#+Date: May 6th, 2025
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+
+* Announcements
+- TiU's 100th anniversary in 2027
+- new vice-dean research: Joris
+
+
+* financial situation
+- education budget was approved in the senate
+  - TiU goes to court over "bestuursakkoord"
+- Spring budget ("voorjaarsnota")
+- protest in Tilburg on April 10th
+- limited number of Overleaf licenses
+- department can have one "uitje" per year: Summer or Christmas
+- no longer possible to give flowers etc.
+
+
+* language BSc Economics program
+- attempt to resolve this with self-regulation:
+  - proposal by universities: psychology BSc programs in Dutch
+  - TiU in addition to this: BSc EOR in Dutch
+
+
+* Other topics
+- suggestions are welcome!

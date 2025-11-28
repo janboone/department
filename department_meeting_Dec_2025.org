@@ -1,0 +1,47 @@
+#+TITLE: Agenda dept. meeting
+#+Author: Sigrid and Jan
+#+Date: December 10th, 2025
+#+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
+#+Reveal_theme: solarized
+#+options: toc:nil num:nil timestamp:nil
+
+
+
+* Announcements
+- new associate dean education: AI and programming in our education programs
+
+* financial situation
+- this years financial result
+- department's reserve position
+
+* Community
+- link to paper showing productivity losses if colleagues work at home too often
+- lunch coordinators for Monday and Thursday
+- GSS seminar attendance
+- getting grants is a combination of talent, effort, luck
+  - the department insures ex ante (incentive scheme)
+  - appropriates some rents ex post: cannot buy out teaching one-for-one
+
+
+* Grant David
+
+- Congrats!
+
+* Our own productivity
+
+- info Corine
+
+* Option model
+
+- leave hours
+  - department pays for the exchange into salary
+  - with fewer days off, you work more and tasks increase
+- exchange into upgrade for first class travel, bike, labor union contribution etc. is different
+
+
+* Grant support
+
+- Gianpiero
+
+* Other topics
+- suggestions are welcome!

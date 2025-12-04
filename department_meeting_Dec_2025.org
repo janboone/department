@@ -1,5 +1,5 @@
 #+TITLE: Agenda dept. meeting
-#+Author: Sigrid and Jan
+#+Author: Sigrid, Gijs and Jan
 #+Date: December 10th, 2025
 #+REVEAL_ROOT: https://cdn.jsdelivr.net/npm/reveal.js
 #+Reveal_theme: solarized
@@ -8,14 +8,18 @@
 
 
 * Announcements
+- Nicole comes back in the new year
 - new associate dean education: AI and programming in our education programs
+- start of theory reading group
+- promotion criteria: https://economics-department.netlify.app/internal
 
 * financial situation
 - this years financial result
 - department's reserve position
+- when do our reserves turn negative?
 
 * Community
-- link to paper showing productivity losses if colleagues work at home too often
+- paper showing productivity losses if colleagues work at home too often
 - lunch coordinators for Monday and Thursday
 - GSS seminar attendance
 - getting grants is a combination of talent, effort, luck
@@ -27,16 +31,12 @@
 
 - Congrats!
 
-* Our own productivity
-
-- info Corine
-
 * Option model
 
 - leave hours
   - department pays for the exchange into salary
   - with fewer days off, you work more and tasks increase
-- exchange into upgrade for first class travel, bike, labor union contribution etc. is different
+- exchange into upgrade first class travel, bike, labor union contribution etc. is different
 
 
 * Grant support

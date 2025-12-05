@@ -15,15 +15,13 @@
 
 * Picture yourself in a boat on a river
 
-#+REVEAL: split
-#+REVEAL_HTML: <section>
 #+REVEAL_HTML:    <img width="600" src="./noah.webp">
-#+REVEAL_HTML: </section>
 
 * The past year
 
 - last year our new government had introduced some disastrous plans (cutting budgets and dropping startergrants completely)
 - we had new elections and things did not get worse
+- chatgpt gives this a very positive interpretation
 
 
 
@@ -36,12 +34,21 @@
 
 - things were worse 10 years ago when I started with Reyer
 - we are running a deficit but we have positive reserves 
-- student numbers
-- associate dean of education: AI and students creating economic apps
+- it's the student numbers, stupid
+  - vice-dean of education: AI and students creating economic apps
 
-* More formal bureaucracy over the years
+* Bureaucracy over the years
 
-- 
+- letter stating that I can make exams
+- holiday cards
+- Microsoftification
+- OSIRIS maintenance has been finished
+- all well-meaning colleagues...
+
+
+* Acknowledgments
+
+
 
 
 

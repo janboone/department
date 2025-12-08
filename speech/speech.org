@@ -10,17 +10,17 @@
 
 * Introduction
 
-- Ben asked me to reflect on being HoD for some time
-- You may remember that I ended my speech last year with this picture of our department
+- Ben asked me to reflect on being HoD
+- You may remember that I ended my speech last year with...
 
 * Picture yourself in a boat on a river
 
 #+REVEAL_HTML:    <img width="600" src="./noah.webp">
 
-* The past year
+* It's getting better all the time (couldn't get much worse)
 
-- last year our new government had introduced some disastrous plans (cutting budgets and dropping startergrants completely)
-- we had new elections and things did not get worse
+- last year our new government had introduced some disastrous plans 
+- a few weeks ago, we had new elections
 - chatgpt gives this a very positive interpretation
 
 
@@ -30,14 +30,14 @@
 #+REVEAL_HTML:    <img width="600" src="./noah2.png">
 
 
-* Although things are serious
+* I feel that ice is slowly melting
 
-- things were worse 10 years ago when I started with Reyer
+- things are serious now but
+- were (far) worse 10 years ago when I started with Reyer
 - we are running a deficit but we have positive reserves 
-- it's the student numbers, stupid
-  - vice-dean of education: AI and students creating economic apps
+- focus on student numbers and work with vice-dean of education on AI 
 
-* Bureaucracy over the years
+* Us and Them
 
 - letter stating that I can make exams
 - holiday cards
@@ -46,12 +46,18 @@
 - all well-meaning colleagues...
 
 
-* Acknowledgments
+* With a little help from my friends
+
+- ghosts of Christmas
+  - past
+  - present
+  - future
+  
+
+
+* Wanneer de Schelde blinkt
+
+#+REVEAL_HTML:    <img width="600" src="./noah3.png">
 
 
 
-
-
-* Coma
-
-- Bush, Cheney, Rumsfeld

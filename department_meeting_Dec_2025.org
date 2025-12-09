@@ -10,6 +10,7 @@
 * Announcements
 - Nicole comes back in the new year
 - new associate dean education: AI and programming in our education programs
+- Tulip grant
 - start of theory reading group
 - promotion criteria: https://economics-department.netlify.app/internal
 
@@ -18,8 +19,19 @@
 - department's reserve position
 - when do our reserves turn negative?
 
+
+* Research outcomes
+
+
+#+REVEAL_HTML:    <img width="600" src="./fig2.png">
+
+* Research (cont.)
+
+
+#+REVEAL_HTML:    <img width="600" src="./fig1.png">
+
 * Community
-- paper showing productivity losses if colleagues work at home too often
+- evidence showing productivity losses if colleagues work at home too often
 - lunch coordinators for Monday and Thursday
 - GSS seminar attendance
 - getting grants is a combination of talent, effort, luck
